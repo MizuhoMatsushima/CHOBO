@@ -1,0 +1,2 @@
+class MiddleOfTag < ApplicationRecord
+end

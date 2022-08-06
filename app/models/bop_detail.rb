@@ -1,0 +1,2 @@
+class BopDetail < ApplicationRecord
+end
