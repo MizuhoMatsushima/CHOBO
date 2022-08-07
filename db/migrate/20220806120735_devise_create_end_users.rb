@@ -11,7 +11,7 @@ class DeviseCreateEndUsers < ActiveRecord::Migration[6.1]
       t.string :last_name_kana, null: false, default: ""
       t.string :first_name_kana, null: false, default: ""
       t.string :phone_number, null: false, default: ""
-      t.string :phone_number, default: ""
+      t.string :share_code, default: ""
       t.boolean :is_deleted, null: false, default: false
 
       ## Recoverable
