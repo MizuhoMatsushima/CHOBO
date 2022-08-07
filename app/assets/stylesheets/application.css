@@ -13,3 +13,22 @@
  *= require_tree .
  *= require_self
  */
+
+
+.name-text {
+  width: 120px
+}
+
+.first-name {
+  margin-left: 27px
+}
+
+
+/*:placeholder {*/
+/*  color: #CCCCCC;*/
+/*}*/
+
+.sign-up-btn .btn {
+  display: block;
+  margin: auto;
+}
