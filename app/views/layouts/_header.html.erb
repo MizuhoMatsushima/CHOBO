@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <% if admin_signed_in? %>
+      <li class="nav-item nav-link"><%= link_to "会員一覧", admin_root_path, class:"link btn btn-light" %></li>
+      <li class="nav-item nav-link"><%= link_to "相談広場", admin_consultations_path, class:"link btn btn-light" %></li>
+      <li class="nav-item nav-link"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"link btn btn-light" %></li>
+    <% elsif end_user_signed_in? %>
+      <li class="nav-item nav-link"><%= link_to "収支登録", new_bop_subject_path, class:"link btn btn-light" %></li>
+      <li class="nav-item nav-link"><%= link_to "Topページ", end_users_path, class:"link btn btn-light" %></li>
+      <li class="nav-item nav-link"><%= link_to "相談広場", consultations_path, class:"link btn btn-light" %></li>
+      <li class="nav-item nav-link"><%= link_to "マイページ", my_page_end_users_path, class:"link btn btn-light" %></li>
+      <li class="nav-item nav-link"><%= link_to "ログアウト", destroy_end_user_session_path, method: :delete, class:"link btn btn-light" %></li>
+    <% else %>
+      <li class="nav-item nav-link"><%= link_to "新規登録", new_end_user_registration_path, class:"link btn btn-light" %></li>
+      <li class="nav-item nav-link"><%= link_to "ログイン", new_end_user_session_path, class:"link btn btn-light" %></li>
+    <% end %>
+  </div>
+</div>
