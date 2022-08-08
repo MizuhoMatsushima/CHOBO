@@ -41,6 +41,7 @@ Rails.application.routes.draw do
       resource :favorites, only: [:create, :destroy]
       collection do
         get "my_index"
+        get "search"
       end
     end
   end

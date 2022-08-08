@@ -21,7 +21,8 @@ class Consultation < ApplicationRecord
       self.tags << new_post_tag
     end
   end
-
+  
+  #consultationのviewで使用
   def favorited_by?(end_user)
     favorites.exists?(end_user_id: end_user.id)
   end
