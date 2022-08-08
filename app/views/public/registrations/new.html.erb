@@ -44,4 +44,4 @@
   </div>
 <% end %>
 <h5 class="col-7 mx-auto mt-3">既に登録済みの方は、<%= link_to "こちら", new_end_user_session_path %>からログインしてください</h5>
-<h5 class="col-7 mx-auto mt-3">ゲストログインの方は、<%= link_to "こちら", new_end_user_session_path %>からログインしてください</h5>
+<h5 class="col-7 mx-auto mt-3">ゲストログインの方は、<%= link_to "こちら", end_users_guest_sign_in_path, method: :post %>からログインしてください</h5>
