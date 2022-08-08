@@ -6,6 +6,7 @@ class Public::ConsultationsController < ApplicationController
   end
 
   def new
+    @consultation = Consultations.new
   end
 
   def my_index
