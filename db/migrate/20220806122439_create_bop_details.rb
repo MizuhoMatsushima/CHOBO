@@ -1,7 +1,7 @@
 class CreateBopDetails < ActiveRecord::Migration[6.1]
   def change
     create_table :bop_details do |t|
-      t.integer :bop_subject, foreign_key: true
+      t.references :bop_subject, foreign_key: true
       t.string :name, null: false, default: ""
       t.datetime :use_at, null: false, default: ""
       t.integer :price, null: false, default: ""

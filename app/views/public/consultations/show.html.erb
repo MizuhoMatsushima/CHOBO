@@ -1,2 +1,25 @@
-<h1>Public::Consultations#show</h1>
-<p>Find me in app/views/public/consultations/show.html.erb</p>
+<div class="col-10 mx-auto mt-5">
+  <div class="card">
+    <div class="m-5">
+      <h3>相談詳細</h3>
+      <table>
+        <tr>
+          <th class="col-2">タイトル</th>
+          <td height="50"><%= @consultation.title %></td>
+        </tr>
+        <tr>
+          <th class="col-2">相談内容</th>
+          <td><%= @consultation.body %></td>
+        </tr>
+        <tr>
+          <th></th>
+        </tr>
+        <tr>
+          <th class="col-2">タグ</th>
+          <td height="50">
+            <% @consultation_tags.each do |consultation_tag| %>
+              <%= consultation_tag.name %>
+            <% end %>
+          </td>
+        </tr>
+      </table>

@@ -1,2 +1,18 @@
-<h1>Public::Consultations#new</h1>
-<p>Find me in app/views/public/consultations/new.html.erb</p>
+<div class="col-7 mx-auto mt-5">
+  <div class="card">
+    <div class="m-5">
+      <h3>相談入力画面</h3>
+      <%= form_with model: @consultation, url: consultations_path, method: :post, local: true do |f| %>
+        <%= f.label :title, "タイトル" %>
+        <%= f.text_field :title, class: "form-control" %>
+        <%= f.label :body, "本文" %>
+        <%= f.text_area :body, class: "form-control" %>
+        <p>タグ</p>
+        <%= f.text_field :name, class: "form-control" %>
+        <div class="mx-auto">
+          <%= f.submit "相談する", class:"col-12 btn btn-secondary mt-5" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
