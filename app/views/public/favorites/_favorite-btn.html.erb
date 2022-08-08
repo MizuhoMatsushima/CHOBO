@@ -1,0 +1,16 @@
+<!--favorited_by?はconsultationモデルに記載した独自のメソッド-->
+<% if consultation.favorited_by?(current_end_user) %>
+  <p>
+    <%= link_to consultation_favorites_path(consultation), method: :delete, remote: true do %>
+      ♥
+    <% end %>
+    <%= consultation.favorites.count %> いいね
+  </p>
+<% else %>
+  <p>
+    <%= link_to consultation_favorites_path(consultation), method: :post, remote: true do %>
+      ♡
+    <% end %>
+    <%= consultation.favorites.count %> いいね
+  </p>
+<% end %>
