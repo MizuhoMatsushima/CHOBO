@@ -2,6 +2,8 @@ class Consultation < ApplicationRecord
   belongs_to :end_user
   has_many :middle_of_tags, dependent: :destroy
   has_many :tags, through: :middle_of_tags
+  has_many :comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   def save_tag(sent_tags)
     current_tags = self.tags.pluck(:name) unless self.tags.nil?
@@ -17,7 +19,11 @@ class Consultation < ApplicationRecord
     new_tags.each do |new|
       new_post_tag = Tag.find_or_create_by(name: new)
       self.tags << new_post_tag
-   end
-end
+    end
+  end
+
+  def favorited_by?(end_user)
+    favorites.exists?(end_user_id: end_user.id)
+  end
 
 end
