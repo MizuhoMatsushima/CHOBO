@@ -1,8 +1,8 @@
 class CreateBopSubjects < ActiveRecord::Migration[6.1]
   def change
     create_table :bop_subjects do |t|
-      t.integer :end_user, foreign_key: true
-      t.integer :account_book, foreign_key: true
+      t.references :end_user, foreign_key: true
+      t.references :account_book, foreign_key: true
       t.string :naame, null: false, default: ""
       t.integer :price, null: false, default: ""
       t.integer :point, default: ""

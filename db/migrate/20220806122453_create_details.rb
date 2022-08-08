@@ -1,7 +1,7 @@
 class CreateDetails < ActiveRecord::Migration[6.1]
   def change
     create_table :details do |t|
-      t.integer :subject, foreign_key: true
+      t.references :subject, foreign_key: true
       t.string :name, null: false, default: ""
       t.integer :tax_rate, null: false, default: ""
 
