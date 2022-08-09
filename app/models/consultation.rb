@@ -21,10 +21,19 @@ class Consultation < ApplicationRecord
       self.tags << new_post_tag
     end
   end
-  
+
   #consultationのviewで使用
   def favorited_by?(end_user)
     favorites.exists?(end_user_id: end_user.id)
+  end
+
+  #キーワード検索
+  def self.search(search)
+    if search != nil
+      Consultation.where('title LIKE(?) or body LIKE(?)' , "%#{search}%",  "%#{search}%")
+    else
+      Consultation.all
+    end
   end
 
 end

@@ -2,7 +2,7 @@ class Public::ConsultationsController < ApplicationController
 
   def index
     @consultations = Consultation.all
-    @tag_list = Tag.all
+    @tags = Tag.all
   end
 
   def show
@@ -27,6 +27,18 @@ class Public::ConsultationsController < ApplicationController
   end
 
   def my_index
+  end
+
+  def search
+    @consultations = Consultation.all
+    @tags = Tag.all
+    if (params[:keyword])[0] == '#'
+      @consultation = Tag.search(params[:keyword]).order('created_at DESC')
+      # redirect_to consultations_path
+    else
+      @consultation = Consultation.search(params[:keyword]).order('created_at DESC')
+      # redirect_to consultations_path
+    end
   end
 
   private
