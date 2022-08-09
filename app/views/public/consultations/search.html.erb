@@ -6,9 +6,10 @@
         <%= link_to "相談する", new_consultation_path, class: "btn btn-secondary" %>
       </div>
       <%= render "search" %>
+      <h4>"<%= params[:keyword] %>"の検索結果</h4>
       <table>
         <tbody>
-          <% @consultations.each do |consultation| %>
+          <% @consultation.each do |consultation| %>
             <tr>
               <td>
                 <%= link_to consultation_path(consultation) do %>
