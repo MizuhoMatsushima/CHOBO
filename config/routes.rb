@@ -44,6 +44,7 @@ Rails.application.routes.draw do
         get "search"
       end
     end
+    get "favorites/my_index"
   end
 
 

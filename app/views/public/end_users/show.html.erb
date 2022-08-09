@@ -1,2 +1,30 @@
-<h1>Public::EndUsers#show</h1>
-<p>Find me in app/views/public/end_users/show.html.erb</p>
+<div class="col-lg-10 col-md-12 mt-5 mx-auto">
+  <div class="card">
+    <div class="m-5">
+      <h3>マイページ</h3>
+      <table>
+        <tbody>
+          <tr>
+            <th>氏名</th>
+            <td><%= @end_user.full_name %></td>
+          </tr>
+          <tr>
+            <th>フリガナ</th>
+            <td><%= @end_user.full_name_kana %></td>
+          </tr>
+          <tr>
+            <th>電話番号</th>
+            <td><%= @end_user.phone_number %></td>
+          </tr>
+          <tr>
+            <th>メールアドレス</th>
+            <td><%= @end_user.email %></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>科目・細目一覧</p>
+      <p>細目集計一覧</p>
+      <%= link_to "相談履歴一覧", favorites_my_index_path %>
+    </div>
+  </div>
+</div>

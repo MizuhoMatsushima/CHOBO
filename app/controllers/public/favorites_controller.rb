@@ -14,4 +14,9 @@ class Public::FavoritesController < ApplicationController
     #非同期通信
   end
 
+  def my_index
+    my_favorites = Favorite.where(end_user_id: current_end_user.id).pluck(:consultation_id)
+    @favorite_consultations = Consultation.find(my_favorites)
+  end
+
 end

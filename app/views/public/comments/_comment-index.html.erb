@@ -1,0 +1,35 @@
+<% consultation.comments.each do |comment| %>
+  <% if consultation.end_user == comment.end_user %>
+    <div class="comment-card-right">
+      <div class="card mt-3 comment-box-right col-11">
+        <div class="row coment_name_body-right">
+          <div class="comment-right col-7 col-sm-8 col-md-9 col-lg-9">
+            <p><%= comment.body %></p>
+          </div>
+          <div style="min-width: 120px;">
+            <p class="text-right"><%= comment.full_name %></p>
+          </div>
+        </div>
+        <p class="text-left">
+          <%= comment.created_at.strftime('%Y年%m月%d日') %>
+        </p>
+      </div>
+    </div>
+  <% else %>
+    <div class="comment-card">
+      <div class="card mt-3 comment-box col-11">
+        <div class="row coment_name_body">
+          <div class="d-flex" style="min-width: 120px;">
+            <p><%= comment.full_name %></p>
+          </div>
+          <div class="comment col-7 col-sm-8 col-md-9 col-lg-9">
+            <p><%= comment.body %></p>
+          </div>
+        </div>
+        <p class="text-right">
+          <%= comment.created_at.strftime('%Y年%m月%d日') %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+<% end %>
