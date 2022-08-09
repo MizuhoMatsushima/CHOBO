@@ -7,7 +7,12 @@
             <p><%= comment.body %></p>
           </div>
           <div style="min-width: 120px;">
-            <p class="text-right"><%= comment.full_name %></p>
+            <p class="text-right">
+              <%= comment.full_name %><br>
+              <% if admin_signed_in? %>
+                <%= link_to "削除", admin_consultation_comment_path(consultation, comment), method: :delete, remote: true, class: "btn btn-danger" %>
+              <% end %>
+            </p>
           </div>
         </div>
         <p class="text-left">
@@ -20,7 +25,12 @@
       <div class="card mt-3 comment-box col-11">
         <div class="row coment_name_body">
           <div class="d-flex" style="min-width: 120px;">
-            <p><%= comment.full_name %></p>
+            <p>
+              <%= comment.full_name %><br>
+              <% if admin_signed_in? %>
+                <%= link_to "削除", admin_consultation_comment_path(consultation, comment), method: :delete, remote: true, class: "btn btn-danger" %>
+              <% end %>
+            </p>
           </div>
           <div class="comment col-7 col-sm-8 col-md-9 col-lg-9">
             <p><%= comment.body %></p>

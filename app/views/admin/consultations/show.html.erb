@@ -30,7 +30,6 @@
         <div class="comment-count">
           <p>コメント数：<%= @consultation.comments.count %></p>
         </div>
-        <%= render "public/comments/comment-post", consultation: @consultation, comment: @comment %>
       </div>
       <div class="comment-index">
         <%= render "public/comments/comment-index", consultation: @consultation %>

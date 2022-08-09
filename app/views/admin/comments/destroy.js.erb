@@ -1,0 +1,2 @@
+$(".comment-count").html("コメント数：<%= @consultation.comments.count %>");
+$(".comment-index").html("<%= j(render 'public/comments/comment-index', consultation: @consultation) %>");
