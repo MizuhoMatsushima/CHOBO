@@ -8,6 +8,7 @@ class Public::ConsultationsController < ApplicationController
   def show
     @consultation = Consultation.find(params[:id])
     @consultation_tags = @consultation.tags
+    @comment = Comment.new
   end
 
   def new
@@ -27,6 +28,7 @@ class Public::ConsultationsController < ApplicationController
   end
 
   def my_index
+   
   end
 
   def search

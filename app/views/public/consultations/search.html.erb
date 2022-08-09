@@ -1,4 +1,4 @@
-<div class="col-7 mx-auto mt-5">
+<div class="col-lg-10 col-md-11 mx-auto mt-5">
   <div class="card">
     <div class="m-5">
       <h3 class="d-inline">相談一覧</h3>
@@ -7,7 +7,7 @@
       </div>
       <%= render "search" %>
       <h4>"<%= params[:keyword] %>"の検索結果</h4>
-      <table>
+      <table class="table">
         <tbody>
           <% @consultation.each do |consultation| %>
             <tr>

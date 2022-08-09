@@ -1,0 +1,30 @@
+<div class="col-lg-10 col-md-11 mx-auto mt-5">
+  <div class="card">
+    <div class="m-5">
+      <h3 class="d-inline">いいねした相談一覧</h3>
+      <table class="table mt-3">
+        <tbody>
+          <% @favorite_consultations.each do |favorite_consultation| %>
+            <tr>
+              <td>
+                <%= link_to consultation_path(favorite_consultation) do %>
+                  <%= favorite_consultation.title %>
+                <% end %>
+              </td>
+              <td>
+                <% favorite_consultation.tags.each do |tag| %>
+                  <%= tag.name %>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to consultation_path(favorite_consultation) do %>
+                  コメント数：<%= favorite_consultation.comments.count %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
