@@ -7,6 +7,9 @@ class EndUser < ApplicationRecord
   has_many :consultations, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :account_books, dependent: :destroy
+  has_many :bop_subjects, dependent: :destroy
+  has_many :bop_details, dependent: :destroy
 
   #氏名の姓名を合わせるメソッド
   def full_name
