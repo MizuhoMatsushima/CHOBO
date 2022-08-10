@@ -22,7 +22,7 @@ Rails.application.routes.draw do
       get "search"
     end
 
-    resources :account_books, only: [:index, :show, :edit, :create, :update, :destroy]
+    resources :account_books, only: [:new, :index, :show, :edit, :create, :update, :destroy]
     resources :bop_subjects, only: [:new, :show, :index, :edit, :create, :update, :destroy]
     resources :subjects, only: [:new, :index, :edit, :create, :update, :destroy]
     resources :tags, only: [:create]
