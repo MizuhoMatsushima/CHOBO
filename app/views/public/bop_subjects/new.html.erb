@@ -1,2 +1,39 @@
-<h1>Public::BopSubjects#new</h1>
-<p>Find me in app/views/public/bop_subjects/new.html.erb</p>
+<div class="col-lg-10 col-md-12 mt-5 mx-auto">
+  <div class="card">
+    <div class="m-5">
+      <h3>収支登録</h3>
+      <p>支出</p>|<p>収入</p>
+      <%= form_with model: @bop_subject, url: bop_subjects_path, method: :post do |f| %>
+        <div class="form-group">
+          <%= f.label :use_at, "利用日" %>
+          <%= f.date_field :use_at, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :price, "支出額" %>
+          <%= f.text_field :price, data: { autonumeric: { aSign: '¥ ', mDec: 0 } }, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :subject_name, "利用科目" %>
+          <%= f.text_field :subject_name, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <p>利用細目</p>
+          <%= f.text_field :subject_name, class: "form-control" %>
+          <%= f.text_field :detail_name, class: "form-control" %>
+          <%= f.text_field :amount, class: "form-control" %>
+          <%#= f.text_field : %>
+          <%= f.text_field :price, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :point, "ポイント利用" %>
+          <%= f.text_field :poin, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :memo, "メモ" %>
+          <%= f.text_field :memo, class: "form-control" %>
+        </div>
+        <%= f.submit "登録", class: "btn btn-success col-12" %>
+      <% end %>
+    </div>
+  </div>
+</div>
