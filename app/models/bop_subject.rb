@@ -17,5 +17,9 @@ class BopSubject < ApplicationRecord
       new_post_detail = Detail.find_or_create_by(name: new)
       self.details << new_post_detail
     end
+    
+    def after_using_points
+      
+    end
   end
 end
