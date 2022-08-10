@@ -6,11 +6,14 @@ class Public::AccountBooksController < ApplicationController
 
   def create
     @account_book = AccountBook.new(account_book_params)
+    @account_book.end_user_id = current_end_user.id
     @account_book.save
     redirect_to end_users_path
   end
 
   def show
+    @account_book = AccountBook.find(params[:id])
+    @bop_subjects = BopSubject.all
   end
 
   def edit
@@ -18,7 +21,7 @@ class Public::AccountBooksController < ApplicationController
 
   private
 
-  def accont_book_params
+  def account_book_params
     params.require(:account_book).permit(:name)
   end
 
