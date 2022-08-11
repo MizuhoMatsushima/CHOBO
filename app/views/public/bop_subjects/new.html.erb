@@ -33,20 +33,7 @@
             <%= f.label :point, "ポイント利用" %>
             <%= f.text_field :poin, class: "form-control point" %>
             <p>➡</p>
-            <div class="result"></div>
-            <script>
-              $('.detail_price').change(function() {
-                var s = $(.detail_price).val();
-                var a = $(.point).val();
-                var si = parseInt(s);
-                var sa = parseInt(a);
-
-                var result = si - sa
-
-                $('.result').val(result)
-              });
-            </script>
-            
+            <%= f.text_field :total_price, class: "form-control total_price" %>
           </div>
         </div>
         <div class="form-group">
@@ -57,4 +44,7 @@
       <% end %>
     </div>
   </div>
+</div>
+<div class="my-5">
+  <h1 class="jquery">Hello jQuery!</h1>
 </div>
