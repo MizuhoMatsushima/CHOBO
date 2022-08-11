@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2022_08_06_122453) do
 
   create_table "bop_details", force: :cascade do |t|
     t.integer "bop_subject_id"
-    t.string "name", default: "", null: false
+    t.string "detail_name", default: "", null: false
     t.datetime "use_at", null: false
     t.integer "price", null: false
     t.integer "amount", null: false
@@ -52,9 +52,10 @@ ActiveRecord::Schema.define(version: 2022_08_06_122453) do
   create_table "bop_subjects", force: :cascade do |t|
     t.integer "end_user_id"
     t.integer "account_book_id"
-    t.string "naame", default: "", null: false
+    t.string "subject_name", default: "", null: false
     t.integer "price", null: false
     t.integer "point"
+    t.string "memo", default: ""
     t.integer "registered_person_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -84,7 +85,7 @@ ActiveRecord::Schema.define(version: 2022_08_06_122453) do
 
   create_table "details", force: :cascade do |t|
     t.integer "subject_id"
-    t.string "name", default: "", null: false
+    t.string "detail_name", default: "", null: false
     t.integer "tax_rate", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -129,7 +130,7 @@ ActiveRecord::Schema.define(version: 2022_08_06_122453) do
   end
 
   create_table "subjects", force: :cascade do |t|
-    t.string "name", default: "", null: false
+    t.string "subject_name", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
