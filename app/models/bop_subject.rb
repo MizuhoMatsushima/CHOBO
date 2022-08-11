@@ -2,7 +2,9 @@ class BopSubject < ApplicationRecord
 
   has_many :bop_details, dependent: :destroy
   belongs_to :account_book_params
-  
+
+  enum bop: { balance: 0, payments: 1 }
+
   def save_detail(sent_details)
     self.bop_details << sent_details
     current_details = self.details.pluck(:name) unless self.details.nil?
@@ -17,9 +19,9 @@ class BopSubject < ApplicationRecord
       new_post_detail = Detail.find_or_create_by(name: new)
       self.details << new_post_detail
     end
-    
+
     def after_using_points
-      
+
     end
   end
 end

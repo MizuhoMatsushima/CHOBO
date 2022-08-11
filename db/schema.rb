@@ -16,7 +16,6 @@ ActiveRecord::Schema.define(version: 2022_08_06_122453) do
     t.integer "end_user_id"
     t.string "name", default: "", null: false
     t.integer "price"
-    t.integer "bop"
     t.string "share_code", default: ""
     t.integer "share_end_user_id"
     t.datetime "created_at", precision: 6, null: false
@@ -53,6 +52,7 @@ ActiveRecord::Schema.define(version: 2022_08_06_122453) do
     t.integer "end_user_id"
     t.integer "account_book_id"
     t.string "subject_name", default: "", null: false
+    t.integer "bop"
     t.integer "price", null: false
     t.integer "point"
     t.string "memo", default: ""
