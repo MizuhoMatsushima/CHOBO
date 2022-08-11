@@ -1,0 +1,6 @@
+ja:
+  enums:
+    bop_subject:
+      bop:
+        balance: "収入"
+        payments: "支出"
