@@ -23,9 +23,9 @@ Rails.application.routes.draw do
     end
 
     resources :account_books, only: [:new, :index, :show, :edit, :create, :update, :destroy]
-    resources :bop_subjects, only: [:new, :show, :index, :edit, :create, :update, :destroy]
     resources :subjects, only: [:new, :index, :edit, :create, :update, :destroy]
     resources :tags, only: [:create]
+    resources :bop_subjects, only: [:new, :show, :index, :edit, :create, :update, :destroy]
     resources :bop_details, only: [:index, :create, :update] do
       collection do
         get "search"

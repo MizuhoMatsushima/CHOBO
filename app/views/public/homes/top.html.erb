@@ -1,2 +1,10 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<div class="text-center mt-5">
+  <h6>CHOBOへようこそ！！</h6>
+  <p>
+    このアプリケーションは、家計簿を管理できるアプリケーションです。<br>
+    ゲストログインも可能ですので、興味のある方は試してみてください。<br>
+  </p>
+  <%= link_to "ログイン", new_end_user_session_path, class: "btn btn-secondary col-7 mt-2" %>
+  <%= link_to "ゲストログイン", end_users_guest_sign_in_path, method: :post, class: "btn btn-secondary col-7 mt-2" %>
+  <%= link_to "新規登録", new_end_user_registration_path, class: "btn btn-secondary col-7 mt-2" %>
+</div>
