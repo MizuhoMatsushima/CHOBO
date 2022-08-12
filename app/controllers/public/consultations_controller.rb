@@ -18,8 +18,7 @@ class Public::ConsultationsController < ApplicationController
   def create
     @consultation = Consultation.new(consultation_params)
     @consultation.end_user_id = current_end_user.id
-    tag_list = params[:consultation][:name].split(',')
-    
+    tag_list = params[:consultation][:name]
     if @consultation.save
       @consultation.save_tag(tag_list)
       redirect_to consultation_path(@consultation)
@@ -29,7 +28,7 @@ class Public::ConsultationsController < ApplicationController
   end
 
   def my_index
-   
+
   end
 
   def search

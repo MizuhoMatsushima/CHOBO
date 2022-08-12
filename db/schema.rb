@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_06_122453) do
+ActiveRecord::Schema.define(version: 2022_08_12_020028) do
 
   create_table "account_books", force: :cascade do |t|
     t.integer "end_user_id"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 2022_08_06_122453) do
     t.integer "bop_subject_id"
     t.string "detail_name", default: "", null: false
     t.datetime "use_at", null: false
-    t.integer "price", null: false
+    t.integer "detail_price", null: false
     t.integer "amount", null: false
     t.string "store", default: "", null: false
     t.integer "registered_person_id", null: false
@@ -118,6 +118,11 @@ ActiveRecord::Schema.define(version: 2022_08_06_122453) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["consultation_id"], name: "index_favorites_on_consultation_id"
     t.index ["end_user_id"], name: "index_favorites_on_end_user_id"
+  end
+
+  create_table "middle_of_bops", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "middle_of_tags", force: :cascade do |t|
