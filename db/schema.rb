@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2022_08_12_020028) do
     t.integer "detail_price", null: false
     t.integer "amount", null: false
     t.string "store", default: "", null: false
-    t.integer "registered_person_id", null: false
+    t.integer "registered_person_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["bop_subject_id"], name: "index_bop_details_on_bop_subject_id"
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 2022_08_12_020028) do
     t.integer "price", null: false
     t.integer "point"
     t.string "memo", default: ""
-    t.integer "registered_person_id", null: false
+    t.integer "registered_person_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_book_id"], name: "index_bop_subjects_on_account_book_id"

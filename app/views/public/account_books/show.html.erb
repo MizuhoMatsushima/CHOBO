@@ -12,7 +12,11 @@
           <p>+</p>
         <% end %>
         <% @bop_subjects.each do |bop_subject| %>
-          <div><%= bop_subject.name %></div>
+          <div>
+            <%= link_to bop_subject_path(bop_subject) do %>
+              <%= bop_subject.subject_name %>
+            <% end %>
+          </div>
         <% end %>
       </div>
     </div>

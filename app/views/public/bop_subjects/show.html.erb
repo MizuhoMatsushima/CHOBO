@@ -1,2 +1,38 @@
-<h1>Public::BopSubjects#show</h1>
-<p>Find me in app/views/public/bop_subjects/show.html.erb</p>
+<div class="col-lg-10 col-md-12 mt-5 mx-auto">
+  <div class="card">
+    <div class="m-5">
+      <h3>収支明細</h3>
+      <table>
+        <tr>
+          <th>収支</th>
+          <td><%#= @bop_subjrct.bop_detail.use_at %></td>
+        </tr>
+        <tr>
+          <th>利用日</th>
+          <td><%#= @bop_details.created_at %></td>
+        </tr>
+        <tr>
+          <th>支出金額</th>
+          <td><%= @bop_subject.price %></td>
+        </tr>
+        <tr>
+          <th>利用細目</th>
+          <% @bop_details.each do |bop_detail| %>
+            <td><%= bop_detail.subject_name %></td>
+            <td><%= bop_detail.detail_name %></td>
+            <td><%= bop_detailamount %></td>
+            <td><%= bop_detail.detail_price %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <th>ポイント利用</th>
+          <td><%= @bop_subject.point %></td>
+        </tr>
+        <tr>
+          <th>メモ</th>
+          <td><%= @bop_subject.memo %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

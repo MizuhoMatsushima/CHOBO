@@ -1,2 +1,30 @@
-<h1>Admin::EndUsers#show</h1>
-<p>Find me in app/views/admin/end_users/show.html.erb</p>
+<div class="col-lg-10 col-md-12 mt-5 mx-auto">
+  <div class="card">
+    <div class="m-5">
+      <h3>利用者詳細画面</h3>
+      <table>
+        <tbody>
+          <tr>
+            <th>氏名</th>
+            <td><%= @end_user.full_name %></td>
+          </tr>
+          <tr>
+            <th>フリガナ</th>
+            <td><%= @end_user.full_name_kana %></td>
+          </tr>
+          <tr>
+            <th>電話番号</th>
+            <td><%= @end_user.phone_number %></td>
+          </tr>
+          <tr>
+            <th>メールアドレス</th>
+            <td><%= @end_user.email %></td>
+          </tr>
+        </tbody>
+      </table>
+      <!--検索で表示できるか？？-->
+      <%#= link_to "相談履歴一覧", favorites_my_index_path %>
+      <%= link_to "編集", edit_admin_end_user_path(@end_user), class: "btn btn-secondary" %>
+    </div>
+  </div>
+</div>

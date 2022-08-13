@@ -8,7 +8,7 @@ class CreateBopSubjects < ActiveRecord::Migration[6.1]
       t.integer :price, null: false, default: ""
       t.integer :point, default: ""
       t.string :memo, default: ""
-      t.integer :registered_person_id, null: false, default: ""
+      t.integer :registered_person_id, default: ""
 
       t.timestamps
     end

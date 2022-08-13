@@ -1,14 +1,17 @@
 class Public::BopSubjectsController < ApplicationController
   def new
     @bop_subject = BopSubject.new
+    @bop_details = @bop_subject.bop_details.build
   end
 
   def create
     @bop_subject = BopSubject.new(bop_subject_params)
     @bop_subject.end_user_id = current_end_user.id
-    detail_list = params[:bop_subject][:detail_name]
     if @bop_subject.save
-      @bop_subject.save_detail(detail_list)
+      #binding.pry
+      # @bop_detail = Bopdetail.new(bop_subject_params)
+      # @bop_detail.
+
       redirect_to bop_subject_path(@bop_subject)
     else
       render :new
@@ -16,7 +19,8 @@ class Public::BopSubjectsController < ApplicationController
   end
 
   def show
-
+    @bop_subject = BopSubject.find(params[:id])
+    @bop_details = @bop_subject.bop_details
   end
 
   def edit
@@ -25,6 +29,6 @@ class Public::BopSubjectsController < ApplicationController
   private
 
   def bop_subject_params
-    params.require(:bop_subject).permit(:subject_name, :bop, :price, :point, :memo, :registered_person_id)
+    params.require(:bop_subject).permit(:subject_name, :bop, :price, :point, :memo, :registered_person_id, :account_book_id, bop_detail_attributes: [:id, :bop_subject_id, :detail_name, :use_at, :detail_price, :amount, :store, :_destroy])
   end
 end

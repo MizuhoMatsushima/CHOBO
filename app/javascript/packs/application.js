@@ -11,9 +11,12 @@ import "channels"
 import "jquery";
 import "popper.js";
 import "bootstrap";
+import "cocoon"
 import "../stylesheets/application"
 import '@fortawesome/fontawesome-free/js/all'
 import "./app.js"
+
+
 
 
 Rails.start()

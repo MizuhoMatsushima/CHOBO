@@ -2,8 +2,6 @@
   <div class="card">
     <div class="m-5">
       <h3>収支登録</h3>
-      <div style="display:inline-flex">
-      </div>
       <%= form_with model: @bop_subject, url: bop_subjects_path, method: :post do |f| %>
         <%= render "public/shared/error_messages", resource: @bop_subject %>
         <div class="form-group row">
@@ -21,8 +19,10 @@
           <%= f.collection_select :account_book_id, AccountBook.all, :id, :name %>
         </div>
         <div class="form-group">
-          <%= f.label :use_at, "利用日" %>
-          <%= f.date_field :use_at, class: "form-control" %>
+          <%= f.fields_for :bop_details do |d| %>
+            <%= f.label :use_at, "利用日" %>
+            <%= f.date_field :use_at, class: "form-control" %>
+          <% end %>
         </div>
         <div class="form-group">
           <%= f.label :price, "利用額" %>
@@ -34,12 +34,25 @@
         </div>
         <div class="form-group">
           <p>利用細目</p>
-          <div style="display:inline-flex">
+           <div style="display:inline-flex">
             <%= f.text_field :subject_name, :placeholder => "科目名（例：食費など）", class: "form-control mr-3" %>
-            <%= f.text_field :detail_name, :placeholder => "細目名（例：バナナなど）", class: "form-control mr-3" %>
-            <%= f.text_field :amount, :placeholder => "×3", class: "form-control mr-3" %>
-            <%#= f.text_field : %>
-            <%= f.text_field :detail_price, :placeholder => "￥10,000,000", class: "detail_price form-control" %>
+            <%= f.fields_for :bop_details do |d| %>
+              <%= d.text_field :detail_name, :placeholder => "細目名（例：バナナなど）", class: "form-control mr-3" %>
+              <%= d.text_field :amount, :placeholder => "×3", class: "form-control mr-3" %>
+              <%#= f.text_field : %>
+              <%= d.text_field :detail_price, :placeholder => "￥10,000,000", class: "detail_price form-control" %>
+            <% end %>
+          </div>
+          <div id="detail-association-insertion-point"></div>
+          <div class="add-botton-box">
+            <%= link_to_add_association "追加ボタン", f, :bop_details,
+              class: 'add_fields',
+              id: 'add-btn',
+              data: {
+                association_insertion_node: '#detail-association-insertion-point',
+                association_insertion_method: 'after'
+                }
+            %>
           </div>
         </div>
         <div class="form-group">
@@ -54,8 +67,10 @@
           </div>
         </div>
         <div class="form-group">
-          <%= f.label :store, "利用店" %>
-          <%= f.text_field :store, class: "form-control" %>
+          <%= f.fields_for :bop_details do |d| %>
+            <%= f.label :store, "利用店" %>
+            <%= f.text_field :store, class: "form-control" %>
+          <% end %>
         </div>
         <div class="form-group">
           <%= f.label :memo, "メモ" %>
