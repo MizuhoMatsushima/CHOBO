@@ -7,7 +7,7 @@ class CreateBopDetails < ActiveRecord::Migration[6.1]
       t.integer :detail_price, null: false, default: ""
       t.integer :amount, null: false, default: ""
       t.string :store, null: false, default: ""
-      t.integer :registered_person_id, null: false, default: ""
+      t.integer :registered_person_id, default: ""
 
       t.timestamps
     end
