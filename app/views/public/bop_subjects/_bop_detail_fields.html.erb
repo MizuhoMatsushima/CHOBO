@@ -8,6 +8,7 @@
           <%= f.text_field :amount, :placeholder => "×3", class: "form-control mr-3" %>
           <%#= f.text_field : %>
           <%= f.text_field :detail_price, :placeholder => "￥10,000,000", class: "detail_price form-control" %>
+          <%= link_to_remove_association "#{'fas fa-trash-alt'}".html_safe, f, class: 'js-log-remove-btn' %>
         <%# end %>
       </div>
       <%# end %>
