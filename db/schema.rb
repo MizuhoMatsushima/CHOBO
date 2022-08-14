@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(version: 2022_08_12_020028) do
   create_table "bop_details", force: :cascade do |t|
     t.integer "bop_subject_id"
     t.string "detail_name", default: "", null: false
-    t.datetime "use_at", null: false
     t.integer "detail_price", null: false
     t.integer "amount", null: false
     t.string "store", default: "", null: false
@@ -54,6 +53,7 @@ ActiveRecord::Schema.define(version: 2022_08_12_020028) do
     t.string "subject_name", default: "", null: false
     t.integer "bop"
     t.integer "price", null: false
+    t.datetime "use_at", null: false
     t.integer "point"
     t.string "memo", default: ""
     t.integer "registered_person_id"

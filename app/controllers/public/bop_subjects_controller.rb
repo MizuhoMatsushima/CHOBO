@@ -29,6 +29,6 @@ class Public::BopSubjectsController < ApplicationController
   private
 
   def bop_subject_params
-    params.require(:bop_subject).permit(:subject_name, :bop, :price, :point, :memo, :registered_person_id, :account_book_id, bop_detail_attributes: [:id, :bop_subject_id, :detail_name, :use_at, :detail_price, :amount, :store, :_destroy])
+    params.require(:bop_subject).permit(:subject_name, :bop, :price, :point, :use_at, :memo, :registered_person_id, :account_book_id, bop_details_attributes: [:id, :bop_subject_id, :detail_name, :detail_price, :amount, :store, :_destroy])
   end
 end

@@ -9,7 +9,7 @@
         </tr>
         <tr>
           <th>利用日</th>
-          <td><%#= @bop_details.created_at %></td>
+          <td><%= @bop_subject.use_at %></td>
         </tr>
         <tr>
           <th>支出金額</th>
@@ -18,9 +18,8 @@
         <tr>
           <th>利用細目</th>
           <% @bop_details.each do |bop_detail| %>
-            <td><%= bop_detail.subject_name %></td>
             <td><%= bop_detail.detail_name %></td>
-            <td><%= bop_detailamount %></td>
+            <td><%= bop_detail.amount %></td>
             <td><%= bop_detail.detail_price %></td>
           <% end %>
         </tr>
