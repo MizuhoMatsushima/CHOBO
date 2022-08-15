@@ -1,35 +1,53 @@
 <div class="col-lg-10 col-md-12 mt-5 mx-auto">
   <div class="card">
     <div class="m-5">
-      <h3>収支明細</h3>
-      <table>
+      <h3 class="col-10 mx-auto">収支明細</h3>
+      <table class="col-10 mx-auto">
         <tr>
-          <th>収支</th>
-          <td><%#= @bop_subjrct.bop_detail.use_at %></td>
+          <th height="50">収支</th>
+          <td><%= @bop_subject.bop_i18n %></td>
         </tr>
         <tr>
-          <th>利用日</th>
-          <td><%#= @bop_details.created_at %></td>
+          <th height="50">利用日</th>
+          <td><%= @bop_subject.use_at.strftime('%Y年%m月%d日') %></td>
         </tr>
         <tr>
-          <th>支出金額</th>
-          <td><%= @bop_subject.price %></td>
+          <th height="50">支出金額</th>
+          <td><%= @bop_subject.total_price.to_s(:delimited) %>円</td>
         </tr>
         <tr>
-          <th>利用細目</th>
-          <% @bop_details.each do |bop_detail| %>
-            <td><%= bop_detail.subject_name %></td>
-            <td><%= bop_detail.detail_name %></td>
-            <td><%= bop_detailamount %></td>
-            <td><%= bop_detail.detail_price %></td>
-          <% end %>
+          <th height="50" class="align-baseline">利用細目リスト</th>
+          <td>
+            <table class="table table-sm">
+              <tr>
+                <th class="text-center">利用細名</th>
+                <th class="text-center">個数</th>
+                <th class="text-center">小計</th>
+              </tr>
+              <% @bop_details.each do |bop_detail| %>
+                <tr>
+                  <td class="pl-3"><%= bop_detail.detail_name %></td>
+                  <td class="text-center"><%= bop_detail.amount %></td>
+                  <td class="text-right pr-3"><%= bop_detail.detail_price.to_s(:delimited) %>円</td>
+                </tr>
+              <% end %>
+              <tr>
+                <td class="pl-3">利用細目合計</td>
+                <td></td>
+                <td class="text-right pr-3"><%= @bop_details_total.to_s(:delimited) %>円</td>
+              </tr>
+            </table>
+          </td>
         </tr>
         <tr>
-          <th>ポイント利用</th>
-          <td><%= @bop_subject.point %></td>
+
         </tr>
         <tr>
-          <th>メモ</th>
+          <th height="50">ポイント利用</th>
+          <td><%= @bop_subject.point %>ポイント</td>
+        </tr>
+        <tr>
+          <th height="50">メモ</th>
           <td><%= @bop_subject.memo %></td>
         </tr>
       </table>

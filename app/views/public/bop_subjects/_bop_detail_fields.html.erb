@@ -1,15 +1,18 @@
 <div class="form-group row mt-3">
   <div class="col-12">
-      <%= form_with model: @bop_subject, url: bop_subjects_path, method: :post do |f| %>
+      <%#= form_with model: @bop_subject, url: bop_subjects_path, method: :post do |f| %>
       <div style="display:inline-flex">
-        <%= f.text_field :subject_name, :placeholder => "科目名（例：食費など）", class: "form-control mr-3" %>
-        <%= f.fields_for :bop_details do |d| %>
-          <%= d.text_field :detail_name, :placeholder => "細目名（例：バナナなど）", class: "form-control mr-3" %>
-          <%= d.text_field :amount, :placeholder => "×3", class: "form-control mr-3" %>
+        <%#= f.text_field :subject_name, :placeholder => "科目名（例：食費など）", class: "form-control mr-3" %>
+        <%#= f.fields_for :bop_details do |d| %>
+          <%= f.text_field :detail_name, :placeholder => "細目名（例：バナナなど）", class: "form-control mr-3" %>
+          <%= f.text_field :amount, :placeholder => "×3", class: "form-control mr-3" %>
           <%#= f.text_field : %>
-          <%= d.text_field :detail_price, :placeholder => "￥10,000,000", class: "detail_price form-control" %>
-        <% end %>
+          <%= f.text_field :detail_price, :placeholder => "￥10,000,000", class: "detail_price form-control" %>
+          <%= link_to_remove_association f, class: 'dynamic my-auto' do %>
+            <i class="fas fa-trash-alt ml-3" style="color: #cbcbcb; font-size:25px;"></i>
+          <% end %>
+        <%# end %>
       </div>
-      <% end %>
+      <%# end %>
     </div>
 </div>
