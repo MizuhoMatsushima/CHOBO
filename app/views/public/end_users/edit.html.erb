@@ -1,2 +1,47 @@
-<h1>Public::EndUsers#edit</h1>
-<p>Find me in app/views/public/end_users/edit.html.erb</p>
+<div class="my-5">
+  <div class="card col-sm-12 col-md-10 mx-auto">
+    <div class="my-5 col-sm-12 col-md-9 mx-auto">
+      <h2 class="">登録情報編集</h2>
+      <%= form_with model: @end_user, url: information_end_users_path(@end_user), local: true do |f| %>
+        <%= render "public/shared/error_messages", resource: @end_user %>
+        <table class="">
+          <tbody>
+            <tr>
+              <td height="50">氏名</td>
+              <td height="50">
+                <div style="display:inline-flex">
+                  <%= f.label :last_name, "(姓)", class: "name-text" %><%= f.text_field :last_name,autofocus: true, autocomplete: "last_name", :placeholder =>"朝暮", class: "form-control" %>
+                  <%= f.label :first_name, "(名)", class: "name-text first-name" %><%= f.text_field :first_name,autocomplete: "first_name", :placeholder =>"みなみ", class: "form-control" %></td>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td height="50">フリガナ</td>
+              <td height="50">
+                <div style="display:inline-flex">
+                  <%= f.label :last_name_kana, "(セイ)", class: "name-text", style: "min-width: 40px;" %><%= f.text_field :last_name_kana, autocomplete: "last_name_kana", :placeholder =>"アサクラ", class: "form-control" %>
+                  <%= f.label :first_name_kana, "(メイ)", class: "name-text", style: "min-width:40px;" %><%= f.text_field :first_name_kana, autocomplete: "first_name_kana", :placeholder =>"ミナミ", class: "form-control" %>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td height="50"><%= f.label :phone_number, "電話番号" %></td>
+              <td height="50"><%= f.text_field :phone_number, :placeholder =>"0312345678", class: "form-control" %></td>
+            </tr>
+            <tr>
+              <td height="50"><%= f.label :email, "メールアドレス" %></td>
+              <td height="50"><%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %></td>
+            </tr>
+            <tr>
+              <td height="50"><%= f.label :share_code, "シェアコード" %></td>
+              <td height="50"><%= f.email_field :share_code, class: "form-control" %></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="sign-up-btn">
+          <%= f.submit "登録情報更新", class: "btn btn-success mt-5 col-12" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

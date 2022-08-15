@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2022_08_12_020028) do
     t.integer "account_book_id"
     t.string "subject_name", default: "", null: false
     t.integer "bop"
-    t.integer "price", null: false
+    t.integer "total_price", null: false
     t.datetime "use_at", null: false
     t.integer "point"
     t.string "memo", default: ""

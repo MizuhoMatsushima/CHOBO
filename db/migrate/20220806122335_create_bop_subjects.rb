@@ -5,7 +5,7 @@ class CreateBopSubjects < ActiveRecord::Migration[6.1]
       t.references :account_book, foreign_key: true
       t.string :subject_name, null: false, default: ""
       t.integer :bop, default: ""
-      t.integer :price, null: false, default: ""
+      t.integer :total_price, null: false, default: ""
       t.datetime :use_at, null: false, default: ""
       t.integer :point, default: ""
       t.string :memo, default: ""

@@ -6,8 +6,4 @@ class BopSubject < ApplicationRecord
 
   enum bop: { balance: 0, payments: 1 }
 
-  def bop_subject_use_at
-    self.find_by(use_at)
-  end
-
 end

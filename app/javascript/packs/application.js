@@ -14,12 +14,12 @@ import "bootstrap";
 import "cocoon"
 import "../stylesheets/application"
 import '@fortawesome/fontawesome-free/js/all'
-import "./app.js"
 
-
+require("app.js")
 
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
 
