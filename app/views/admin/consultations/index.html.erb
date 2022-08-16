@@ -2,7 +2,7 @@
   <div class="card">
     <div class="m-5">
       <h3 class="d-inline">相談管理画面</h3>
-      <%= render "search" %>
+      <%= render "layouts/search", search_path: search_consultations_path %>
       <table class="table mt-3">
         <tbody>
           <% @consultations.each do |consultation| %>

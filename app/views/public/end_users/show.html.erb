@@ -1,33 +1,44 @@
-<div class="col-lg-10 col-md-12 mt-5 mx-auto">
+<div class="col-md-10 col-sm-12 my-5 mx-auto">
   <div class="card">
     <div class="m-5">
-      <h3>マイページ</h3>
-      <table>
+      <h2 class="text-center mb-4">マイページ</h3>
+      <table class="col-md-6 mx-auto">
         <tbody>
           <tr>
-            <th>氏名</th>
-            <td><%= @end_user.full_name %></td>
+            <th width=150>氏名</th>
+            <td height=50><%= @end_user.full_name %></td>
           </tr>
           <tr>
             <th>フリガナ</th>
-            <td><%= @end_user.full_name_kana %></td>
+            <td height=50><%= @end_user.full_name_kana %></td>
           </tr>
           <tr>
             <th>電話番号</th>
-            <td><%= @end_user.phone_number %></td>
+            <td height=50><%= @end_user.phone_number %></td>
           </tr>
           <tr>
             <th>メールアドレス</th>
-            <td><%= @end_user.email %></td>
+            <td height=50><%= @end_user.email %></td>
+          </tr>
+          <tr>
+            <%= form_with model: @end_user, url: information_end_users_path(@end_user), local: true do |f| %>
+              <th height="70"><%= f.label :share_code, "シェアコード" %></th>
+              <td class="form-inline">
+                <%= f.text_field :share_code, class: "form-control col-8" %>
+                <%= f.submit "登録", class: "btn btn-secondary col-2 ml-2", style: "min-width: 60px;" %>
+              </td>
+            <% end %>
           </tr>
         </tbody>
       </table>
-      <p>科目・細目一覧</p>
-      <p>細目集計一覧</p>
-      <%= link_to "相談履歴一覧", favorites_my_index_path %>
+      <div class="col-md-6 mx-auto mt-4">
+        <p>科目・細目一覧</p>
+        <p>細目集計一覧</p>
+        <%= link_to "いいねした相談履歴一覧", favorites_my_index_path %>
+      </div>
     </div>
     <div class="mx-auto">
-      <%= link_to "登録情報の編集", edit_end_users_path(@end_user), class: "btn btn-success my-5" %>
+      <%= link_to "登録情報の編集", edit_end_users_path(@end_user), class: "btn btn-success my-3" %>
     </div>
   </div>
 </div>

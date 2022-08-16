@@ -1,30 +1,48 @@
-<div class="col-lg-10 col-md-12 mt-5 mx-auto">
+<div class="col-md-10 col-sm-12 my-5 mx-auto">
   <div class="card">
     <div class="m-5">
-      <h3>利用者詳細画面</h3>
-      <table>
+      <h2 class="text-center mb-4">利用者詳細画面</h2>
+      <table class="col-md-6 mx-auto">
         <tbody>
           <tr>
-            <th>氏名</th>
-            <td><%= @end_user.full_name %></td>
+            <th width=200>氏名</th>
+            <td height=50><%= @end_user.full_name %></td>
           </tr>
           <tr>
             <th>フリガナ</th>
-            <td><%= @end_user.full_name_kana %></td>
+            <td height=50><%= @end_user.full_name_kana %></td>
           </tr>
           <tr>
             <th>電話番号</th>
-            <td><%= @end_user.phone_number %></td>
+            <td height=50><%= @end_user.phone_number %></td>
           </tr>
           <tr>
             <th>メールアドレス</th>
-            <td><%= @end_user.email %></td>
+            <td height=50><%= @end_user.email %></td>
+          </tr>
+          <tr>
+            <th>シェアコード</th>
+            <td height=50><%= @end_user.share_code %></td>
+          </tr>
+          <tr>
+            <th>会員ステータス</th>
+            <td height=50>
+              <% if @end_user.is_deleted == false %>
+                <div class="text-success font-weight-bold">有効</div>
+              <% else %>
+                <div class="text-secondary">退会</div>
+              <% end %>
+            </td>
           </tr>
         </tbody>
       </table>
       <!--検索で表示できるか？？-->
       <%#= link_to "相談履歴一覧", favorites_my_index_path %>
-      <%= link_to "編集", edit_admin_end_user_path(@end_user), class: "btn btn-secondary" %>
+      <div class="mx-auto my-5">
+        <div class="text-center">
+          <%= link_to "編集", edit_admin_end_user_path(@end_user), class: "btn btn-secondary col-6" %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
