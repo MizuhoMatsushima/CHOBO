@@ -1,45 +1,47 @@
-<div class="my-5">
-  <div class="card col-sm-12 col-md-10 mx-auto">
-    <div class="my-5 col-sm-12 col-md-9 mx-auto">
-      <h2 class="">登録情報編集</h2>
+<div class="col-md-10 col-sm-12 my-5 mx-auto">
+  <div class="card">
+    <div class="m-5">
+      <h2 class="text-center mb-4">登録情報編集</h2>
       <%= form_with model: @end_user, url: information_end_users_path(@end_user), local: true do |f| %>
         <%= render "public/shared/error_messages", resource: @end_user %>
-        <table class="">
+        <table class="col-11">
           <tbody>
             <tr>
-              <td height="50">氏名</td>
-              <td height="50">
-                <div style="display:inline-flex">
-                  <%= f.label :last_name, "(姓)", class: "name-text" %><%= f.text_field :last_name,autofocus: true, autocomplete: "last_name", :placeholder =>"朝暮", class: "form-control" %>
-                  <%= f.label :first_name, "(名)", class: "name-text first-name" %><%= f.text_field :first_name,autocomplete: "first_name", :placeholder =>"みなみ", class: "form-control" %></td>
+              <td width=30% style="min-width: 120px;">氏名</td>
+              <td height="50" width=70%>
+                <div>
+                  <div  class="text-right" style="display:inline-flex; width: 45%;">
+                    <%= f.label :last_name, "(姓)", class: "my-auto text-right mr-1", style: "width: 55px; min-width: 55px;" %><%= f.text_field :last_name,autofocus: true, autocomplete: "last_name", :placeholder =>"朝暮", class: "form-control" %>
+                  </div>
+                  <div  class="text-right" style="display:inline-flex; width: 45%;">
+                    <%= f.label :first_name, "(名)", class: "my-auto text-right mr-1", style:"width: 55px; min-width: 55px;" %><%= f.text_field :first_name,autocomplete: "first_name", :placeholder =>"みなみ", class: "form-control" %></td>
+                  </div>
                 </div>
               </td>
             </tr>
             <tr>
-              <td height="50">フリガナ</td>
-              <td height="50">
-                <div style="display:inline-flex">
-                  <%= f.label :last_name_kana, "(セイ)", class: "name-text", style: "min-width: 40px;" %><%= f.text_field :last_name_kana, autocomplete: "last_name_kana", :placeholder =>"アサクラ", class: "form-control" %>
-                  <%= f.label :first_name_kana, "(メイ)", class: "name-text", style: "min-width:40px;" %><%= f.text_field :first_name_kana, autocomplete: "first_name_kana", :placeholder =>"ミナミ", class: "form-control" %>
+              <td height="70">フリガナ</td>
+              <td>
+                <div class="text-right" style="display:inline-flex; width: 45%;">
+                  <%= f.label :last_name_kana, "(セイ)", class: "my-auto mr-1", style:"width: 55px; min-width: 55px;" %><%= f.text_field :last_name_kana, autocomplete: "last_name_kana", :placeholder =>"アサクラ", class: "form-control" %>
+                </div>
+                <div class="text-right" style="display:inline-flex; width: 45%;">
+                  <%= f.label :first_name_kana, "(メイ)", class: "my-auto mr-1", style:"width: 55px; min-width: 55px;" %><%= f.text_field :first_name_kana, autocomplete: "first_name_kana", :placeholder =>"ミナミ", class: "form-control" %>
                 </div>
               </td>
             </tr>
             <tr>
-              <td height="50"><%= f.label :phone_number, "電話番号" %></td>
-              <td height="50"><%= f.text_field :phone_number, :placeholder =>"0312345678", class: "form-control" %></td>
+              <td height="70"><%= f.label :phone_number, "電話番号" %></td>
+              <td><%= f.text_field :phone_number, :placeholder =>"0312345678", class: "form-control", style:"width: 91%;" %></td>
             </tr>
             <tr>
-              <td height="50"><%= f.label :email, "メールアドレス" %></td>
-              <td height="50"><%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %></td>
-            </tr>
-            <tr>
-              <td height="50"><%= f.label :share_code, "シェアコード" %></td>
-              <td height="50"><%= f.email_field :share_code, class: "form-control" %></td>
+              <td height="70"><%= f.label :email, "メールアドレス" %></td>
+              <td><%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", style:"width: 91%;" %></td>
             </tr>
           </tbody>
         </table>
-        <div class="sign-up-btn">
-          <%= f.submit "登録情報更新", class: "btn btn-success mt-5 col-12" %>
+        <div class="btn-center">
+          <%= f.submit "登録情報更新", class: "btn btn-success mt-5 col-6" %>
         </div>
       <% end %>
     </div>

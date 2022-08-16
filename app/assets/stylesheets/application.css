@@ -15,13 +15,6 @@
  */
 
 
-.name-text {
-  width: 120px
-}
-
-.first-name {
-  margin-left: 27px
-}
 
 
 /*:placeholder {*/
@@ -29,6 +22,11 @@
 /*}*/
 
 .sign-up-btn .btn {
+  display: block;
+  margin: auto;
+}
+
+.btn-center .btn {
   display: block;
   margin: auto;
 }

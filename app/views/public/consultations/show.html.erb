@@ -27,9 +27,11 @@
         <%= render 'public/favorites/favorite-btn', consultation: @consultation %>
       </div>
       <div class="comment-count">
-        <p>コメント数：<%= @consultation.comments.count %></p>
+        <p>コメント数：<%= @consultation.comments.count %></p>  
       </div>
-      <%= render "public/comments/comment-post", consultation: @consultation, comment: @comment %>
+      <div class="comment-textarea">
+        <%= render "public/comments/comment-post", consultation: @consultation, comment: @comment %>
+      </div>
       <div class="comment-index">
         <%= render "public/comments/comment-index", consultation: @consultation %>
       </div>
