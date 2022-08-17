@@ -14,6 +14,7 @@ class Public::AccountBooksController < ApplicationController
   def show
     @account_book = AccountBook.find(params[:id])
     @bop_subjects = BopSubject.all
+
   end
 
   def edit

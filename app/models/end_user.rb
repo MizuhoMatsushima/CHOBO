@@ -22,7 +22,7 @@ class EndUser < ApplicationRecord
 
   def self.search(search)
     if search != nil
-      EndUser.where('last_name LIKE(?) or first_name LIKE(?) or last_name_kana LIKE(?)' , "%#{search}%",  "%#{search}%")
+      EndUser.where('last_name LIKE(?) or first_name LIKE(?)' , "%#{search}%",  "%#{search}%")
     else
       EndUser.all
     end

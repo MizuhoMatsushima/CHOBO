@@ -19,6 +19,7 @@ class Public::BopSubjectsController < ApplicationController
     @bop_subject = BopSubject.find(params[:id])
     @bop_details = @bop_subject.bop_details
     @bop_details_total = @bop_details.sum(:detail_price)
+    @acount_book = @bop_subject.account_book_id
   end
 
   def edit
