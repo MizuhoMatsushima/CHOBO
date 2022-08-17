@@ -1,0 +1,75 @@
+<div class="col-lg-10 col-md-11 mx-auto mt-5">
+  <div class="card">
+    <div class="m-5">
+      <% if controller.controller_name == "consultations" %>
+        <h3 class="d-inline">相談一覧</h3>
+          <% unless admin_signed_in? %>
+            <%# unless current_end_user.full_name == "Guest User"? %>
+            <div class="d-inline" style="">
+              <%= link_to "相談する", new_consultation_path, class: "btn btn-secondary" %>
+            </div>
+            <%# end %>
+          <% end %>
+          <%= render "layouts/search", search_path: search_path %>
+          <h4>"<%= params[:keyword] %>"の検索結果</h4>
+          <table class="table">
+            <tbody>
+              <% consultation.each do |consultation| %>
+                <tr>
+                  <td>
+                    <%= link_to consultation_path(consultation) do %>
+                      <%= consultation.title %>
+                    <% end %>
+                  </td>
+                  <% consultation.tags.each do |tag| %>
+                    <td><%= tag.name %></td>
+                  <% end %>
+                  <td></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+      <% else @model == 'end_user' %>
+        <% if admin_signed_in? %>
+          <h3 class="d-inline">会員一覧画</h3>
+          <%= render "layouts/search", search_path: search_path %>
+          <h4>"<%= params[:keyword] %>"の検索結果</h4>
+          <table class="table mt-3">
+            <thead>
+              <tr>
+                <th>氏名</th>
+                <th>フリガナ</th>
+                <th class="text-center">会員ステータス</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% end_user.each do |end_user| %>
+                <tr>
+                  <td>
+                    <%= link_to admin_end_user_path(end_user) do %>
+                      <%= end_user.full_name %>
+                    <% end %>
+                  </td>
+                  <td>
+                    <%= link_to admin_end_user_path(end_user) do %>
+                      <%= end_user.full_name_kana %>
+                    <% end %>
+                  </td>
+                  <td class="text-center">
+                    <% if end_user.is_deleted == false %>
+                      <div class="text-danger font-weight-bold">有効</div>
+                    <% else %>
+                      <div class="text-secondary">退会</div>
+                    <% end %>
+                  </td>
+                  <td><%= link_to "編集", edit_admin_end_user_path(end_user), class: "btn btn-secondary" %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

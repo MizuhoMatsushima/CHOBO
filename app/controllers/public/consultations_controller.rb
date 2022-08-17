@@ -35,10 +35,10 @@ class Public::ConsultationsController < ApplicationController
     @consultations = Consultation.all
     @tags = Tag.all
     if (params[:keyword])[0] == '#'
-      @consultation = Tag.search(params[:keyword]).order('created_at DESC')
+      @consultation = Tag.search(params[:keyword]).order('created_at asc')
       # redirect_to consultations_path
     else
-      @consultation = Consultation.search(params[:keyword]).order('created_at DESC')
+      @consultation = Consultation.search(params[:keyword]).order('created_at asc')
       # redirect_to consultations_path
     end
   end
