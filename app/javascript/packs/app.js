@@ -24,3 +24,8 @@
   });
 });
 
+
+
+    if ("#bop_subject_bop_payments").change(function() {
+      ('.payments').html('#new_payments');
+    )};

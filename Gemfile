@@ -58,3 +58,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem "enum_help"
 gem 'cocoon'
+
+# gem 'dotenv-rails'
+# group :production do
+#   gem 'mysql2'
+# end
