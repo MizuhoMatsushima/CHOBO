@@ -92,9 +92,6 @@ ActiveRecord::Schema.define(version: 2022_08_18_050211) do
     t.integer "savings_amount", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["account_book_id"], name: "index_deposit_balances_on_account_book_id"
-    t.index ["end_user_id"], name: "index_deposit_balances_on_end_user_id"
-    t.index ["savings_estination_id"], name: "index_deposit_balances_on_savings_estination_id"
   end
 
   create_table "details", force: :cascade do |t|
