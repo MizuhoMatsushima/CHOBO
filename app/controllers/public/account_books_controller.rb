@@ -23,7 +23,7 @@ class Public::AccountBooksController < ApplicationController
   private
 
   def account_book_params
-    params.require(:account_book).permit(:name)
+    params.require(:account_book).permit(:source_of_income_id, :income, :pay_day)
   end
 
 end

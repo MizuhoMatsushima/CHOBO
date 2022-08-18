@@ -10,7 +10,8 @@ class CreateBopSubjects < ActiveRecord::Migration[6.1]
       t.integer :point, default: ""
       t.string :memo, default: ""
       t.integer :registered_person_id, default: ""
-
+      t.string :share_code, default: ""
+      t.integer :share_end_user_id, default: ""
       t.timestamps
     end
   end

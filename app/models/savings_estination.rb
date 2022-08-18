@@ -1,0 +1,2 @@
+class SavingsEstination < ApplicationRecord
+end

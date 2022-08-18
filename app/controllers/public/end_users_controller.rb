@@ -1,6 +1,7 @@
 class Public::EndUsersController < ApplicationController
   def top
     @account_books = AccountBook.all
+    @end_user = current_end_user
   end
 
   def show
