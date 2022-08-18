@@ -23,11 +23,11 @@
           </td>
         </tr>
       </table>
-      <div class="favorite-btn">
+      <div class="favorite-btn" id="favorite-btn">
         <%= render 'public/favorites/favorite-btn', consultation: @consultation %>
       </div>
       <div class="comment-count">
-        <p>コメント数：<%= @consultation.comments.count %></p>  
+        <p>コメント数：<%= @consultation.comments.count %></p>
       </div>
       <div class="comment-textarea">
         <%= render "public/comments/comment-post", consultation: @consultation, comment: @comment %>
