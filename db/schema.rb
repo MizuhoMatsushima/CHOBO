@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_12_020028) do
+ActiveRecord::Schema.define(version: 2022_08_18_050211) do
 
   create_table "account_books", force: :cascade do |t|
     t.integer "end_user_id"
-    t.string "name", default: "", null: false
-    t.integer "price"
-    t.string "share_code", default: ""
-    t.integer "share_end_user_id"
+    t.integer "source_of_income_id"
+    t.integer "income", default: 0
+    t.datetime "pay_day", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["end_user_id"], name: "index_account_books_on_end_user_id"
+    t.index ["source_of_income_id"], name: "index_account_books_on_source_of_income_id"
   end
 
   create_table "admins", force: :cascade do |t|
@@ -37,10 +37,10 @@ ActiveRecord::Schema.define(version: 2022_08_12_020028) do
 
   create_table "bop_details", force: :cascade do |t|
     t.integer "bop_subject_id"
-    t.string "detail_name", default: "", null: false
+    t.string "detail_name", null: false
     t.integer "detail_price", null: false
     t.integer "amount", null: false
-    t.string "store", default: "", null: false
+    t.string "store", null: false
     t.integer "registered_person_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -55,8 +55,10 @@ ActiveRecord::Schema.define(version: 2022_08_12_020028) do
     t.integer "total_price", null: false
     t.datetime "use_at", null: false
     t.integer "point"
-    t.string "memo", default: ""
+    t.string "memo"
     t.integer "registered_person_id"
+    t.string "share_code"
+    t.integer "share_end_user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_book_id"], name: "index_bop_subjects_on_account_book_id"
@@ -83,9 +85,21 @@ ActiveRecord::Schema.define(version: 2022_08_12_020028) do
     t.index ["end_user_id"], name: "index_consultations_on_end_user_id"
   end
 
+  create_table "deposit_balances", force: :cascade do |t|
+    t.integer "end_user_id"
+    t.integer "account_book_id"
+    t.integer "savings_estination_id"
+    t.integer "savings_amount", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_book_id"], name: "index_deposit_balances_on_account_book_id"
+    t.index ["end_user_id"], name: "index_deposit_balances_on_end_user_id"
+    t.index ["savings_estination_id"], name: "index_deposit_balances_on_savings_estination_id"
+  end
+
   create_table "details", force: :cascade do |t|
     t.integer "subject_id"
-    t.string "detail_name", default: "", null: false
+    t.string "detail_name", null: false
     t.integer "tax_rate", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -120,11 +134,6 @@ ActiveRecord::Schema.define(version: 2022_08_12_020028) do
     t.index ["end_user_id"], name: "index_favorites_on_end_user_id"
   end
 
-  create_table "middle_of_bops", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "middle_of_tags", force: :cascade do |t|
     t.integer "consultation_id"
     t.integer "tag_id"
@@ -134,8 +143,24 @@ ActiveRecord::Schema.define(version: 2022_08_12_020028) do
     t.index ["tag_id"], name: "index_middle_of_tags_on_tag_id"
   end
 
+  create_table "savings_estinations", force: :cascade do |t|
+    t.integer "end_user_id"
+    t.string "savings_estination_name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["end_user_id"], name: "index_savings_estinations_on_end_user_id"
+  end
+
+  create_table "source_of_incomes", force: :cascade do |t|
+    t.integer "end_user_id"
+    t.string "source_name", default: "", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["end_user_id"], name: "index_source_of_incomes_on_end_user_id"
+  end
+
   create_table "subjects", force: :cascade do |t|
-    t.string "subject_name", default: "", null: false
+    t.string "subject_name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -147,15 +172,21 @@ ActiveRecord::Schema.define(version: 2022_08_12_020028) do
   end
 
   add_foreign_key "account_books", "end_users"
+  add_foreign_key "account_books", "source_of_incomes"
   add_foreign_key "bop_details", "bop_subjects"
   add_foreign_key "bop_subjects", "account_books"
   add_foreign_key "bop_subjects", "end_users"
   add_foreign_key "comments", "consultations"
   add_foreign_key "comments", "end_users"
   add_foreign_key "consultations", "end_users"
+  add_foreign_key "deposit_balances", "account_books"
+  add_foreign_key "deposit_balances", "end_users"
+  add_foreign_key "deposit_balances", "savings_estinations"
   add_foreign_key "details", "subjects"
   add_foreign_key "favorites", "consultations"
   add_foreign_key "favorites", "end_users"
   add_foreign_key "middle_of_tags", "consultations"
   add_foreign_key "middle_of_tags", "tags"
+  add_foreign_key "savings_estinations", "end_users"
+  add_foreign_key "source_of_incomes", "end_users"
 end

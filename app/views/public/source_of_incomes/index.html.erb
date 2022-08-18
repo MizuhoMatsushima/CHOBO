@@ -1,0 +1,35 @@
+<div class="col-lg-10 col-md-12 mt-5 mx-auto">
+  <div class="card">
+    <div class="m-5">
+      <h3>収入元の追加</h3>
+      <div>
+        <%= form_with model: @source_of_income, url: source_of_incomes_path, method: :post do |f| %>
+          <div class="form-group">
+            <%= f.label :source_name, "収入元の名前" %>
+            <%= f.text_field :source_name, class:"form-control" %>
+          </div>
+          <%= f.submit "登録", class: "btn btn-success" %>
+        <% end %>
+      </div>
+      <div class="mt-5">
+        <h5>収入元の一覧</h5>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>収入元の名前</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @source_of_incomes.each do |source_of_income| %>
+              <tr>
+                <td><%= source_of_income.source_name %></td>
+                <td><%= link_to "編集", edit_source_of_income_path(source_of_income) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

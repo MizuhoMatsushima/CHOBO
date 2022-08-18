@@ -1,0 +1,2 @@
+class DepositBalance < ApplicationRecord
+end

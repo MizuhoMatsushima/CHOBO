@@ -90,9 +90,68 @@ Consultation.create!(
 
 Tag.create!(
   [{
-
+    name: "#食費",
   },
+  {
+    name: "#節約",
+  },
+  {
+    name: "#4人家族",
+  },
+  {
+    name: "#貯金",
+  },
+  {
+    name: "#一人暮らし",
+  },
+  {
+    name: "#戸建て購入",
+  },
+  {
+    name: "#学費",
+  },
+])
 
+  MiddleOfTag.create!(
+  [{
+    consultation_id: 1,
+    tag_id: 1,
+  },
+  {
+    consultation_id: 1,
+    tag_id: 2,
+  },
+  {
+    consultation_id: 1,
+    tag_id: 3,
+  },
+  {
+    consultation_id: 2,
+    tag_id: 6,
+  },
+  {
+    consultation_id: 3,
+    tag_id: 5,
+  },
+  {
+    consultation_id: 3,
+    tag_id: 1,
+  },
+  {
+    consultation_id: 3,
+    tag_id: 2,
+  },
+  {
+    consultation_id: 4,
+    tag_id: 2,
+  },
+  {
+    consultation_id: 4,
+    tag_id: 4,
+  },
+  {
+    consultation_id: 5,
+    tag_id: 7,
+  },
+])
 
-
-  ])

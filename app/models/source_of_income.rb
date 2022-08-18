@@ -1,0 +1,2 @@
+class SourceOfIncome < ApplicationRecord
+end
