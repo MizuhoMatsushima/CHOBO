@@ -1,34 +1,30 @@
 <div class="container">
   <div class="row">
-    <div class="col-8">
-      <h3>今月の家計簿</h3>
-      <p>(日付～日付）</p>
-      <div>円グラフ</div>
+    <div class="card col-8 mt-3">
+      <div class="m-4">
+        <h3>今月の家計簿</h3>
+        <p>(日付～日付）</p>
+        <div>円グラフ</div>
+      </div>
     </div>
-    <div class="col-3">
-      <table>
-        <tr>
-          <th>収入</th>
-          <td>￥00000</td>
-        </tr>
-        <tr>
-          <th>支出</th>
-          <td>￥00000</td>
-        </tr>
-        <tr>
-          <th>収支</th>
-          <td>￥00000</td>
-        </tr>
-      </table>
-      <h3>帳簿一覧</h3>
-      <% @account_books.each do |account_book| %>
-        <div>
-          <%= link_to account_book_path(account_book) do %>
-            <%= account_book.name %>
-          <% end %>
-        </div>
-      <% end %>
-      <%= link_to "帳簿を追加する", new_account_book_path, method: :get %>
+    <div class="card col-3 mt-3">
+      <div class="m-4">
+        <table>
+          <tr>
+            <th>収入</th>
+            <td>￥<%= @end_user.income_total %></td>
+          </tr>
+          <tr>
+            <th>支出</th>
+            <td>￥00000</td>
+          </tr>
+          <tr>
+            <th>収支</th>
+            <td>￥00000</td>
+          </tr>
+        </table>
+        <%= link_to "収入を追加する", new_account_book_path, method: :get %>
+      </div>
     </div>
   </div>
 </div>

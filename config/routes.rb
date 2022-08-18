@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  # 顧客用
+  # 利用者用
   # URL /customers/sign_in ...
   devise_for :end_users,skip: [:passwords], controllers: {
     registrations: "public/registrations",
@@ -23,6 +23,9 @@ Rails.application.routes.draw do
     end
 
     resources :account_books, only: [:new, :index, :show, :edit, :create, :update, :destroy]
+    resources :deposit_balances, only: [:index, :edit, :create, :update]
+    resources :source_of_incomes, only: [:index, :edit, :create, :update]
+    resources :savings_estinations, only: [:index, :edit, :create, :update]
     resources :subjects, only: [:new, :index, :edit, :create, :update, :destroy]
     resources :tags, only: [:create]
     resources :bop_subjects, only: [:new, :show, :index, :edit, :create, :update, :destroy]
