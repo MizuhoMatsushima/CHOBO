@@ -17,10 +17,10 @@
       }
 	  });
 
-  $('#bop_subject_point').change(function() {
-    let total_detail_price = $('#bop_subject_price').val();
-    let subject_point = $('#bop_subject_point').val();
-    $('#bop_subject_total_price').val(total_detail_price-subject_point);
+    $('#bop_subject_point').change(function() {
+      let total_detail_price = $('#bop_subject_price').val();
+      let subject_point = $('#bop_subject_point').val();
+      $('#bop_subject_total_price').val(total_detail_price-subject_point);
+    });
   });
-});
 
