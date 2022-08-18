@@ -1,46 +1,53 @@
-<h2 class="col-7 mx-auto">新規登録</h2>
-<%= form_with model: @end_user, url: registration_path(resource_name), local: true do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
-  <table class="col-7 mx-auto">
-    <tbody>
-      <tr>
-        <td height="50">氏名</td>
-        <td height="50">
-          <div style="display:inline-flex">
-            <%= f.label :last_name, "(姓)", class: "name-text" %><%= f.text_field :last_name,autofocus: true, autocomplete: "last_name", :placeholder =>"朝暮", class: "form-control" %>
-            <%= f.label :first_name, "(名)", class: "name-text first-name" %><%= f.text_field :first_name,autocomplete: "first_name", :placeholder =>"みなみ", class: "form-control" %></td>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td height="50">フリガナ</td>
-        <td height="50">
-          <div style="display:inline-flex">
-            <%= f.label :last_name_kana, "(セイ)", class: "name-text" %><%= f.text_field :last_name_kana, autocomplete: "last_name_kana", :placeholder =>"アサクラ", class: "form-control" %>
-            <%= f.label :first_name_kana, "(メイ)", class: "name-text first-name" %><%= f.text_field :first_name_kana, autocomplete: "first_name_kana", :placeholder =>"ミナミ", class: "form-control" %>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td height="50"><%= f.label :phone_number, "電話番号" %></td>
-        <td height="50"><%= f.text_field :phone_number, :placeholder =>"0312345678", class: "form-control" %></td>
-      </tr>
-      <tr>
-        <td height="50"><%= f.label :email, "メールアドレス" %></td>
-        <td height="50"><%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %></td>
-      </tr>
-      <tr>
-        <td height="50"><%= f.label :password, "パスワード(英数字#{@minimum_password_length}文字以上)" %></td>
-        <td height="50"><%= f.password_field :password, class: "form-control" %></td>
-      </tr>
-      <tr>
-        <td height="50"><%= f.label :assword_confirmation, "パスワード(確認用)" %></td>
-        <td height="50"><%= f.password_field :password_confirmation, class: "form-control" %></td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="sign-up-btn">
-    <%= f.submit "新規登録", class: "btn btn-success mt-5 col-7" %>
+<div class="my-5">
+  <div class="card col-sm-12 col-md-10 mx-auto">
+    <div class="my-5 col-sm-12 col-md-9 mx-auto">
+      <h2 class="">新規登録</h2>
+      <%= form_with model: @end_user, url: registration_path(resource_name), local: true do |f| %>
+        <%= render "public/shared/error_messages", resource: resource %>
+        <table class="">
+          <tbody>
+            <tr>
+              <td height="50">氏名</td>
+              <td height="50">
+                <div style="display:inline-flex">
+                  <%= f.label :last_name, "(姓)", class: "name-text" %><%= f.text_field :last_name,autofocus: true, autocomplete: "last_name", :placeholder =>"朝暮", class: "form-control" %>
+                  <%= f.label :first_name, "(名)", class: "name-text first-name" %><%= f.text_field :first_name,autocomplete: "first_name", :placeholder =>"みなみ", class: "form-control" %></td>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td height="50">フリガナ</td>
+              <td height="50">
+                <div style="display:inline-flex">
+                  <%= f.label :last_name_kana, "(セイ)", class: "name-text", style: "min-width: 40px;" %><%= f.text_field :last_name_kana, autocomplete: "last_name_kana", :placeholder =>"アサクラ", class: "form-control" %>
+                  <%= f.label :first_name_kana, "(メイ)", class: "name-text", style: "min-width:40px;" %><%= f.text_field :first_name_kana, autocomplete: "first_name_kana", :placeholder =>"ミナミ", class: "form-control" %>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td height="50"><%= f.label :phone_number, "電話番号" %></td>
+              <td height="50"><%= f.text_field :phone_number, :placeholder =>"0312345678", class: "form-control" %></td>
+            </tr>
+            <tr>
+              <td height="50"><%= f.label :email, "メールアドレス" %></td>
+              <td height="50"><%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %></td>
+            </tr>
+            <tr>
+              <td height="50"><%= f.label :password, "パスワード(英数字#{@minimum_password_length}文字以上)" %></td>
+              <td height="50"><%= f.password_field :password, class: "form-control" %></td>
+            </tr>
+            <tr>
+              <td height="50"><%= f.label :assword_confirmation, "パスワード(確認用)" %></td>
+              <td height="50"><%= f.password_field :password_confirmation, class: "form-control" %></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="sign-up-btn">
+          <%= f.submit "新規登録", class: "btn btn-success mt-5 col-12" %>
+        </div>
+      <% end %>
+      <h6 class="mt-2">既に登録済みの方は、<%= link_to "こちら", new_end_user_session_path %>からログインしてください</h5>
+      <h6 class="mt-2">ゲストログインの方は、<%= link_to "こちら", end_users_guest_sign_in_path, method: :post %>からログインしてください</h5>
+    </div>
   </div>
-<% end %>
-<h5 class="col-7 mx-auto mt-3">既に登録済みの方は、<%= link_to "こちら", new_end_user_session_path %>からログインしてください</h5>
+</div>

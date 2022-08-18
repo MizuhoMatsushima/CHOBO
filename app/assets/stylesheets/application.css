@@ -15,13 +15,6 @@
  */
 
 
-.name-text {
-  width: 120px
-}
-
-.first-name {
-  margin-left: 27px
-}
 
 
 /*:placeholder {*/
@@ -31,4 +24,83 @@
 .sign-up-btn .btn {
   display: block;
   margin: auto;
+}
+
+.btn-center .btn {
+  display: block;
+  margin: auto;
+}
+
+.comment-card {
+  margin-right: auto;
+}
+
+.comment-box {
+  width: 90%;
+}
+
+.coment_name_body {
+  padding: 10px;
+}
+
+.comment {
+  position: relative;
+  display: inline-block;
+  padding: 7px 10px;
+  min-width: 120px;
+  color: #555;
+  font-size: 16px;
+  background: #fafafa;
+}
+
+.comment:before {
+  content: "";
+  position: absolute;
+  top: 5%;
+  left: -30px;
+  border: 15px solid transparent;
+  border-right: 15px solid #fafafa;
+}
+
+.comment-card-right {
+  display: flex;
+  justify-content: flex-end;
+
+}
+
+.comment-box-right {
+  width: 90%;
+}
+
+.coment_name_body-right {
+  padding: 10px;
+  justify-content: flex-end;
+}
+
+.comment-right {
+  position: relative;
+  display: inline-block;
+  padding: 7px 10px;
+  min-width: 120px;
+  color: #555;
+  font-size: 16px;
+  background: #fafafa;
+}
+
+.comment-right:before {
+  content: "";
+  position: absolute;
+  top: 5%;
+  left: 100%;
+  border: 15px solid transparent;
+  border-left: 15px solid #fafafa;
+}
+
+.btn-group > label > input {
+  display: none;
+}
+
+.btn-group > label {
+  border-color: #cacaca;
+  border-width: 1px;
 }

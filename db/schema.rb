@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_06_122453) do
+ActiveRecord::Schema.define(version: 2022_08_12_020028) do
 
   create_table "account_books", force: :cascade do |t|
-    t.integer "end_user"
+    t.integer "end_user_id"
     t.string "name", default: "", null: false
-    t.integer "price", null: false
-    t.integer "bop", null: false
+    t.integer "price"
     t.string "share_code", default: ""
     t.integer "share_end_user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["end_user_id"], name: "index_account_books_on_end_user_id"
   end
 
   create_table "admins", force: :cascade do |t|
@@ -36,51 +36,60 @@ ActiveRecord::Schema.define(version: 2022_08_06_122453) do
   end
 
   create_table "bop_details", force: :cascade do |t|
-    t.integer "bop_subject"
-    t.string "name", default: "", null: false
-    t.datetime "use_at", null: false
-    t.integer "price", null: false
+    t.integer "bop_subject_id"
+    t.string "detail_name", default: "", null: false
+    t.integer "detail_price", null: false
     t.integer "amount", null: false
     t.string "store", default: "", null: false
-    t.integer "registered_person_id", null: false
+    t.integer "registered_person_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["bop_subject_id"], name: "index_bop_details_on_bop_subject_id"
   end
 
   create_table "bop_subjects", force: :cascade do |t|
-    t.integer "end_user"
-    t.integer "account_book"
-    t.string "naame", default: "", null: false
-    t.integer "price", null: false
+    t.integer "end_user_id"
+    t.integer "account_book_id"
+    t.string "subject_name", default: "", null: false
+    t.integer "bop"
+    t.integer "total_price", null: false
+    t.datetime "use_at", null: false
     t.integer "point"
-    t.integer "registered_person_id", null: false
+    t.string "memo", default: ""
+    t.integer "registered_person_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_book_id"], name: "index_bop_subjects_on_account_book_id"
+    t.index ["end_user_id"], name: "index_bop_subjects_on_end_user_id"
   end
 
   create_table "comments", force: :cascade do |t|
-    t.integer "end_user"
-    t.integer "consultation"
+    t.integer "end_user_id"
+    t.integer "consultation_id"
     t.text "body", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["consultation_id"], name: "index_comments_on_consultation_id"
+    t.index ["end_user_id"], name: "index_comments_on_end_user_id"
   end
 
   create_table "consultations", force: :cascade do |t|
-    t.integer "end_user"
+    t.integer "end_user_id"
     t.string "title", default: "", null: false
     t.text "body", null: false
     t.boolean "is_draft", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["end_user_id"], name: "index_consultations_on_end_user_id"
   end
 
   create_table "details", force: :cascade do |t|
-    t.integer "subject"
-    t.string "name", default: "", null: false
+    t.integer "subject_id"
+    t.string "detail_name", default: "", null: false
     t.integer "tax_rate", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["subject_id"], name: "index_details_on_subject_id"
   end
 
   create_table "end_users", force: :cascade do |t|
@@ -103,21 +112,30 @@ ActiveRecord::Schema.define(version: 2022_08_06_122453) do
   end
 
   create_table "favorites", force: :cascade do |t|
-    t.integer "end_user"
-    t.integer "consultation"
+    t.integer "end_user_id"
+    t.integer "consultation_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["consultation_id"], name: "index_favorites_on_consultation_id"
+    t.index ["end_user_id"], name: "index_favorites_on_end_user_id"
+  end
+
+  create_table "middle_of_bops", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "middle_of_tags", force: :cascade do |t|
-    t.integer "consultation"
-    t.integer "tag"
+    t.integer "consultation_id"
+    t.integer "tag_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["consultation_id"], name: "index_middle_of_tags_on_consultation_id"
+    t.index ["tag_id"], name: "index_middle_of_tags_on_tag_id"
   end
 
   create_table "subjects", force: :cascade do |t|
-    t.string "name", default: "", null: false
+    t.string "subject_name", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -128,4 +146,16 @@ ActiveRecord::Schema.define(version: 2022_08_06_122453) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "account_books", "end_users"
+  add_foreign_key "bop_details", "bop_subjects"
+  add_foreign_key "bop_subjects", "account_books"
+  add_foreign_key "bop_subjects", "end_users"
+  add_foreign_key "comments", "consultations"
+  add_foreign_key "comments", "end_users"
+  add_foreign_key "consultations", "end_users"
+  add_foreign_key "details", "subjects"
+  add_foreign_key "favorites", "consultations"
+  add_foreign_key "favorites", "end_users"
+  add_foreign_key "middle_of_tags", "consultations"
+  add_foreign_key "middle_of_tags", "tags"
 end

@@ -1,2 +1,34 @@
-<h1>Public::Consultations#index</h1>
-<p>Find me in app/views/public/consultations/index.html.erb</p>
+<div class="col-lg-10 col-md-11 mx-auto mt-5">
+  <div class="card">
+    <div class="m-5">
+      <h3 class="d-inline">相談一覧</h3>
+      <div class="d-inline" style="">
+        <%= link_to "相談する", new_consultation_path, class: "btn btn-secondary" %>
+      </div>
+      <%= render "search" %>
+      <table class="table mt-3">
+        <tbody>
+          <% @consultations.each do |consultation| %>
+            <tr>
+              <td>
+                <%= link_to consultation_path(consultation) do %>
+                  <%= consultation.title %>
+                <% end %>
+              </td>
+              <td>
+                <% consultation.tags.each do |tag| %>
+                  <%= tag.name %>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to consultation_path(consultation) do %>
+                  コメント数：<%= consultation.comments.count %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

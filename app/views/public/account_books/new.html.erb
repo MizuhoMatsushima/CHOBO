@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="m-5">
+    <div class="">
+      <h3>帳簿の新規登録</h3>
+      <%= form_with model: @account_book, url: account_books_path, method: :post do |f| %>
+        <%= f.label :name, "帳簿名" %>
+        <%= f.text_field :name %>
+        <%= f.submit "登録"%>
+      <% end %>
+    </div>
+  </div>
+</div>

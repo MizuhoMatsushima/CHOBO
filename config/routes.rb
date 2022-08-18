@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: "homes#top"
 
+    devise_scope :end_user do
+      post 'end_users/guest_sign_in', to: 'guests#guest_sign_in'
+    end
+
     resource :end_users, only: [:edit], path_names: { edit: 'information/edit' } do
       get "/" => "end_users#top"
       get "/my_page" => "end_users#show"
@@ -18,10 +22,10 @@ Rails.application.routes.draw do
       get "search"
     end
 
-    resources :account_books, only: [:index, :show, :edit, :create, :update, :destroy]
-    resources :bop_subjects, only: [:new, :show, :index, :edit, :create, :update, :destroy]
+    resources :account_books, only: [:new, :index, :show, :edit, :create, :update, :destroy]
     resources :subjects, only: [:new, :index, :edit, :create, :update, :destroy]
     resources :tags, only: [:create]
+    resources :bop_subjects, only: [:new, :show, :index, :edit, :create, :update, :destroy]
     resources :bop_details, only: [:index, :create, :update] do
       collection do
         get "search"
@@ -37,8 +41,10 @@ Rails.application.routes.draw do
       resource :favorites, only: [:create, :destroy]
       collection do
         get "my_index"
+        get "search"
       end
     end
+    get "favorites/my_index"
   end
 
 
@@ -52,6 +58,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: "homes#top"
     resources :consultations, only: [:show, :index, :destroy] do
+      resources :comments, only: [:destroy]
       collection do
         get "search"
       end

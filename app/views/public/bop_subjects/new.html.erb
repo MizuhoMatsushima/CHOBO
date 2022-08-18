@@ -1,2 +1,20 @@
-<h1>Public::BopSubjects#new</h1>
-<p>Find me in app/views/public/bop_subjects/new.html.erb</p>
+<div class="col-lg-10 col-md-12 mt-5 mx-auto">
+  <div class="card">
+    <div class="m-5">
+      <%= form_with model: @bop_subject, url: bop_subjects_path, method: :post do |f| %>
+        <%= render "public/shared/error_messages", resource: @bop_subject %>
+        <div class="form-group row">
+          <div class="btn-group col-12" data-toggle="buttons">
+            <label class="col-6 btn btn-outline-secondary active">
+              <%= f.radio_button :bop, "payments", {checked: true} %>支出
+            </label>
+            <label class="col-6 btn btn-outline-secondary">
+              <%= f.radio_button :bop, "balance" %>収入
+            </label>
+          </div>
+        </div>
+        <div class="payments"><%= render "new_payments", f: f %></div>
+      <% end %>
+    </div>
+  </div>
+</div>
