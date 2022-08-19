@@ -40,7 +40,6 @@ ActiveRecord::Schema.define(version: 2022_08_18_050300) do
     t.string "detail_name", null: false
     t.integer "detail_price", null: false
     t.integer "amount", null: false
-    t.string "store", null: false
     t.integer "registered_person_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -56,6 +55,7 @@ ActiveRecord::Schema.define(version: 2022_08_18_050300) do
     t.datetime "use_at", null: false
     t.integer "point"
     t.string "memo"
+    t.string "store", null: false
     t.integer "registered_person_id"
     t.string "share_code"
     t.integer "share_end_user_id"

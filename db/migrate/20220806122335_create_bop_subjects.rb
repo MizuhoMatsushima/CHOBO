@@ -9,6 +9,7 @@ class CreateBopSubjects < ActiveRecord::Migration[6.1]
       t.datetime :use_at, null: false
       t.integer :point
       t.string :memo
+      t.string :store, null: false
       t.integer :registered_person_id
       t.string :share_code
       t.integer :share_end_user_id

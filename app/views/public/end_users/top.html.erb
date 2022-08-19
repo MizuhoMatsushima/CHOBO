@@ -1,30 +1,39 @@
-<div class="container">
-  <div class="row">
-    <div class="card col-8 mt-3">
+<div class="end_user_top">
+    <div class="card mt-3 center-block" style="width: 60%;">
       <div class="m-4">
         <h3>今月の家計簿</h3>
-        <p>(日付～日付）</p>
-        <div>円グラフ</div>
+        <p><%#= @account_book.pay_da %></p>
+        <div>
+          <%= pie_chart @bop_subjects.group(:subject_name).count %>
+        </div>
       </div>
     </div>
-    <div class="card col-3 mt-3">
+    <div class="card mt-3" style="width: 30%;">
       <div class="m-4">
         <table>
           <tr>
             <th>収入</th>
-            <td>￥<%= @end_user.income_total %></td>
+            <td>
+              <%= link_to account_books_path do %>
+                ￥<%= @end_user.income_total.to_s(:delimited) %>
+              <% end %>
+              </td>
           </tr>
           <tr>
             <th>支出</th>
-            <td>￥00000</td>
+            <td>
+              <%= link_to bop_subjects_path do %>
+                ￥<%= @end_user.bop_subject_total.to_s(:delimited) %>
+              <% end %>
+            </td>
           </tr>
           <tr>
             <th>収支</th>
-            <td>￥00000</td>
+            <td>￥<%= @end_user.bop.to_s(:delimited) %></td>
           </tr>
         </table>
-        <%= link_to "収入を追加する", new_account_book_path, method: :get %>
+        <div><%= link_to "収入を追加する", new_account_book_path, method: :get %></div>
+        <div><%= link_to "支出登録", new_bop_subject_path %></div>
       </div>
     </div>
-  </div>
 </div>

@@ -6,8 +6,8 @@ class BopSubject < ApplicationRecord
 
   enum bop: { balance: 0, payments: 1 }
 
-  # def income_serect
-  #   self.pay_day + '(' + self.source_name + ')'
-  # end
+  def income_serect
+    self.pay_day.strftime('%Y年%m月%d日') + '(' + self.source_name + ')'
+  end
 
 end

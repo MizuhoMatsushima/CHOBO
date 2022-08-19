@@ -10,6 +10,9 @@ class EndUser < ApplicationRecord
   has_many :account_books, dependent: :destroy
   has_many :bop_subjects, dependent: :destroy
   has_many :bop_details, dependent: :destroy
+  has_many :savings_estinations, dependent: :destroy
+  has_many :source_of_incomes, dependent: :destroy
+  has_many :deposit_balances, dependent: :destroy
 
   #氏名の姓名を合わせるメソッド
   def full_name
@@ -32,9 +35,22 @@ class EndUser < ApplicationRecord
     array = [] #空の配列を用意し、
     AccountBook.all.each do |account_book|
       array << account_book.income
-      #bookテーブルのレコードを１件ずつ取り出し、priceカラムのデータを配列に入れる
+      #テーブルのレコードを１件ずつ取り出し、incomeカラムのデータを配列に入れる
     end
     array.sum
+  end
+
+  def bop_subject_total
+    array = [] #空の配列を用意し、
+    BopSubject.all.each do |bop_subject|
+      array << bop_subject.total_price
+      #テーブルのレコードを１件ずつ取り出し、total_priceカラムのデータを配列に入れる
+    end
+    array.sum
+  end
+
+  def bop
+    income_total.to_i - bop_subject_total.to_i
   end
 
 end
