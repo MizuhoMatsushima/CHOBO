@@ -53,4 +53,13 @@ class EndUser < ApplicationRecord
     income_total.to_i - bop_subject_total.to_i
   end
 
+  #groupにしたカラムのgroupごとの小計
+  def bop_subject(subject_name)
+    array = [] #空の配列を用意し、
+    BopSubject.where(subject_name: subject_name).each do |bop_subject|
+      array << bop_subject.total_price
+    end
+    array.sum
+  end
+
 end

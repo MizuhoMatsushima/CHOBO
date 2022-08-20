@@ -14,7 +14,7 @@ import "bootstrap";
 import "cocoon"
 import "../stylesheets/application"
 import '@fortawesome/fontawesome-free/js/all'
-import "./app.js"
+//import "./app.js"
 import "chartkick/chart.js"
 
 

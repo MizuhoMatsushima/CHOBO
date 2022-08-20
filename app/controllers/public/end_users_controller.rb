@@ -2,7 +2,9 @@ class Public::EndUsersController < ApplicationController
   def top
     @end_user = current_end_user
     @bop_subjects = BopSubject.all
-    @account_book = @end_user.account_books
+    @bop_subject_price = @end_user.bop_subjects.group(:subject_name).sum(:total_price)
+    @bop_subject_graph = @bop_subject_price.sort_by { |_, v| v }.reverse.to_h
+    @bop_subject_name = @end_user.bop_subjects.group(:subject_name).pluck(:subject_name)
   end
 
   def show

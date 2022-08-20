@@ -6,8 +6,12 @@ class BopSubject < ApplicationRecord
 
   enum bop: { balance: 0, payments: 1 }
 
-  def income_serect
+  def income_select
     self.pay_day.strftime('%Y年%m月%d日') + '(' + self.source_name + ')'
+  end
+
+  def pay_day_select
+    self.pay_day.strftime('%Y年%m月%d日') + "の収入"
   end
 
 end

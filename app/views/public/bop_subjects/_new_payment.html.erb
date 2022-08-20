@@ -1,0 +1,76 @@
+<div class="bop_form active">
+  <h3 class="text-center">支出登録</h3>
+  <div class="form-group">
+    <%= f.collection_select( :account_book_id, AccountBook.all, :id, :pay_day, {prompt: false}, {class: "form-control inpur-sm"}) %>の収入
+  </div>
+  <div class="form-group">
+      <%= f.label :use_at, "利用日" %>
+      <%= f.date_field :use_at, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :subject_name, "利用科目" %>
+    <%= f.text_field :subject_name, class: "form-control" %>
+  </div>
+  <div style="display:inline-flex; width:100%;">
+    <p>利用細目</p>
+    <div class="add-botton-box ml-auto mr-4">
+      <%= link_to_add_association f, :bop_details,
+        class: 'add_fields',
+        id: 'add-btn',
+        data: {
+          association_insertion_node: '#detail-association-insertion-point',
+          association_insertion_method: 'before'
+          } do %>
+          <i class="fas fa-plus-circle", style= "color: black; font-size: 25px;"></i>
+        <% end %>
+    </div>
+  </div>
+  <div class="form-group">
+    <table class="table">
+      <thead>
+        <tr class="text-center">
+          <th>細目名</th>
+          <th class="col-1">数量</th>
+          <th>税込金額</th>
+          <th></th>
+        </tr>
+      </thead>
+      <%= f.fields_for :bop_details do |d| %>
+        <tbody>
+          <tr>
+            <%#= f.text_field :subject_name, :placeholder => "科目名（例：食費など）", class: "form-control mr-3" %>
+            <td><%= d.text_field :detail_name, :placeholder => "細目名（例：バナナなど）", class: "form-control mr-3" %></td>
+            <td><%= d.text_field :amount, :value => 1, class: "form-control mr-3" %></td>
+            <td><%= d.text_field :detail_price, :placeholder => "1000", class: "detail_price form-control" %></td>
+            <td></td>
+          </tr>
+          <tr id="detail-association-insertion-point"></tr>
+          <tr>
+            <td>利用細目の合計</td>
+            <td></td>
+            <td><%= f.text_field :price, data: { autonumeric: { aSign: '¥ ', mDec: 0 } }, class: "detail_total_price form-control" %></td>
+          </tr>
+          <tr>
+            <td style="border: none;"><%= f.label :point, "ポイント利用" %></td>
+            <td style="border: none;"></td>
+            <td style="border: none;"><%= f.text_field :point, class: "point form-control" %></td>
+          </tr>
+          <tr>
+            <td style="border: none;">支出額</td>
+            <td style="border: none;"></td>
+            <td style="border: none;"><%= f.text_field :total_price, class: "total_price form-control" %></td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+  </div>
+  <div class="form-group">
+    <%= f.label :store, "利用店" %>
+    <%= f.text_field :store, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :memo, "メモ" %>
+    <%= f.text_field :memo, class: "form-control" %>
+  </div>
+  <%= f.submit "登録", class: "btn btn-success col-12" %>
+</div>

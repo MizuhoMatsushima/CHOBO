@@ -14,13 +14,6 @@
  *= require_self
  */
 
-
-.end_user_top {
-  width: 100%;
-  display:inline-flex;
-  margin: 0 4% 0 4%;
-}
-
 /*:placeholder {*/
 /*  color: #CCCCCC;*/
 /*}*/
@@ -107,4 +100,13 @@
 .btn-group > label {
   border-color: #cacaca;
   border-width: 1px;
+}
+
+/*bop_subjectのnewのbop切り替え*/
+.bop_group .bop_form {
+    display:none;
+}
+
+.bop_group .bop_form.active {
+    display:block;
 }
