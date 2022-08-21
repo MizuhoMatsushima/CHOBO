@@ -1,0 +1,25 @@
+<div class="col-lg-10 col-md-12 mt-5 mx-auto">
+  <div class="card">
+    <div class="m-5">
+      <h3>収入の一覧</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>収入日</th>
+            <th>金額</th>
+            <th>収入元</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @account_books.each do |account_book| %>
+            <tr>
+              <td><%= account_book.pay_day.strftime('%Y年%m月%d日') %></td>
+              <td><%= account_book.income %></td>
+              <td><%= account_book.source_of_income.source_name %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

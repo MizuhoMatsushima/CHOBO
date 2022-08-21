@@ -1,6 +1,9 @@
 class AccountBook < ApplicationRecord
-  has_many :bop_subjects, dependent: :destroy
 
+  belongs_to :end_user
+  has_many :bop_subjects, dependent: :destroy
+  has_many :deposit_balances, dependent: :destroy
+  belongs_to :source_of_income
 
   def income_total
     array = [] #空の配列を用意し、

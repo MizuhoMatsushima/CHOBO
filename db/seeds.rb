@@ -44,18 +44,18 @@ EndUser.create!(
     first_name: "一恵",
     last_name_kana: "イチハラ",
     first_name_kana: "カズエ",
-    email: "111@gmail.com",
-    password: "111111",
-    phone_number: "0311111111",
+    email: "444@gmail.com",
+    password: "444444",
+    phone_number: "0344444444",
   },
   {
     last_name: "四道",
     first_name: "四平",
     last_name_kana: "シドウ",
     first_name_kana: "ヨンペイ",
-    email: "444@gmail.com",
-    password: "444444",
-    phone_number: "0344444444",
+    email: "555@gmail.com",
+    password: "555555",
+    phone_number: "0355555555",
   }
 ])
 

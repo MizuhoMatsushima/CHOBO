@@ -1,30 +1,87 @@
-<div class="container">
-  <div class="row">
-    <div class="card col-8 mt-3">
-      <div class="m-4">
-        <h3>今月の家計簿</h3>
-        <p>(日付～日付）</p>
-        <div>円グラフ</div>
-      </div>
-    </div>
-    <div class="card col-3 mt-3">
-      <div class="m-4">
-        <table>
-          <tr>
-            <th>収入</th>
-            <td>￥<%= @end_user.income_total %></td>
-          </tr>
-          <tr>
-            <th>支出</th>
-            <td>￥00000</td>
-          </tr>
-          <tr>
-            <th>収支</th>
-            <td>￥00000</td>
-          </tr>
-        </table>
-        <%= link_to "収入を追加する", new_account_book_path, method: :get %>
+  <div class="card col-11 mx-auto my-4">
+    <div class="column flex-direction:row">
+      <div class="row">
+        <div style="width: 60%;">
+          <div class="my-4">
+            <% if params[:date].nil? %>
+              <%= link_to "先月", end_users_path({date: @current_date.prev_month.strftime("%Y-%m")}) %>
+            <% elsif params[:date] == @current_date.prev_month.strftime("%Y-%m") %>
+              <%= link_to "#{@month.prev_month.strftime("%m月")}", end_users_path({date: @month.prev_month.strftime("%Y-%m")}) %>
+              <%= link_to "今月", end_users_path %>
+            <% else %>
+              <%= link_to "#{@month.prev_month.strftime("%m月")}", end_users_path({date: @month.prev_month.strftime("%Y-%m")}) %>
+              <%= link_to "#{@month.next_month.strftime("%m月")}", end_users_path({date: @month.next_month.strftime("%Y-%m")}) %>
+              <%= link_to "今月", end_users_path %>
+            <% end %>
+
+            <h3 class="text-center"><%= @month.strftime("%m") %>の支出</h3>
+            <div style="display:inline-flex; width: 100%;">
+              <table class="mx-auto" style="">
+                <thead class="text-center">
+                  <tr>
+                    <td style="border: none;">収入</td>
+                    <td></td>
+                    <td>支出</td>
+                    <td></td>
+                    <td>残金</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <%= link_to account_books_path do %>
+                      ￥<%= @end_user.income_total.to_s(:delimited) %>
+                      <% end %>
+                    </td>
+                    <td>－</td>
+                    <td>
+                      ￥<%= @end_user.bop_subject_total.to_s(:delimited) %>
+                    </td>
+                    <td>＝</td>
+                    <td>￥<%= @end_user.bop.to_s(:delimited) %></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div>
+              <%= pie_chart @bop_subject_graph,colors: ["#82cddd","#f0908d","#339966","333"] %>
+            </div>
+          </div>
+        </div>
+        <div class="my-4" style="width: 30%;">
+          <div>
+            <%= link_to "収入を追加する", new_account_book_path, method: :get %>
+          </div>
+          <div>
+            <%= link_to  new_bop_subject_path do %>
+              <i class="fas fa-plus-circle"></i>支出登録
+            <% end %>
+          </div>
+          <% @bop_subject_name.each do |bop_subject| %>
+            <table class="table table-sm my-4">
+              <thead>
+                <tr>
+                  <th style="border-top: none; display:inline-flex;">
+                    <div><%= bop_subject %></div>
+                    <div>￥<%= @end_user.bop_subject(bop_subject).to_s(:delimited) %></div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @bop_subjects.where(subject_name: bop_subject).each do |bop_subject_index| %>
+                  <tr>
+                    <td>
+                      <%= link_to bop_subject_path(bop_subject) do %>
+                        <%= bop_subject_index.use_at.strftime('%Y年%m月%d日') %>
+                        ￥<%= bop_subject_index.total_price.to_s(:delimited) %>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
-</div>

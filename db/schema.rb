@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_18_050211) do
+ActiveRecord::Schema.define(version: 2022_08_18_050300) do
 
   create_table "account_books", force: :cascade do |t|
     t.integer "end_user_id"
@@ -37,10 +37,9 @@ ActiveRecord::Schema.define(version: 2022_08_18_050211) do
 
   create_table "bop_details", force: :cascade do |t|
     t.integer "bop_subject_id"
-    t.string "detail_name", default: "", null: false
+    t.string "detail_name", null: false
     t.integer "detail_price", null: false
     t.integer "amount", null: false
-    t.string "store", default: "", null: false
     t.integer "registered_person_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -50,14 +49,15 @@ ActiveRecord::Schema.define(version: 2022_08_18_050211) do
   create_table "bop_subjects", force: :cascade do |t|
     t.integer "end_user_id"
     t.integer "account_book_id"
-    t.string "subject_name", default: "", null: false
+    t.string "subject_name", null: false
     t.integer "bop"
     t.integer "total_price", null: false
     t.datetime "use_at", null: false
     t.integer "point"
-    t.string "memo", default: ""
+    t.string "memo"
+    t.string "store", null: false
     t.integer "registered_person_id"
-    t.string "share_code", default: ""
+    t.string "share_code"
     t.integer "share_end_user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 2022_08_18_050211) do
 
   create_table "details", force: :cascade do |t|
     t.integer "subject_id"
-    t.string "detail_name", default: "", null: false
+    t.string "detail_name", null: false
     t.integer "tax_rate", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -134,11 +134,6 @@ ActiveRecord::Schema.define(version: 2022_08_18_050211) do
     t.index ["end_user_id"], name: "index_favorites_on_end_user_id"
   end
 
-  create_table "middle_of_bops", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "middle_of_tags", force: :cascade do |t|
     t.integer "consultation_id"
     t.integer "tag_id"
@@ -150,7 +145,7 @@ ActiveRecord::Schema.define(version: 2022_08_18_050211) do
 
   create_table "savings_estinations", force: :cascade do |t|
     t.integer "end_user_id"
-    t.string "savings_estination_name", default: "", null: false
+    t.string "savings_estination_name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["end_user_id"], name: "index_savings_estinations_on_end_user_id"
@@ -158,14 +153,14 @@ ActiveRecord::Schema.define(version: 2022_08_18_050211) do
 
   create_table "source_of_incomes", force: :cascade do |t|
     t.integer "end_user_id"
-    t.string "source_name", default: "", null: false
+    t.string "source_name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["end_user_id"], name: "index_source_of_incomes_on_end_user_id"
   end
 
   create_table "subjects", force: :cascade do |t|
-    t.string "subject_name", default: "", null: false
+    t.string "subject_name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
