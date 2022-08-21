@@ -3,7 +3,18 @@
       <div class="row">
         <div style="width: 60%;">
           <div class="my-4">
-            <h3 class="text-center">今月の支出</h3>
+            <% if params[:date].nil? %>
+              <%= link_to "先月", end_users_path({date: @current_date.prev_month.strftime("%Y-%m")}) %>
+            <% elsif params[:date] == @current_date.prev_month.strftime("%Y-%m") %>
+              <%= link_to "#{@month.prev_month.strftime("%m月")}", end_users_path({date: @month.prev_month.strftime("%Y-%m")}) %>
+              <%= link_to "今月", end_users_path %>
+            <% else %>
+              <%= link_to "#{@month.prev_month.strftime("%m月")}", end_users_path({date: @month.prev_month.strftime("%Y-%m")}) %>
+              <%= link_to "#{@month.next_month.strftime("%m月")}", end_users_path({date: @month.next_month.strftime("%Y-%m")}) %>
+              <%= link_to "今月", end_users_path %>
+            <% end %>
+
+            <h3 class="text-center"><%= @month.strftime("%m") %>の支出</h3>
             <div style="display:inline-flex; width: 100%;">
               <table class="mx-auto" style="">
                 <thead class="text-center">

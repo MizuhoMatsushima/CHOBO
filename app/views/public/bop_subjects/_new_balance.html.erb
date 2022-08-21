@@ -1,19 +1,22 @@
-<div class="bop_form">
-  <h3 class="text-center">収入登録</h3>
-  <div class="form-group">
-    <%= f.collection_select( :account_book_id, AccountBook.all, :id, :pay_day, {prompt: false}, {class: "form-control inpur-sm"}) %>の収入
+<%= form_with model: @bop_subject, url: bop_subjects_path, method: :post do |f| %>
+  <div class="bop_form">
+    <h3 class="text-center">収入登録</h3>
+    <div class="form-group">
+      <%= f.collection_select( :account_book_id, AccountBook.all, :id, :pay_day, {prompt: false}, {class: "form-control inpur-sm"}) %>の収入
+    </div>
+    <div class="form-group">
+        <%= f.label :use_at, "収入日" %>
+        <%= f.date_field :use_at, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :total_price, "収入金額" %>
+      <%= f.text_field :total_price, class: "total_price form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :memo, "メモ" %>
+      <%= f.text_field :memo, class: "form-control" %>
+    </div>
+    <%= f.hidden_field :bop, value: "balance" %>
+    <%= f.submit "登録", class: "btn btn-success col-12" %>
   </div>
-  <div class="form-group">
-      <%= f.label :use_at, "収入日" %>
-      <%= f.date_field :use_at, class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.label :total_price, "収入金額" %>
-    <%= f.text_field :total_price, class: "total_price form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.label :memo, "メモ" %>
-    <%= f.text_field :memo, class: "form-control" %>
-  </div>
-  <%= f.submit "登録", class: "btn btn-success col-12" %>
-</div>
+<% end %>

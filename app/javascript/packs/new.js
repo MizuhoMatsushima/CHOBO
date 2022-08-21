@@ -28,11 +28,14 @@
         $('#bop_subject_total_price').val(total_detail_price-subject_point);
       });
 	  });
-  });
+
 
   $('.bop_group .bop_btn').click(function() {
   	var index = $('.bop_group .bop_btn').index(this);
-  	$('.bop_group .bop_btn, .bop_group .bop_form').remove('.active');
+  	$('.bop_group .bop_btn, .bop_group .bop_form').removeClass('active');
   	$(this).addClass('active');
-  	$('.bop_group .bop_form').eq(index).add('.active');
+  	$('.bop_form').eq(index).addClass('active');
   });
+
+
+});
