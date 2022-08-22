@@ -1,20 +1,24 @@
-<div class="col-lg-10 col-md-12 mt-5 mx-auto">
+<%= javascript_pack_tag "new" %>
+<div class="col-lg-10 col-md-12 my-5 mx-auto">
   <div class="card">
-    <div class="m-5">
-      <%= form_with model: @bop_subject, url: bop_subjects_path, method: :post do |f| %>
+    <%= form_with model: @bop_subject, url: bop_subjects_path, method: :post do |f| %>
+      <div class="m-5 bop_group">
         <%= render "public/shared/error_messages", resource: @bop_subject %>
-        <div class="form-group row">
+        <div class="form-group bop_btn_group row">
           <div class="btn-group col-12" data-toggle="buttons">
-            <label class="col-6 btn btn-outline-secondary active">
+            <label class="col-6 btn btn-outline-secondary bop_btn active">
               <%= f.radio_button :bop, "payments", {checked: true} %>支出
             </label>
-            <label class="col-6 btn btn-outline-secondary">
+            <label class="col-6 btn btn-outline-secondary bop_btn">
               <%= f.radio_button :bop, "balance" %>収入
             </label>
           </div>
         </div>
-        <div class="payments"><%= render "new_payments", f: f %></div>
-      <% end %>
-    </div>
+        <div class="new_bop_form">
+          <%= render "new_payment", bop_subject: @bop_subject %>
+          <%= render "new_balance", bop_subject: @bop_subject %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>

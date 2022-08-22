@@ -40,7 +40,6 @@ ActiveRecord::Schema.define(version: 2022_08_18_050300) do
     t.string "detail_name", null: false
     t.integer "detail_price", null: false
     t.integer "amount", null: false
-    t.string "store", null: false
     t.integer "registered_person_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -49,19 +48,18 @@ ActiveRecord::Schema.define(version: 2022_08_18_050300) do
 
   create_table "bop_subjects", force: :cascade do |t|
     t.integer "end_user_id"
-    t.integer "account_book_id"
     t.string "subject_name", null: false
     t.integer "bop"
     t.integer "total_price", null: false
     t.datetime "use_at", null: false
     t.integer "point"
     t.string "memo"
+    t.string "store", null: false
     t.integer "registered_person_id"
     t.string "share_code"
     t.integer "share_end_user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["account_book_id"], name: "index_bop_subjects_on_account_book_id"
     t.index ["end_user_id"], name: "index_bop_subjects_on_end_user_id"
   end
 
@@ -174,7 +172,6 @@ ActiveRecord::Schema.define(version: 2022_08_18_050300) do
   add_foreign_key "account_books", "end_users"
   add_foreign_key "account_books", "source_of_incomes"
   add_foreign_key "bop_details", "bop_subjects"
-  add_foreign_key "bop_subjects", "account_books"
   add_foreign_key "bop_subjects", "end_users"
   add_foreign_key "comments", "consultations"
   add_foreign_key "comments", "end_users"

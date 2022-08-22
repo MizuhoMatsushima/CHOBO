@@ -1,0 +1,36 @@
+<div class="col-lg-10 col-md-12 mt-5 mx-auto">
+  <div class="card">
+    <div class="m-5">
+      <div class="col-12">
+        <h3 style="display:inline-flex;">収入の一覧</h3>
+        <div class="ml-auto" style="display:inline-flex;">
+          <%= link_to new_account_book_path, class: "text-right" do %>
+            <i class="fas fa-money-bill" style="font-size: 25px;"></i>
+          <% end %>
+        </div>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>収入日</th>
+            <th>金額</th>
+            <th>収入元</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @account_books.each do |account_book| %>
+            <tr>
+              <td><%= account_book.pay_day.strftime('%Y年%m月%d日') %></td>
+              <td><%= account_book.income.to_s(:delimited) %>円</td>
+              <td><%= account_book.source_of_income.source_name %></td>
+              <td><%= link_to "編集", edit_account_book_path(account_book) %></td>
+              <td><%= link_to "削除", account_book_path(account_book), method: :delete, data: { confirm: '削除しますか？' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

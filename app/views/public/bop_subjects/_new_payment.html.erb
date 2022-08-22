@@ -1,12 +1,6 @@
-<%= javascript_pack_tag "edit" %>
-<div class="col-lg-10 col-md-12 my-5 mx-auto">
-  <div class="card">
-    <div class="m-5 bop_group">
-
-<%= form_with model: @bop_subject, url: bop_subjects_path, method: :patch do |f| %>
-
+<%= form_with model: @bop_subject, url: bop_subjects_path, method: :post do |f| %>
   <div class="bop_form active">
-    <h3 class="text-center">支出登録変更</h3>
+    <h3 class="text-center">支出登録</h3>
     <div class="form-group">
         <%= f.label :use_at, "利用日" %>
         <%= f.date_field :use_at, class: "form-control" %>
@@ -18,7 +12,7 @@
     <div style="display:inline-flex; width:100%;">
       <p>利用細目</p>
       <div class="add-botton-box ml-auto mr-4">
-        <%#= link_to_add_association f, :bop_details,
+        <%= link_to_add_association f, :bop_details,
           class: 'add_fields',
           id: 'add-btn',
           data: {
@@ -26,16 +20,16 @@
             association_insertion_method: 'before'
             } do %>
             <i class="fas fa-plus-circle", style= "color: black; font-size: 25px;"></i>
-          <%# end %>
+          <% end %>
       </div>
     </div>
     <div class="form-group">
       <table class="table">
         <thead>
           <tr class="text-center">
-            <th class="col-5">細目名</th>
+            <th>細目名</th>
             <th class="col-1">数量</th>
-            <th class="col-5">税込金額</th>
+            <th>税込金額</th>
             <th></th>
           </tr>
         </thead>
@@ -43,34 +37,29 @@
           <tbody>
             <tr>
               <%#= f.text_field :subject_name, :placeholder => "科目名（例：食費など）", class: "form-control mr-3" %>
-              <td><%= d.text_field :detail_name, :placeholder => "細目名（例：バナナなど）", class: "form-control" %></td>
+              <td><%= d.text_field :detail_name, :placeholder => "細目名（例：バナナなど）", class: "form-control mr-3" %></td>
               <td><%= d.text_field :amount, :value => 1, class: "form-control mr-3" %></td>
               <td><%= d.text_field :detail_price, :placeholder => "1000", class: "detail_price form-control" %></td>
               <td></td>
             </tr>
             <tr id="detail-association-insertion-point"></tr>
+            <tr>
+              <td>利用細目の合計</td>
+              <td></td>
+              <td><%= f.text_field :price, data: { autonumeric: { aSign: '¥ ', mDec: 0 } }, class: "detail_total_price form-control" %></td>
+            </tr>
+            <tr>
+              <td style="border: none;"><%= f.label :point, "ポイント利用" %></td>
+              <td style="border: none;"></td>
+              <td style="border: none;"><%= f.text_field :point, class: "point form-control" %></td>
+            </tr>
+            <tr>
+              <td style="border: none;">支出額</td>
+              <td style="border: none;"></td>
+              <td style="border: none;"><%= f.text_field :total_price, class: "total_price form-control" %></td>
+            </tr>
           </tbody>
         <% end %>
-      </table>
-      <table class="table">
-        <tr>
-          <td>利用細目の合計</td>
-          <td></td>
-          <td class="col-5"><%= f.text_field :price, data: { autonumeric: { aSign: '¥ ', mDec: 0 } }, class: "detail_total_price form-control" %></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td style="border: none;"><%= f.label :point, "ポイント利用" %></td>
-          <td class="col-1" style="border: none;">
-          <td style="border: none;"><%= f.text_field :point, class: "point form-control" %></td>
-          <td style="border: none;"></td>
-        </tr>
-        <tr>
-          <td style="border: none;">支出額</td>
-          <td style="border: none;"></td>
-          <td style="border: none;"><%= f.text_field :total_price, class: "total_price form-control" %></td>
-          <td style="border: none;"></td>
-        </tr>
       </table>
     </div>
     <div class="form-group">
@@ -82,9 +71,6 @@
       <%= f.text_field :memo, class: "form-control" %>
     </div>
     <%= f.hidden_field :bop, value: "payments" %>
-    <%= f.submit "変更", class: "btn btn-success col-12" %>
+    <%= f.submit "登録", class: "btn btn-success col-12" %>
   </div>
 <% end %>
-</div>
-</div>
-</div>

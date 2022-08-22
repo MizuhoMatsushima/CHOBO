@@ -1,7 +1,21 @@
 class Public::EndUsersController < ApplicationController
   def top
-    @account_books = AccountBook.all
+    @current_date = DateTime.current.beginning_of_month
+    if params[:date].nil?
+      month = @current_date
+    elsif DateTime.parse("#{params[:date]}-1").strftime("%Y-%m") == @current_date.prev_month.strftime("%Y-%m")
+      month = @current_date.prev_month
+    else
+      month = DateTime.parse("#{params[:date]}-1")
+    end
+    @month = month
+    next_month = month.next_month
     @end_user = current_end_user
+    @bop_subjects = BopSubject.where(use_at: month...next_month)
+    @end_user_bop = @end_user.bop_subjects.where(use_at: month...next_month)
+    @bop_subject_price = @end_user_bop.group(:subject_name).sum(:total_price)
+    @bop_subject_graph = @bop_subject_price.sort_by { |_, v| v }.reverse.to_h
+    @bop_subject_name = @end_user_bop.group(:subject_name).pluck(:subject_name)
   end
 
   def show
@@ -22,9 +36,17 @@ class Public::EndUsersController < ApplicationController
   end
 
   def confirm
+
   end
 
-  def search
+  def withdraw
+    @end_user = current_end_user
+    # is_deleteカラムに削除フラグを立てる(defaultはfalse)
+    @end_user.update(is_deleted: true)
+    # ログアウトさせる
+    reset_session
+    flash[:notice] = "ありがとうございました。またのご利用を心よりお待ちしております。"
+    redirect_to root_path
   end
 
   private

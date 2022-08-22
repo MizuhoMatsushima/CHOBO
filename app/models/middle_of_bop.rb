@@ -1,2 +1,0 @@
-class MiddleOfBop < ApplicationRecord
-end
