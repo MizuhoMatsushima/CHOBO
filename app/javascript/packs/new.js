@@ -4,6 +4,7 @@
     if( $('#bop_subject_price').length ){
 	    $('#bop_subject_price').val( total_price );
 	    $('#bop_subject_total_price').val( total_price );
+	    $('#bop_subject_point').val(0);
     }
 	  var current_detail_price;
 	  $(document).on('change','.detail_price',function() {

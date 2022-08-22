@@ -33,7 +33,7 @@ class EndUser < ApplicationRecord
 
   def income_total
     array = [] #空の配列を用意し、
-    AccountBook.all.each do |account_book|
+    AccountBook.each do |account_book|
       array << account_book.income
       #テーブルのレコードを１件ずつ取り出し、incomeカラムのデータを配列に入れる
     end

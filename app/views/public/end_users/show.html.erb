@@ -40,7 +40,10 @@
       </div>
     </div>
     <div class="mx-auto">
-      <%= link_to "登録情報の編集", edit_end_users_path(@end_user), class: "btn btn-success my-3" %>
+      <%= link_to "登録情報の編集", edit_end_users_path(@end_user), class: "btn btn-success my-3", style: "width: 200px;" %>
+    </div>
+    <div class="mx-auto">
+      <%= link_to "退会する", confirm_end_users_path(@end_user), class: "btn btn-secondary mb-5", style: "width: 200px;" %>
     </div>
   </div>
 </div>
