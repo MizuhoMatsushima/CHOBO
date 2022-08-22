@@ -22,7 +22,14 @@ class Public::BopSubjectsController < ApplicationController
     @acount_book = @bop_subject.account_book_id
   end
 
+  def destroy
+    @bop_subject = BopSubject.find(params[:id])
+    @bop_subject.destroy
+    redirect_to end_users_path
+  end
+
   def edit
+    @bop_subject = BopSubject.find(params[:id])
   end
 
   private

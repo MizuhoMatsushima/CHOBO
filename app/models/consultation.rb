@@ -38,6 +38,7 @@ class Consultation < ApplicationRecord
     end
   end
 
+
   #氏名の姓名を合わせるメソッド
   def full_name
     end_user.last_name + ' ' + end_user.first_name

@@ -1,20 +1,21 @@
   <div class="card col-11 mx-auto my-4">
     <div class="column flex-direction:row">
       <div class="row">
-        <div style="width: 60%;">
+        <div style="width: 55%;">
           <div class="my-4">
-            <% if params[:date].nil? %>
-              <%= link_to "先月", end_users_path({date: @current_date.prev_month.strftime("%Y-%m")}) %>
-            <% elsif params[:date] == @current_date.prev_month.strftime("%Y-%m") %>
-              <%= link_to "#{@month.prev_month.strftime("%m月")}", end_users_path({date: @month.prev_month.strftime("%Y-%m")}) %>
-              <%= link_to "今月", end_users_path %>
-            <% else %>
-              <%= link_to "#{@month.prev_month.strftime("%m月")}", end_users_path({date: @month.prev_month.strftime("%Y-%m")}) %>
-              <%= link_to "#{@month.next_month.strftime("%m月")}", end_users_path({date: @month.next_month.strftime("%Y-%m")}) %>
-              <%= link_to "今月", end_users_path %>
-            <% end %>
-
-            <h3 class="text-center"><%= @month.strftime("%m") %>の支出</h3>
+            <div class="col-12">
+              <% if params[:date].nil? %>
+                <%= link_to "<先月", end_users_path({date: @current_date.prev_month.strftime("%Y-%m")}) %>
+              <% elsif params[:date] == @current_date.prev_month.strftime("%Y-%m") %>
+                <%= link_to "<#{@month.prev_month.strftime("%Y年%-m月")}", end_users_path({date: @month.prev_month.strftime("%Y-%m")}) %>
+                <%= link_to "今月>", end_users_path, class: "ml-auto" %>
+              <% else %>
+                <%= link_to "<#{@month.prev_month.strftime("%Y年%-m月")}", end_users_path({date: @month.prev_month.strftime("%Y-%m")}) %>
+                <%= link_to "#{@month.next_month.strftime("%Y年%-m月")}>", end_users_path({date: @month.next_month.strftime("%Y-%m")}) %>
+                <%= link_to "今月>>", end_users_path %>
+              <% end %>
+            </div>
+            <h3 class="text-center"><%= @month.strftime("%Y年%-m月") %>の支出</h3>
             <div style="display:inline-flex; width: 100%;">
               <table class="mx-auto" style="">
                 <thead class="text-center">
@@ -48,7 +49,7 @@
             </div>
           </div>
         </div>
-        <div class="my-4" style="width: 30%;">
+        <div class="my-4" style="width: 40%;">
           <div>
             <%= link_to "収入を追加する", new_account_book_path, method: :get %>
           </div>
@@ -61,7 +62,7 @@
             <table class="table table-sm my-4">
               <thead>
                 <tr>
-                  <th style="border-top: none; display:inline-flex;">
+                  <th style="border-top: none; border-bottom: none; display:inline-flex;">
                     <div><%= bop_subject %></div>
                     <div>￥<%= @end_user.bop_subject(bop_subject).to_s(:delimited) %></div>
                   </th>
@@ -71,10 +72,16 @@
                 <% @bop_subjects.where(subject_name: bop_subject).each do |bop_subject_index| %>
                   <tr>
                     <td>
-                      <%= link_to bop_subject_path(bop_subject) do %>
+                      <%= link_to bop_subject_path(bop_subject_index) do %>
                         <%= bop_subject_index.use_at.strftime('%Y年%m月%d日') %>
                         ￥<%= bop_subject_index.total_price.to_s(:delimited) %>
                       <% end %>
+                    </td>
+                    <td>
+                      <%= link_to "編集", edit_bop_subject_path(bop_subject_index) %>
+                    </td>
+                    <td>
+                      <%= link_to "削除", bop_subject_path(bop_subject_index), method: :delete, data: { confirm: '削除しますか？' } %>
                     </td>
                   </tr>
                 <% end %>
