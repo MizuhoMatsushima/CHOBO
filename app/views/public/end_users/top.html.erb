@@ -3,18 +3,6 @@
       <div class="row">
         <div style="width: 55%;">
           <div class="my-4">
-            <div class="col-12">
-              <% if params[:date].nil? %>
-                <%= link_to "<先月", end_users_path({date: @current_date.prev_month.strftime("%Y-%m")}) %>
-              <% elsif params[:date] == @current_date.prev_month.strftime("%Y-%m") %>
-                <%= link_to "<#{@month.prev_month.strftime("%Y年%-m月")}", end_users_path({date: @month.prev_month.strftime("%Y-%m")}) %>
-                <%= link_to "今月>", end_users_path, class: "ml-auto" %>
-              <% else %>
-                <%= link_to "<#{@month.prev_month.strftime("%Y年%-m月")}", end_users_path({date: @month.prev_month.strftime("%Y-%m")}) %>
-                <%= link_to "#{@month.next_month.strftime("%Y年%-m月")}>", end_users_path({date: @month.next_month.strftime("%Y-%m")}) %>
-                <%= link_to "今月>>", end_users_path %>
-              <% end %>
-            </div>
             <h3 class="text-center"><%= @month.strftime("%Y年%-m月") %>の支出</h3>
             <div style="display:inline-flex; width: 100%;">
               <table class="mx-auto" style="">
@@ -46,6 +34,18 @@
             </div>
             <div>
               <%= pie_chart @bop_subject_graph,colors: ["#82cddd","#f0908d","#339966","333"] %>
+            </div>
+            <div class="col-12">
+              <% if params[:date].nil? %>
+                <%= link_to "<先月", end_users_path({date: @current_date.prev_month.strftime("%Y-%m")}) %>
+              <% elsif params[:date] == @current_date.prev_month.strftime("%Y-%m") %>
+                <%= link_to "<#{@month.prev_month.strftime("%Y年%-m月")}", end_users_path({date: @month.prev_month.strftime("%Y-%m")}) %>
+                <%= link_to "今月>", end_users_path, class: "ml-auto" %>
+              <% else %>
+                <%= link_to "<#{@month.prev_month.strftime("%Y年%-m月")}", end_users_path({date: @month.prev_month.strftime("%Y-%m")}) %>
+                <%= link_to "#{@month.next_month.strftime("%Y年%-m月")}>", end_users_path({date: @month.next_month.strftime("%Y-%m")}) %>
+                <%= link_to "今月>>", end_users_path %>
+              <% end %>
             </div>
           </div>
         </div>
