@@ -3,6 +3,7 @@ class Public::ConsultationsController < ApplicationController
   def index
     @consultations = Consultation.all
     @tags = Tag.all
+    @name = ""
   end
 
   def show
@@ -28,12 +29,15 @@ class Public::ConsultationsController < ApplicationController
   end
 
   def my_index
-
+    @end_user = current_end_user
+    @consultations = @end_user.consultations
+    @name = @end_user.full_name + "さんの"
   end
 
   def search
     @consultations = Consultation.all
     @tags = Tag.all
+    @name = ""
     if (params[:keyword])[0] == '#'
       @consultation = Tag.search(params[:keyword]).order('created_at asc')
       # redirect_to consultations_path
@@ -42,6 +46,7 @@ class Public::ConsultationsController < ApplicationController
       # redirect_to consultations_path
     end
   end
+
 
   private
 

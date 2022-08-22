@@ -36,9 +36,17 @@ class Public::EndUsersController < ApplicationController
   end
 
   def confirm
+
   end
 
-  def search
+  def withdraw
+    @end_user = current_end_user
+    # is_deleteカラムに削除フラグを立てる(defaultはfalse)
+    @end_user.update(is_deleted: true)
+    # ログアウトさせる
+    reset_session
+    flash[:notice] = "ありがとうございました。またのご利用を心よりお待ちしております。"
+    redirect_to root_path
   end
 
   private

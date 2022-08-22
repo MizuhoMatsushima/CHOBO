@@ -19,10 +19,9 @@ Rails.application.routes.draw do
       patch "/information" => "end_users#update"
       get "confirm"
       patch "withdraw"
-      get "search"
     end
 
-    resources :account_books, only: [:new, :index, :show, :edit, :create, :update, :destroy]
+    resources :account_books, only: [:new, :index, :edit, :create, :update, :destroy]
     resources :deposit_balances, only: [:index, :edit, :create, :update]
     resources :source_of_incomes, only: [:index, :edit, :create, :update]
     resources :savings_estinations, only: [:index, :edit, :create, :update]
