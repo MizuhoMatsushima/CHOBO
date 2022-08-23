@@ -3,7 +3,7 @@
       <div class="row">
         <div style="width: 55%;">
           <div class="my-4">
-            <h3 class="text-center"><%= @month.strftime("%Y年%-m月") %>の支出</h3>
+            <h3 class="text-center"><%= @dt.strftime("%Y年%-m月") %>の支出</h3>
             <div style="display:inline-flex; width: 100%;">
               <table class="mx-auto" style="">
                 <thead class="text-center">
@@ -19,15 +19,15 @@
                   <tr>
                     <td>
                       <%= link_to account_books_path do %>
-                      ￥<%= @end_user.income_total.to_s(:delimited) %>
+                      ￥<%= @end_user.income_total(@dt).to_s(:delimited) %>
                       <% end %>
                     </td>
                     <td>－</td>
                     <td>
-                      ￥<%= @end_user.bop_subject_total.to_s(:delimited) %>
+                      ￥<%= @end_user.bop_subject_total(@dt).to_s(:delimited) %>
                     </td>
                     <td>＝</td>
-                    <td>￥<%= @end_user.bop.to_s(:delimited) %></td>
+                    <td>￥<%= @end_user.bop(@dt).to_s(:delimited) %></td>
                   </tr>
                 </tbody>
               </table>
@@ -36,15 +36,19 @@
               <%= pie_chart @bop_subject_graph,colors: ["#82cddd","#f0908d","#339966","333"] %>
             </div>
             <div class="col-12">
-              <% if params[:date].nil? %>
-                <%= link_to "<先月", end_users_path({date: @current_date.prev_month.strftime("%Y-%m")}) %>
-              <% elsif params[:date] == @current_date.prev_month.strftime("%Y-%m") %>
-                <%= link_to "<#{@month.prev_month.strftime("%Y年%-m月")}", end_users_path({date: @month.prev_month.strftime("%Y-%m")}) %>
+              <% if params[:date].nil? or params[:date] == "#{@current_time.strftime("%Y-%m")}" %>
+                <%= link_to "<先月", end_users_path({date: @dt.prev_month.strftime("%Y-%m")}) %>
+                <%= link_to "翌月>", end_users_path({date: @dt.next_month.strftime("%Y-%m")}) %>
+              <% elsif params[:date] == @current_time.prev_month.strftime("%Y-%m") %>
+                <%= link_to "<#{@dt.prev_month.strftime("%Y年%-m月")}", end_users_path({date: @dt.prev_month.strftime("%Y-%m")}) %>
                 <%= link_to "今月>", end_users_path, class: "ml-auto" %>
+              <% elsif params[:date] == @current_time.next_month.strftime("%Y-%m") %>
+                <%= link_to "<今月", end_users_path %>
+                <%= link_to "#{@dt.next_month.strftime("%Y年%-m月")}>", end_users_path({date: @dt.next_month.strftime("%Y-%m")}) %>
               <% else %>
-                <%= link_to "<#{@month.prev_month.strftime("%Y年%-m月")}", end_users_path({date: @month.prev_month.strftime("%Y-%m")}) %>
-                <%= link_to "#{@month.next_month.strftime("%Y年%-m月")}>", end_users_path({date: @month.next_month.strftime("%Y-%m")}) %>
-                <%= link_to "今月>>", end_users_path %>
+                <%= link_to "<#{@dt.prev_month.strftime("%Y年%-m月")}", end_users_path({date: @dt.prev_month.strftime("%Y-%m")}) %>
+                <%= link_to "今月", end_users_path %>
+                <%= link_to "#{@dt.next_month.strftime("%Y年%-m月")}>", end_users_path({date: @dt.next_month.strftime("%Y-%m")}) %>
               <% end %>
             </div>
           </div>
@@ -64,12 +68,12 @@
                 <tr>
                   <th style="border-top: none; border-bottom: none; display:inline-flex;">
                     <div><%= bop_subject %></div>
-                    <div>￥<%= @end_user.bop_subject(bop_subject).to_s(:delimited) %></div>
+                    <div>￥<%= @end_user.bop_subject(bop_subject, @dt).to_s(:delimited) %></div>
                   </th>
                 </tr>
               </thead>
               <tbody>
-                <% @bop_subjects.where(subject_name: bop_subject).each do |bop_subject_index| %>
+                <% @end_user_bop.where(subject_name: bop_subject).each do |bop_subject_index| %>
                   <tr>
                     <td>
                       <%= link_to bop_subject_path(bop_subject_index) do %>

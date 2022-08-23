@@ -22,9 +22,9 @@ class Public::SessionsController < Devise::SessionsController
   protected
 
   def reject_end_user
-    @end_user = EndUser.find_by(email: params[:end_user][:email].downcase)
+    @end_user = EndUser.find_by(email: params[:end_user][:email])
     if @end_user
-      if (@end_user.valid_password?(params[:end_user][:password]) && (@end_user.active_for_authentication? == false))
+      if (@end_user.valid_password?(params[:end_user][:password]) && (@end_user.is_deleted == true))
         flash[:error] = "退会済みです。"
         redirect_to new_end_user_session_path
       end

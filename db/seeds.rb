@@ -56,7 +56,7 @@ EndUser.create!(
     email: "555@gmail.com",
     password: "555555",
     phone_number: "0355555555",
-  }
+  },
 ])
 
 Consultation.create!(

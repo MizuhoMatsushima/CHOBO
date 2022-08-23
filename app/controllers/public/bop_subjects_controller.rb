@@ -31,6 +31,15 @@ class Public::BopSubjectsController < ApplicationController
     @bop_subject = BopSubject.find(params[:id])
   end
 
+  def update
+    @bop_subject = BopSubject.find(params[:id])
+    if @bop_subject.update(bop_subject_params)
+      redirect_to bop_subject_path(@bop_subject)
+    else
+      render :edit
+    end
+  end
+
   private
 
   def bop_subject_params

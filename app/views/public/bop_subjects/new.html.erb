@@ -3,7 +3,7 @@
   <div class="card">
     <%= form_with model: @bop_subject, url: bop_subjects_path, method: :post do |f| %>
       <div class="m-5 bop_group">
-        <%= render "public/shared/error_messages", resource: @bop_subject %>
+        <%= render "layouts/error_count", resource: @bop_subject %>
         <div class="form-group bop_btn_group row">
           <div class="btn-group col-12" data-toggle="buttons">
             <label class="col-6 btn btn-outline-secondary bop_btn active">
