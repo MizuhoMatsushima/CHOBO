@@ -15,15 +15,15 @@ class EndUser < ApplicationRecord
   has_many :deposit_balances, dependent: :destroy
 
 
-  validates :first_name, presence: true, length: { minimum: 1, maximum: 50 }
-  validates :last_name, presence: true, length: { minimum: 1, maximum: 50 }
-  validates :first_name_kana, presence: true, length: { minimum: 1, maximum: 50 },
-            format: {with: /\A[\p{katakana}　ー－&&[^ -~｡-ﾟ]]+\z/}
-  validates :last_name_kana, presence: true, length: { minimum: 1, maximum: 50 },
-            format: {with: /\A[\p{katakana}　ー－&&[^ -~｡-ﾟ]]+\z/}
+  validates :first_name, presence: true, length: { minimum: 1, maximum: 50, allow_blank: true }
+  validates :last_name, presence: true, length: { minimum: 1, maximum: 50, allow_blank: true }
+  validates :first_name_kana, presence: true, length: { minimum: 1, maximum: 50, allow_blank: true },
+            format: {with: /\A[\p{katakana}　ー－&&[^ -~｡-ﾟ]]+\z/, allow_blank: true}
+  validates :last_name_kana, presence: true, length: { minimum: 1, maximum: 50, allow_blank: true },
+            format: {with: /\A[\p{katakana}　ー－&&[^ -~｡-ﾟ]]+\z/, allow_blank: true}
   validates :email, presence: true
   VALID_PHONE_NUMBER_REGEX = /\A\d{10,11}\z/
-  validates :phone_number, presence: true, format: { with: VALID_PHONE_NUMBER_REGEX }
+  validates :phone_number, presence: true, format: { with: VALID_PHONE_NUMBER_REGEX, allow_blank: true }
   validates :password, presence: true, length: { minimum: 6 }, on: :create, unless: -> { :guest_sign_in }
   validates :password_confirmation, presence: true, length: { minimum: 6 }, on: :create, unless: -> { :guest_sign_in }
 

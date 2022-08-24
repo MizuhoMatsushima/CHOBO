@@ -1,9 +1,9 @@
 <div class="col-lg-10 col-md-11 mx-auto mt-5">
   <div class="card">
     <div class="m-5">
-      <h3 class="d-inline">会員一覧画面</h3>
+      <h3 class="d-inline">利用者一覧画面</h3>
       <%= render "layouts/search", search_path: search_admin_end_users_path %>
-      <table class="table mt-3">
+      <table class="table mt-5">
         <thead>
           <tr>
             <th>氏名</th>
@@ -39,5 +39,6 @@
         </tbody>
       </table>
     </div>
+    <div class="mb-5 mx-auto"><%= paginate @end_users %></div>
   </div>
 </div>

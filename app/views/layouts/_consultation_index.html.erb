@@ -14,19 +14,36 @@
         <% if controller.action_name == "search" %>
           <h4 class="mt-4">"<%= params[:keyword] %>"の検索結果</h4>
         <% end %>
-        <table class="table mt-4">
+        <table class="table mt-5">
+          <thead>
+            <tr>
+              <th class="text-center">相談タイトル</th>
+              <th class="text-center">タグ</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
           <tbody>
-            <% consultation.each do |consultation| %>
+            <% consultations.each do |consultation| %>
               <tr>
                 <td>
                   <%= link_to consultation_path(consultation) do %>
                     <%= consultation.title %>
                   <% end %>
                 </td>
-                <% consultation.tags.each do |tag| %>
-                  <td><%= tag.name %></td>
-                <% end %>
-                <td></td>
+                <td>
+                  <% consultation.tags.each do |tag| %>
+                    <%= tag.name %>
+                  <% end %>
+                </td>
+                <td class="favorite-btn_<%= consultation.id %>">
+                  <%= render 'public/favorites/favorite-btn', consultation: consultation %>
+                </td>
+                <td>
+                  <%= link_to consultation_path(consultation) do %>
+                    コメント数：<%= consultation.comments.count %>
+                  <% end %>
+                </td>
               </tr>
             <% end %>
           </tbody>
@@ -43,7 +60,7 @@
         <% if controller.action_name == "search" %>
           <h4 class="mt-4">"<%= params[:keyword] %>"の検索結果</h4>
         <% end %>
-        <table class="table mt-3">
+        <table class="table mt-5">
           <tbody>
             <% consultations.each do |consultation| %>
               <tr>
@@ -56,6 +73,9 @@
                   <% consultation.tags.each do |tag| %>
                     <%= tag.name %>
                   <% end %>
+                </td>
+                <td>
+                  ♥<%= consultation.favorites.count %>
                 </td>
                 <td>
                   <%= link_to admin_consultation_path(consultation) do %>

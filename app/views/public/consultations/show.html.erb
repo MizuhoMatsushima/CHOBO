@@ -23,7 +23,7 @@
           </td>
         </tr>
       </table>
-      <div class="favorite-btn" id="favorite-btn">
+      <div class="favorite-btn_<%= @consultation.id %>" id="favorite-btn">
         <%= render 'public/favorites/favorite-btn', consultation: @consultation %>
       </div>
       <div class="comment-count">

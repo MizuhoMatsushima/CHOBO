@@ -25,7 +25,7 @@ class Public::SessionsController < Devise::SessionsController
     @end_user = EndUser.find_by(email: params[:end_user][:email])
     if @end_user
       if (@end_user.valid_password?(params[:end_user][:password]) && (@end_user.is_deleted == true))
-        flash[:error] = "この利用者アカウントは、退会済みです。"
+        flash.now[:error] = "この利用者アカウントは、退会済みです。"
         redirect_to new_end_user_session_path
       end
     end
@@ -40,8 +40,8 @@ class Public::SessionsController < Devise::SessionsController
     end_users_path
   end
 
-  # def after_sign_out_path_for(resource_or_scope)
-  #   root_path
-  # end
+  def after_sign_out_path_for(resource_or_scope)
+    root_path
+  end
 
 end
