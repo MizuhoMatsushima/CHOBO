@@ -5,7 +5,11 @@ class Admin::EndUsersController < ApplicationController
 
   def search
     @end_users = EndUser.all
-    @end_user = EndUser.search(params[:keyword]).order('created_at asc')
+    unless params[:keyword].nil?
+      @end_user = EndUser.search(params[:keyword]).order('created_at asc')
+    else
+      flash[:notice] = "キーワードを入力してください。"
+    end
   end
 
   def edit

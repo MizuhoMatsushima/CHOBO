@@ -39,21 +39,34 @@ ja:
               blank: を入力してください。
             income:
               blank: （1以上の半角数字）を入力してください。
-              greater_than_or_equal_to: を1以上の半角英数字のみで入力してください。
-              not_a_number: を1以上の半角英数字のみで入力してください。
+              greater_than_or_equal_to: （1以上の半角数字）を入力してください。
+              not_a_number: （1以上の半角数字）みで入力してください。
         bop_subject:
           attributes:
-            use_at:
+            date:
               blank: を入力してください。
             subject_name:
               blank: を入力してください。
             point:
-              greater_than_or_equal_to: を1以上の半角英数字のみで入力してください。
+              greater_than_or_equal_to: （1以上の半角数字）を入力してください。
             total_price:
-              greater_than_or_equal_to: を1以上の半角英数字のみで入力してください。
+              greater_than_or_equal_to: （1以上の半角数字）を入力してください。
+              not_a_number: （1以上の半角数字）を入力してください。
+              blank: （1以上の半角数字）を入力してください。
             store:
               blank: を入力してください。
-
+        bop_detail:
+          attributes:
+            detail_price:
+              blank: （1以上の半角数字）を全て入力してください。
+              not_a_number: （1以上の半角数字）を全て入力してください。
+              invalid: 無効な値
+            detail_name:
+              blank: を全て入力してください。
+            amount:
+              blank: （1以上の半角数字）を全て入力してください。
+              not_a_number: （1以上の半角数字）を全て入力してください。
+              invalid: 無効な値
     attributes:
       end_user:
         last_name: 姓
@@ -64,15 +77,24 @@ ja:
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード（確認用）
+      admin:
+        email: メールアドレス
       account_book:
         source_of_income_id: 収入元
         pay_day: 収入があった日
         income: 収入
       bop_subject:
-        use_at: 日付
+        date: 日付
         subject_name: 利用科目
         total_price: 金額
         store: 利用店
+      bop_subject/bop_details:
+        detail_name: 利用細目
+        amount: 数量
+        detail_price: 税込金額
+      bop_detail:
+        detail_name: 利用細目
+        detail_price: 税込金額
 
 
 

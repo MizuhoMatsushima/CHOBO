@@ -1,0 +1,9 @@
+<% if @bop_subject.errors.include?("bop_details") %>
+  <div id="error_explanation" class="text-danger">
+    <ul>
+      <% @bop_subject.errors.full_messages_for("bop_details").each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

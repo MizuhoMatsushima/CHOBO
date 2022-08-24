@@ -56,12 +56,12 @@ class EndUser < ApplicationRecord
 
   def bop_subject_total(dt)
     # array = [] #空の配列を用意し、
-    # BopSubject.where(use_at: dt.beginning_of_month...dt.end_of_month).each do |bop_subject|
+    # BopSubject.where(date: dt.beginning_of_month...dt.end_of_month).each do |bop_subject|
     #   array << bop_subject.total_price
     #   #テーブルのレコードを１件ずつ取り出し、total_priceカラムのデータを配列に入れる
     # end
     # array.sum
-    self.bop_subjects.where(use_at: dt.beginning_of_month...dt.end_of_month).map{|k| k.total_price}.sum
+    self.bop_subjects.where(date: dt.beginning_of_month...dt.end_of_month).map{|k| k.total_price}.sum
   end
 
   def bop(dt)
@@ -71,11 +71,11 @@ class EndUser < ApplicationRecord
   #groupにしたカラムのgroupごとの小計
   def bop_subject(subject_name, dt)
     # array = [] #空の配列を用意し、
-    # BopSubject.where(subject_name: subject_name, use_at: dt.beginning_of_month...dt.end_of_month).each do |bop_subject|
+    # BopSubject.where(subject_name: subject_name, date: dt.beginning_of_month...dt.end_of_month).each do |bop_subject|
     #   array << bop_subject.total_price
     # end
     # array.sum
-    self.bop_subjects.where(subject_name: subject_name, use_at: dt.beginning_of_month...dt.end_of_month).map{|k| k.total_price}.sum
+    self.bop_subjects.where(subject_name: subject_name, date: dt.beginning_of_month...dt.end_of_month).map{|k| k.total_price}.sum
   end
 
 end

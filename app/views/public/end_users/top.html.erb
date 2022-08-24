@@ -55,11 +55,13 @@
         </div>
         <div class="my-4" style="width: 40%;">
           <div>
-            <%= link_to "収入を追加する", new_account_book_path, method: :get %>
+            <%= link_to new_account_book_path, method: :get do %>
+              <i class="fas fa-plus-circle"></i>収入登録
+            <% end %>
           </div>
           <div>
             <%= link_to  new_bop_subject_path do %>
-              <i class="fas fa-plus-circle"></i>支出登録
+              <i class="fas fa-plus-circle"></i>利用科目
             <% end %>
           </div>
           <% @bop_subject_name.each do |bop_subject| %>
@@ -77,7 +79,7 @@
                   <tr>
                     <td>
                       <%= link_to bop_subject_path(bop_subject_index) do %>
-                        <%= bop_subject_index.use_at.strftime('%Y年%m月%d日') %>
+                        <%= bop_subject_index.date.strftime('%Y年%m月%d日') %>
                         ￥<%= bop_subject_index.total_price.to_s(:delimited) %>
                       <% end %>
                     </td>

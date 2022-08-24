@@ -11,6 +11,7 @@ class Public::BopSubjectsController < ApplicationController
       #binding.pry
       redirect_to bop_subject_path(@bop_subject)
     else
+      #pp @bop_subject.errors.attribute_names
       render :new
     end
   end
@@ -36,6 +37,7 @@ class Public::BopSubjectsController < ApplicationController
     if @bop_subject.update(bop_subject_params)
       redirect_to bop_subject_path(@bop_subject)
     else
+      pp @bop_subject.errors.attribute_names
       render :edit
     end
   end
@@ -43,6 +45,6 @@ class Public::BopSubjectsController < ApplicationController
   private
 
   def bop_subject_params
-    params.require(:bop_subject).permit(:subject_name, :bop, :total_price, :point, :use_at, :memo, :store, :registered_person_id, :account_book_id, bop_details_attributes: [:id, :bop_subject_id, :detail_name, :detail_price, :amount, :_destroy])
+    params.require(:bop_subject).permit(:subject_name, :bop, :total_price, :point, :date, :memo, :store, :registered_person_id, :account_book_id, bop_details_attributes: [:id, :bop_subject_id, :detail_name, :detail_price, :amount, :_destroy])
   end
 end

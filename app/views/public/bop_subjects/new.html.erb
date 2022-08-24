@@ -6,10 +6,10 @@
         <%= render "layouts/error_count", resource: @bop_subject %>
         <div class="form-group bop_btn_group row">
           <div class="btn-group col-12" data-toggle="buttons">
-            <label class="col-6 btn btn-outline-secondary bop_btn active">
+            <label class="col-6 btn btn-outline-secondary bop_btn active" id="tab_payment_new">
               <%= f.radio_button :bop, "payments", {checked: true} %>支出
             </label>
-            <label class="col-6 btn btn-outline-secondary bop_btn">
+            <label class="col-6 btn btn-outline-secondary bop_btn" id="tab_balance_new">
               <%= f.radio_button :bop, "balance" %>収入
             </label>
           </div>

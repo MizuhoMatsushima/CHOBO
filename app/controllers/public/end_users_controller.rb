@@ -12,7 +12,7 @@ class Public::EndUsersController < ApplicationController
     beginning_of_month = @dt.beginning_of_month # 月初
     end_of_month = @dt.end_of_month # 月末
     @end_user = current_end_user
-    @end_user_bop = @end_user.bop_subjects.where(use_at: beginning_of_month...end_of_month)
+    @end_user_bop = @end_user.bop_subjects.where(date: beginning_of_month...end_of_month)
     @bop_subject_price = @end_user_bop.group(:subject_name).sum(:total_price)
     @bop_subject_graph = @bop_subject_price.sort_by { |_, v| v }.reverse.to_h
     @bop_subject_name = @end_user_bop.group(:subject_name).pluck(:subject_name)

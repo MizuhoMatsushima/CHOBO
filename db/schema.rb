@@ -48,13 +48,13 @@ ActiveRecord::Schema.define(version: 2022_08_18_050300) do
 
   create_table "bop_subjects", force: :cascade do |t|
     t.integer "end_user_id"
-    t.string "subject_name", null: false
+    t.string "subject_name"
     t.integer "bop"
     t.integer "total_price", null: false
-    t.datetime "use_at", null: false
+    t.datetime "date", null: false
     t.integer "point"
     t.string "memo"
-    t.string "store", null: false
+    t.string "store"
     t.integer "registered_person_id"
     t.string "share_code"
     t.integer "share_end_user_id"
