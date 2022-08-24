@@ -1,6 +1,6 @@
-<%= form_with model: @bop_subject, url: bop_subjects_path, method: :post do |f| %>
-  <div class="bop_form" id="balance_form_new">
-    <h3 class="text-center">収入登録</h3>
+<%= form_with model: @bop_subject, url: bop_subject_path, method: :patch do |f| %>
+  <div class="bop_form" id="balance_form">
+    <h3 class="text-center">収入登録の編集</h3>
     <div class="form-group">
         <%= f.label :date, "収入日" %>
         <%= f.date_field :date, class: "form-control" %>
@@ -20,6 +20,6 @@
       <%= f.text_field :memo, class: "form-control" %>
     </div>
     <%= f.hidden_field :bop, value: "balance" %>
-    <%= f.submit "登録", class: "btn btn-success col-12 mt-4", id: "new_balance_btn" %>
+    <%= f.submit "登録", class: "btn btn-success col-12" %>
   </div>
 <% end %>

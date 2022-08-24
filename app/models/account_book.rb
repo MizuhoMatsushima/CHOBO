@@ -5,7 +5,8 @@ class AccountBook < ApplicationRecord
   belongs_to :source_of_income
 
   validates :source_of_income_id, presence: true
-  validates :income, presence: true
+  INCOME_REGEX = /\A[0-9]+\z/
+  validates :income, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 1}, format: { with: INCOME_REGEX }
   validates :pay_day, presence: true
 
   def income_total

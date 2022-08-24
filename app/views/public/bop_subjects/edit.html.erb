@@ -1,90 +1,24 @@
 <%= javascript_pack_tag "edit" %>
 <div class="col-lg-10 col-md-12 my-5 mx-auto">
-  <div class="card">
-    <div class="m-5 bop_group">
-
-<%= form_with model: @bop_subject, url: bop_subjects_path, method: :patch do |f| %>
-
-  <div class="bop_form active">
-    <h3 class="text-center">支出登録変更</h3>
-    <div class="form-group">
-        <%= f.label :use_at, "利用日" %>
-        <%= f.date_field :use_at, class: "form-control" %>
-    </div>
-    <div class="form-group">
-      <%= f.label :subject_name, "利用科目" %>
-      <%= f.text_field :subject_name, class: "form-control" %>
-    </div>
-    <div style="display:inline-flex; width:100%;">
-      <p>利用細目</p>
-      <div class="add-botton-box ml-auto mr-4">
-        <%#= link_to_add_association f, :bop_details,
-          class: 'add_fields',
-          id: 'add-btn',
-          data: {
-            association_insertion_node: '#detail-association-insertion-point',
-            association_insertion_method: 'before'
-            } do %>
-            <i class="fas fa-plus-circle", style= "color: black; font-size: 25px;"></i>
-          <%# end %>
+  <div class="card" id="edit_bop" data-type="<%= @bop_subject.bop %>">
+    <%= form_with model: @bop_subject, url: bop_subject_path, method: :patch do |f| %>
+      <div class="m-5 bop_group">
+        <%= render "layouts/error_count", resource: @bop_subject %>
+        <div class="form-group bop_btn_group row mt-4">
+          <div class="btn-group col-12" data-toggle="buttons">
+            <label class="col-6 btn btn-outline-secondary bop_btn" id="tab_payment">
+              <%= f.radio_button :bop, "payments" %>支出
+            </label>
+            <label class="col-6 btn btn-outline-secondary bop_btn" id="tab_balance">
+              <%= f.radio_button :bop, "balance" %>収入
+            </label>
+          </div>
+        </div>
+        <div class="edit_bop_form">
+          <%= render "edit_payment", bop_subject: @bop_subject %>
+          <%= render "edit_balance", bop_subject: @bop_subject %>
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      <table class="table">
-        <thead>
-          <tr class="text-center">
-            <th class="col-5">細目名</th>
-            <th class="col-1">数量</th>
-            <th class="col-5">税込金額</th>
-            <th></th>
-          </tr>
-        </thead>
-        <%= f.fields_for :bop_details do |d| %>
-          <tbody>
-            <tr>
-              <%#= f.text_field :subject_name, :placeholder => "科目名（例：食費など）", class: "form-control mr-3" %>
-              <td><%= d.text_field :detail_name, :placeholder => "細目名（例：バナナなど）", class: "form-control" %></td>
-              <td><%= d.text_field :amount, :value => 1, class: "form-control mr-3" %></td>
-              <td><%= d.text_field :detail_price, :placeholder => "1000", class: "detail_price form-control" %></td>
-              <td></td>
-            </tr>
-            <tr id="detail-association-insertion-point"></tr>
-          </tbody>
-        <% end %>
-      </table>
-      <table class="table">
-        <tr>
-          <td>利用細目の合計</td>
-          <td></td>
-          <td class="col-5"><%= f.text_field :price, data: { autonumeric: { aSign: '¥ ', mDec: 0 } }, class: "detail_total_price form-control" %></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td style="border: none;"><%= f.label :point, "ポイント利用" %></td>
-          <td class="col-1" style="border: none;">
-          <td style="border: none;"><%= f.text_field :point, class: "point form-control" %></td>
-          <td style="border: none;"></td>
-        </tr>
-        <tr>
-          <td style="border: none;">支出額</td>
-          <td style="border: none;"></td>
-          <td style="border: none;"><%= f.text_field :total_price, class: "total_price form-control" %></td>
-          <td style="border: none;"></td>
-        </tr>
-      </table>
-    </div>
-    <div class="form-group">
-      <%= f.label :store, "利用店" %>
-      <%= f.text_field :store, class: "form-control" %>
-    </div>
-    <div class="form-group">
-      <%= f.label :memo, "メモ" %>
-      <%= f.text_field :memo, class: "form-control" %>
-    </div>
-    <%= f.hidden_field :bop, value: "payments" %>
-    <%= f.submit "変更", class: "btn btn-success col-12" %>
+    <% end %>
   </div>
-<% end %>
-</div>
-</div>
 </div>

@@ -3,7 +3,7 @@
     <div class="m-5">
       <h2 class="text-center mb-4">利用者情報編集</h2>
       <%= form_with model: @end_user, url: admin_end_user_path(@end_user), local: true do |f| %>
-        <%= render "public/shared/error_messages", resource: @end_user %>
+        <%= render "shared/error_messages", resource: @end_user %>
         <table class="col-12">
           <tbody>
             <tr>

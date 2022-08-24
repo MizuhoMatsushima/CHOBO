@@ -1,6 +1,6 @@
-<%= form_with model: @bop_subject, url: bop_subjects_path, method: :post do |f| %>
-  <div class="bop_form active" id="payment_form_new">
-    <h3 class="text-center">支出登録</h3>
+<%= form_with model: @bop_subject, url: bop_subject_path, method: :patch do |f| %>
+  <div class="bop_form" id="payment_form">
+    <h3 class="text-center">支出登録の編集</h3>
     <div class="form-group">
         <%= f.label :date, "利用日" %>
         <%= f.date_field :date, class: "form-control" %>
@@ -17,7 +17,6 @@
     </div>
     <div style="display:inline-flex; width:100%;">
       <p>利用細目</p>
-      <%#= render "public/shared/error_messages", resource: @bop_details %>
       <div class="add-botton-box ml-auto mr-4">
         <%= link_to_add_association f, :bop_details,
           class: 'add_fields',
@@ -30,8 +29,9 @@
           <% end %>
       </div>
     </div>
+    <div><%= render "layouts/error_messages" %></div>
     <div class="form-group">
-      <table class="table bop_table">
+      <table class="table">
         <thead>
           <tr class="text-center">
             <th>細目名</th>
@@ -40,10 +40,9 @@
             <th></th>
           </tr>
         </thead>
-        <%= f.fields_for :bop_details do |d| %>
-          <tbody>
+        <tbody>
+          <%= f.fields_for :bop_details do |d| %>
             <tr class="nested-fields">
-              <%#= f.text_field :subject_name, :placeholder => "科目名（例：食費など）", class: "form-control mr-3" %>
               <td>
                 <%= d.text_field :detail_name, :placeholder => "細目名（例：バナナなど）", class: "form-control mr-3" %>
                 <% if @bop_subject.errors.include?(:"bop_details.detail_name") %>
@@ -68,34 +67,34 @@
                 <% end %>
               </td>
             </tr>
-            <tr id="detail-association-insertion-point"></tr>
-            <tr>
-              <td class="align-middle">利用細目の合計</td>
-              <td></td>
-              <td>
-                <%= f.text_field :price, data: { autonumeric: { aSign: '¥ ', mDec: 0 } }, class: "detail_total_price form-control" %>
-              </td>
-              <td class="align-middle">円</td>
-            </tr>
-            <tr>
-              <td class="align-middle" style="border: none;"><%= f.label :point, "ポイント利用" %></td>
-              <td style="border: none;"></td>
-              <td style="border: none;"><%= f.text_field :point, class: "point form-control" %></td>
-              <td class="align-middle" style="border: none;">PT</td>
-            </tr>
-            <tr>
-              <td class="align-middle" style="border: none;">支出額</td>
-              <td style="border: none;"></td>
-              <td style="border: none;">
-                <%= f.text_field :total_price, class: "total_price form-control" %>
-                <% if @bop_subject.errors.include?(:total_price) %>
-                  <p class="text-danger"><%= @bop_subject.errors.full_messages_for(:total_price).first %>
-                <% end %>
-              </td>
-              <td class="align-middle" style="border: none;">円</td>
-            </tr>
-          </tbody>
-        <% end %>
+          <% end %>
+          <tr id="detail-association-insertion-point"></tr>
+          <tr>
+            <td class="align-middle">利用細目の合計</td>
+            <td></td>
+            <td>
+              <%= f.text_field :price, data: { autonumeric: { aSign: '¥ ', mDec: 0 } }, class: "detail_total_price form-control" %>
+            </td>
+            <td class="align-middle">円</td>
+          </tr>
+          <tr>
+            <td class="align-middle" style="border: none;"><%= f.label :point, "ポイント利用" %></td>
+            <td style="border: none;"></td>
+            <td style="border: none;"><%= f.text_field :point, class: "point form-control" %></td>
+            <td class="align-middle" style="border: none;">PT</td>
+          </tr>
+          <tr>
+            <td class="align-middle" style="border: none;">支出額</td>
+            <td style="border: none;"></td>
+            <td style="border: none;">
+              <%= f.text_field :total_price, class: "total_price form-control" %>
+              <% if @bop_subject.errors.include?(:total_price) %>
+                <p class="text-danger"><%= @bop_subject.errors.full_messages_for(:total_price).first %>
+              <% end %>
+            </td>
+            <td class="align-middle" style="border: none;">円</td>
+          </tr>
+        </tbody>
       </table>
     </div>
     <div class="form-group">
@@ -110,6 +109,6 @@
       <%= f.text_field :memo, class: "form-control" %>
     </div>
     <%= f.hidden_field :bop, value: "payments" %>
-    <%= f.submit "登録", class: "btn btn-success col-12" %>
+    <%= f.submit "登録", class: "btn btn-success col-12 mt-4" %>
   </div>
 <% end %>
