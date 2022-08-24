@@ -14,7 +14,7 @@
         <% if controller.action_name == "search" %>
           <h4 class="mt-4">"<%= params[:keyword] %>"の検索結果</h4>
         <% end %>
-        <table class="table mt-4">
+        <table class="table mt-5">
           <thead>
             <tr>
               <th class="text-center">相談タイトル</th>
@@ -60,7 +60,7 @@
         <% if controller.action_name == "search" %>
           <h4 class="mt-4">"<%= params[:keyword] %>"の検索結果</h4>
         <% end %>
-        <table class="table mt-3">
+        <table class="table mt-5">
           <tbody>
             <% consultations.each do |consultation| %>
               <tr>
