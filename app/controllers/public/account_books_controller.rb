@@ -27,6 +27,8 @@ class Public::AccountBooksController < ApplicationController
     @account_book = AccountBook.find(params[:id])
     if @account_book.update(account_book_params)
       redirect_to account_books_path
+    else
+      render :edit
     end
   end
 

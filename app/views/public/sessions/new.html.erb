@@ -1,7 +1,12 @@
 <div class="my-5">
   <div class="card col-10 mx-auto">
     <div class="my-5 col-8 mx-auto">
-      <h2 class="mx-auto mb-5">ログイン</h2>
+      <div class="mb-5">
+        <h2 class="mx-auto">ログイン</h2>
+        <% flash.each do |key, value| %>
+          <%= content_tag :div, value, class: key, class: "text-danger" %>
+        <% end %>
+      </div>
       <div class="mx-auto">
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class="form-group mx-auto mb-5">

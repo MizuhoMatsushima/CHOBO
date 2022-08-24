@@ -8,7 +8,6 @@ class Public::GuestsController < ActionController::Base
       end_user.last_name_kana = "ゲスト"
       end_user.first_name_kana = "ユーザー"
       end_user.phone_number = "0312345678"
-
      # user.confirmed_at = Time.now  # Confirmable を使用している場合は必要
    end
     sign_in end_user

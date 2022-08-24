@@ -1,7 +1,7 @@
 ja:
   activerecord:
     attributes:
-      user:
+      end_user:
         confirmation_sent_at: パスワード確認送信時刻
         confirmation_token: パスワード確認用トークン
         confirmed_at: パスワード確認時刻
@@ -25,8 +25,16 @@ ja:
         unconfirmed_email: 未確認Eメール
         unlock_token: ロック解除用トークン
         updated_at: 更新日
+      account_book:
+        source_of_income: 収入元
     models:
-      user: ユーザー
+      end_user: 利用者情報
+      account_book: 帳簿
+      source_of_income: 収入元
+      bop_subject: 利用科目
+      bop_detail: 利用細目
+      bop_details.detail_price: 税込金額
+
   devise:
     confirmations:
       confirmed: メールアドレスが確認できました。
@@ -142,3 +150,6 @@ ja:
       not_saved:
         one: エラーが発生したため %{resource} は保存されませんでした。
         other: "%{count} 件のエラーが発生したため %{resource} は保存されませんでした。"
+      error:
+        one: エラーが発生したため %{resource} は保存されませんでした。
+        other: "エラーが発生したため %{resource} は保存されませんでした。"

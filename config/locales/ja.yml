@@ -4,3 +4,99 @@ ja:
       bop:
         balance: "収入"
         payments: "支出"
+  activerecord:
+    errors:
+      models:
+        end_user:
+          attributes:
+            last_name:
+              blank: を入力してください。
+            first_name:
+              blank: を入力してください。
+            last_name_kana:
+              blank: （全角カタカナ）を入力してください。
+              invalid: は全角カタカナで入力してください。
+            first_name_kana:
+              blank: （全角カタカナ）を入力してください。
+              invalid: は全角カタカナで入力してください。
+            phone_number:
+              blank: を入力してください。
+              invalid: を10～11桁（ハイフン無し）で入力してください。
+            email:
+              blank: を入力してください。
+            password:
+              blank: を入力してください。
+            password_confirmation:
+              blank: を入力してください。
+            title:
+        account_book:
+          attributes:
+            source_of_income:
+              required: は必要です。
+            source_of_income_id:
+              blank: を入力してください。
+            pay_day:
+              blank: を入力してください。
+            income:
+              blank: （1以上の半角数字）を入力してください。
+              greater_than_or_equal_to: （1以上の半角数字）を入力してください。
+              not_a_number: （1以上の半角数字）みで入力してください。
+        bop_subject:
+          attributes:
+            date:
+              blank: を入力してください。
+            subject_name:
+              blank: を入力してください。
+            point:
+              greater_than_or_equal_to: （1以上の半角数字）を入力してください。
+            total_price:
+              greater_than_or_equal_to: （1以上の半角数字）を入力してください。
+              not_a_number: （1以上の半角数字）を入力してください。
+              blank: （1以上の半角数字）を入力してください。
+            store:
+              blank: を入力してください。
+        bop_detail:
+          attributes:
+            detail_price:
+              blank: （1以上の半角数字）を全て入力してください。
+              not_a_number: （1以上の半角数字）を全て入力してください。
+              invalid: 無効な値
+            detail_name:
+              blank: を全て入力してください。
+            amount:
+              blank: （1以上の半角数字）を全て入力してください。
+              not_a_number: （1以上の半角数字）を全て入力してください。
+              invalid: 無効な値
+    attributes:
+      end_user:
+        last_name: 姓
+        first_name: 名
+        last_name_kana: 姓のフリガナ
+        first_name_kana: 名のフリガナ
+        phone_number: 電話番号
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード（確認用）
+      admin:
+        email: メールアドレス
+      account_book:
+        source_of_income_id: 収入元
+        pay_day: 収入があった日
+        income: 収入
+      bop_subject:
+        date: 日付
+        subject_name: 利用科目
+        total_price: 金額
+        store: 利用店
+      bop_subject/bop_details:
+        detail_name: 利用細目
+        amount: 数量
+        detail_price: 税込金額
+      bop_detail:
+        detail_name: 利用細目
+        detail_price: 税込金額
+
+
+
+
+
