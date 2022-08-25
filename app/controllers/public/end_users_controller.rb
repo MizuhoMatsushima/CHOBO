@@ -1,7 +1,7 @@
 class Public::EndUsersController < ApplicationController
   def top
     @current_time = DateTime.current
-    @ago = @current_time.strftime("%m")
+    #@ago = @current_time.strftime("%m") エラーなければ削除
     # 三項演算子Version
     @dt = params[:date].nil? ? DateTime.current : DateTime.parse("#{params[:date]}-01").in_time_zone('Asia/Tokyo')
     # if params[:date].nil?
@@ -12,10 +12,13 @@ class Public::EndUsersController < ApplicationController
     beginning_of_month = @dt.beginning_of_month # 月初
     end_of_month = @dt.end_of_month # 月末
     @end_user = current_end_user
-    @end_user_bop = @end_user.bop_subjects.where(date: beginning_of_month...end_of_month)
-    @bop_subject_price = @end_user_bop.group(:subject_name).sum(:total_price)
+    @balance = @end_user.bop_subjects.where(bop: 0)
+    @end_user_balance = @balance.where(date: beginning_of_month...end_of_month)
+    @payments = @end_user.bop_subjects.where(bop: 1)
+    @end_user_pay = @payments.where(date: beginning_of_month...end_of_month)
+    @bop_subject_name = @end_user_pay.group(:subject_name).pluck(:subject_name)
+    @bop_subject_price = @end_user_pay.group(:subject_name).sum(:total_price)
     @bop_subject_graph = @bop_subject_price.sort_by { |_, v| v }.reverse.to_h
-    @bop_subject_name = @end_user_bop.group(:subject_name).pluck(:subject_name)
   end
 
   def show

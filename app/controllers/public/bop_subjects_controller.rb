@@ -22,6 +22,15 @@ class Public::BopSubjectsController < ApplicationController
     @bop_details_total = @bop_details.sum(:detail_price)
   end
 
+  def index
+    @dt = params[:date].nil? ? DateTime.current : DateTime.parse("#{params[:date]}-01").in_time_zone('Asia/Tokyo')
+    beginning_of_month = @dt.beginning_of_month # 月初
+    end_of_month = @dt.end_of_month # 月末
+    @end_user = current_end_user
+    @balance = @end_user.bop_subjects.where(bop: 0)
+    @end_user_balance = @balance.where(date: beginning_of_month...end_of_month)
+  end
+
   def destroy
     @bop_subject = BopSubject.find(params[:id])
     @bop_subject.destroy

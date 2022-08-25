@@ -23,11 +23,22 @@
                       <% end %>
                     </td>
                     <td>－</td>
-                    <td>
-                      ￥<%= @end_user.bop_subject_total(@dt).to_s(:delimited) %>
-                    </td>
-                    <td>＝</td>
-                    <td>￥<%= @end_user.bop(@dt).to_s(:delimited) %></td>
+                    <% if @end_user_balance.count > 0 %>
+                      <td>
+                        <%= link_to bop_subjects_path do %>
+                          ￥<%= @end_user.balance(@dt).to_s(:delimited) %></td>
+                        <% end %>
+                      <td>＝</td>
+                      <% if @end_user.balance_bop(@dt) < 0 %>
+                        <td class="text-danger">￥<%= @end_user.balance_bop(@dt).to_s(:delimited) %></td>
+                      <% else %>
+                          <td>￥<%= @end_user.balance_bop(@dt).to_s(:delimited) %></td>
+                      <% end %>
+                    <% else %>
+                      <td>￥<%= @end_user.payments(@dt).to_s(:delimited) %></td>
+                      <td>＝</td>
+                      <td>￥<%= @end_user.payments_bop(@dt).to_s(:delimited) %></td>
+                    <% end %>
                   </tr>
                 </tbody>
               </table>
@@ -35,9 +46,9 @@
             <div>
               <%= pie_chart @bop_subject_graph,colors: ["#82cddd","#f0908d","#339966","333"] %>
             </div>
-            <div class="col-12">
+            <div class="col-12 d-flex justify-content-between">
               <% if params[:date].nil? or params[:date] == "#{@current_time.strftime("%Y-%m")}" %>
-                <%= link_to "<先月", end_users_path({date: @dt.prev_month.strftime("%Y-%m")}) %>
+                <%= link_to "<先月", end_users_path({date: @dt.prev_month.strftime("%Y-%m")})%>
                 <%= link_to "翌月>", end_users_path({date: @dt.next_month.strftime("%Y-%m")}) %>
               <% elsif params[:date] == @current_time.prev_month.strftime("%Y-%m") %>
                 <%= link_to "<#{@dt.prev_month.strftime("%Y年%-m月")}", end_users_path({date: @dt.prev_month.strftime("%Y-%m")}) %>
@@ -61,7 +72,7 @@
           </div>
           <div>
             <%= link_to  new_bop_subject_path do %>
-              <i class="fas fa-plus-circle"></i>利用科目
+              <i class="fas fa-plus-circle"></i>利用科目登録
             <% end %>
           </div>
           <% @bop_subject_name.each do |bop_subject| %>
@@ -70,12 +81,24 @@
                 <tr>
                   <th style="border-top: none; border-bottom: none; display:inline-flex;">
                     <div><%= bop_subject %></div>
-                    <div>￥<%= @end_user.bop_subject(bop_subject, @dt).to_s(:delimited) %></div>
+                    <% if @end_user_balance.where(subject_name: bop_subject).count > 0 %>
+                      <div>
+                        <%= link_to bop_subjects_path({date: @dt}) do %>
+                          ￥<%= @end_user.subject_balance(bop_subject, @dt).to_s(:delimited) %>
+                        <% end %>
+                      </div>
+                      <div>－</div>
+                      <div>￥<%= @end_user.subject_payments(bop_subject, @dt).to_s(:delimited) %></div>
+                      <div>＝</div>
+                      <div>￥<%= @end_user.subject_bop(bop_subject, @dt).to_s(:delimited) %></div>
+                    <% else %>
+                      <div>￥<%= @end_user.subject_payments(bop_subject, @dt).to_s(:delimited) %></div>
+                    <% end %>
                   </th>
                 </tr>
               </thead>
               <tbody>
-                <% @end_user_bop.where(subject_name: bop_subject).each do |bop_subject_index| %>
+                <% @end_user_pay.where(subject_name: bop_subject).each do |bop_subject_index| %>
                   <tr>
                     <td>
                       <%= link_to bop_subject_path(bop_subject_index) do %>

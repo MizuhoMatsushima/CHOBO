@@ -8,44 +8,47 @@
           <td><%= @bop_subject.bop_i18n %></td>
         </tr>
         <tr>
-          <th height="50">利用日</th>
+          <th height="50">日付</th>
           <td><%= @bop_subject.date.strftime('%Y年%m月%d日') %></td>
         </tr>
         <tr>
-          <th height="50">支出金額</th>
+          <% if @bop_subject.bop == "balance" %>
+            <th height="50">収入金額</th>
+          <% else  %>
+            <th height="50">支出金額</th>
+          <% end %>
           <td style="font-size: 20px; font-weight: bold;"><%= @bop_subject.total_price.to_s(:delimited) %>円</td>
         </tr>
-        <tr>
-          <th height="50" class="align-baseline">利用細目リスト</th>
-          <td>
-            <table class="table table-sm">
-              <tr>
-                <th class="text-center">利用細名</th>
-                <th class="text-center">個数</th>
-                <th class="text-center">小計</th>
-              </tr>
-              <% @bop_details.each do |bop_detail| %>
+        <% unless @bop_subject.bop == "balance" %>
+          <tr>
+            <th height="50" class="align-baseline">利用細目リスト</th>
+            <td>
+              <table class="table table-sm">
                 <tr>
-                  <td class="pl-3"><%= bop_detail.detail_name %></td>
-                  <td class="text-center"><%= bop_detail.amount %></td>
-                  <td class="text-right pr-3"><%= bop_detail.detail_price.to_s(:delimited) %>円</td>
+                  <th class="text-center">利用細名</th>
+                  <th class="text-center">個数</th>
+                  <th class="text-center">小計</th>
                 </tr>
-              <% end %>
-              <tr>
-                <td class="pl-3">利用細目合計</td>
-                <td></td>
-                <td class="text-right pr-3"><%= @bop_details_total.to_s(:delimited) %>円</td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-        <tr>
-
-        </tr>
-        <tr>
-          <th height="50">ポイント利用</th>
-          <td><%= @bop_subject.point %>ポイント</td>
-        </tr>
+                <% @bop_details.each do |bop_detail| %>
+                  <tr>
+                    <td class="pl-3"><%= bop_detail.detail_name %></td>
+                    <td class="text-center"><%= bop_detail.amount %></td>
+                    <td class="text-right pr-3"><%= bop_detail.detail_price.to_s(:delimited) %>円</td>
+                  </tr>
+                <% end %>
+                <tr>
+                  <td class="pl-3">利用細目合計</td>
+                  <td></td>
+                  <td class="text-right pr-3"><%= @bop_details_total.to_s(:delimited) %>円</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <th height="50">ポイント利用</th>
+            <td><%= @bop_subject.point %>ポイント</td>
+          </tr>
+        <% end %>
         <tr>
           <th height="50">メモ</th>
           <td><%= @bop_subject.memo %></td>
@@ -54,6 +57,9 @@
       <div class="mt-4 text-center col-12">
         <%= link_to "今月の収支一覧", end_users_path, class: "text-center btn btn-secondary" %>
         <%= link_to "利用科目を編集", edit_bop_subject_path(@bop_subject), class: "ml-5 btn btn-secondary" %>
+        <% if @bop_subject.bop == "balance" %>
+          <%= link_to "予算割当一覧", bop_subjects_path, class: "ml-5 btn btn-secondary" %>
+        <% end %>
       </div>
     </div>
   </div>

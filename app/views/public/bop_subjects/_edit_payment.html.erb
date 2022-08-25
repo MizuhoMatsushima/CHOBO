@@ -2,21 +2,21 @@
   <div class="bop_form" id="payment_form">
     <h3 class="text-center">支出登録の編集</h3>
     <div class="form-group">
-        <%= f.label :date, "利用日" %>
+        <%= f.label :date, "日付" %>
         <%= f.date_field :date, class: "form-control" %>
         <% if @bop_subject.errors.include?(:date) %>
           <p class="text-danger"><%= @bop_subject.errors.full_messages_for(:date).first %>
         <% end %>
     </div>
     <div class="form-group">
-      <%= f.label :subject_name, "利用科目" %>
+      <%= f.label :subject_name, "科目名" %>
       <%= f.text_field :subject_name, class: "form-control" %>
       <% if @bop_subject.errors.include?(:subject_name) %>
         <p class="text-danger"><%= @bop_subject.errors.full_messages_for(:subject_name).first %>
       <% end %>
     </div>
     <div style="display:inline-flex; width:100%;">
-      <p>利用細目</p>
+      <p>細目リスト入力欄</p>
       <div class="add-botton-box ml-auto mr-4">
         <%= link_to_add_association f, :bop_details,
           class: 'add_fields',
@@ -70,7 +70,7 @@
           <% end %>
           <tr id="detail-association-insertion-point"></tr>
           <tr>
-            <td class="align-middle">利用細目の合計</td>
+            <td class="align-middle">細目の合計</td>
             <td></td>
             <td>
               <%= f.text_field :price, data: { autonumeric: { aSign: '¥ ', mDec: 0 } }, class: "detail_total_price form-control" %>
@@ -109,6 +109,6 @@
       <%= f.text_field :memo, class: "form-control" %>
     </div>
     <%= f.hidden_field :bop, value: "payments" %>
-    <%= f.submit "登録", class: "btn btn-success col-12 mt-4" %>
+    <%= f.submit "変更", class: "btn btn-success col-12 mt-4" %>
   </div>
 <% end %>

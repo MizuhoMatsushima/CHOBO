@@ -28,6 +28,7 @@ ja:
               invalid: を10～11桁（ハイフン無し）で入力してください
             email:
               blank: を入力してください
+              taken: を入力してください
             password:
               blank: を入力してください
             password_confirmation:
@@ -90,15 +91,15 @@ ja:
         income: 収入
       bop_subject:
         date: 日付
-        subject_name: 利用科目
+        subject_name: 科目名
         total_price: 金額
         store: 利用店
       bop_subject/bop_details:
-        detail_name: 利用細目
+        detail_name: 細目名
         amount: 数量
         detail_price: 税込金額
       bop_detail:
-        detail_name: 利用細目
+        detail_name: 細目名
         detail_price: 税込金額
 
 
