@@ -16,7 +16,7 @@ class Public::AccountBooksController < ApplicationController
 
   def index
     @end_user = current_end_user
-    @account_books = @end_user.account_books
+    @account_books = @end_user.account_books.order(pay_day: "DESC").page(params[:page]).per(15)
   end
 
   def edit

@@ -5,10 +5,10 @@
       <table class="table">
         <thead>
           <tr>
-            <th>日付</th>
-            <th>割当科目名</th>
-            <th>金額</th>
-            <th>メモ</th>
+            <th class="text-center">日付</th>
+            <th class="text-center">割当科目名</th>
+            <th class="text-center">金額</th>
+            <th class="text-center">メモ</th>
             <th></th>
             <th></th>
           </tr>
@@ -22,7 +22,7 @@
                 <%= link_to bop_subject_path(bop_subject) do %>
                   <%= bop_subject.total_price.to_s(:delimited) %>円</td>
                 <% end %>
-              <th><%= bop_subject.memo %></th>
+              <th><%= bop_subject.memo.truncate(15) %></th>
               <td><%= link_to "編集", edit_bop_subject_path(bop_subject) %></td>
               <td><%= link_to "削除", bop_subject_path(bop_subject), method: :delete, data: { confirm: '削除しますか？' } %></td>
             </tr>

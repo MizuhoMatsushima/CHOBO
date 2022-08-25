@@ -3,8 +3,8 @@
     <div class="m-5">
       <div class="col-12">
         <h3 style="display:inline-flex;">収入の一覧</h3>
-        <div class="ml-auto" style="display:inline-flex;">
-          <%= link_to new_account_book_path, class: "text-right" do %>
+        <div class="d-flex justify-content-end" style="display:inline-flex;">
+          <%= link_to new_account_book_path, class: "" do %>
             <i class="fas fa-money-bill" style="font-size: 25px;"></i>
           <% end %>
         </div>
@@ -31,6 +31,7 @@
           <% end %>
         </tbody>
       </table>
+      <div class="mt-4 d-flex justify-content-center"><%= paginate @account_books %></div>
       <div class="mt-4 text-center col-12">
         <%= link_to "今月の収支一覧", end_users_path, class: "text-center btn btn-secondary" %>
       </div>

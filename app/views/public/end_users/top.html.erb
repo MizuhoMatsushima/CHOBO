@@ -25,9 +25,7 @@
                     <td>－</td>
                     <% if @end_user_balance.count > 0 %>
                       <td>
-                        <%= link_to bop_subjects_path do %>
-                          ￥<%= @end_user.balance(@dt).to_s(:delimited) %></td>
-                        <% end %>
+                        ￥<%= @end_user.balance(@dt).to_s(:delimited) %></td>
                       <td>＝</td>
                       <% if @end_user.balance_bop(@dt) < 0 %>
                         <td class="text-danger">￥<%= @end_user.balance_bop(@dt).to_s(:delimited) %></td>

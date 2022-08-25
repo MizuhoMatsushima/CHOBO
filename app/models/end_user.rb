@@ -56,12 +56,15 @@ class EndUser < ApplicationRecord
 
   def balance(dt)
     array = [] #空の配列を用意し
-    BopSubject.group(:subject_name).each do |name|
+    BopSubject.pluck(:subject_name).uniq.each do |name|
+     
       group = BopSubject.where(subject_name: name, date: dt.beginning_of_month...dt.end_of_month)
+   
       if group.where(bop: 0).count > 0
-        array << group.where(bop: 0).map{|k| k.total_price}.sum
+     
+        array << group.where(bop: 0).sum{|k| k.total_price}
       else
-        array << group.where(bop: 1).map{|k| k.total_price}.sum
+        array << group.where(bop: 1).sum{|k| k.total_price}
       end
     end
     array.sum

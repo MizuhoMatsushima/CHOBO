@@ -18,6 +18,8 @@
     <% end %>
   </td>
   <td>
-    <%= link_to_remove_association '削除', f, class: 'bg-orange btn-type-s' %>
+    <%= link_to_remove_association f, class: 'bg-orange btn-type-s' do %>
+      <i class="fas fa-trash" style="font-size: 20px; color: black;"></i>
+    <% end %>
   </td>
 </tr>

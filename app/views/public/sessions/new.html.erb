@@ -3,12 +3,11 @@
     <div class="my-5 col-8 mx-auto">
       <div class="mb-5">
         <h2 class="mx-auto">ログイン</h2>
-        <%= flash[:sign_in] %>
         <% flash.each do |key, value| %>
-          <%= content_tag :div, value, class: key, class: "text-danger" %>
+          <% unless value == "ログアウトしました。" %>
+            <%= content_tag :div, value, class: key, class: "text-danger" %>
+          <% end %>
         <% end %>
-        <%#= render "public/shared/error_messages", resource: resource %>
-        <%#= render 'layouts/notifications' %>
       </div>
       <div class="mx-auto">
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
