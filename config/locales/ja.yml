@@ -73,6 +73,22 @@ ja:
               blank: （1以上の半角数字）を全て入力してください
               not_a_number: （1以上の半角数字）を全て入力してください
               invalid: 無効な値
+        source_of_income:
+          attributes:
+            source_name:
+              blank: を入力してください
+        savings_estination:
+          attributes:
+            savings_estination_name:
+              blank: を入力してください
+        deposit_balance:
+          attributes:
+            savings_estination_id:
+              blank: を入力してください
+            savings_estination:
+              required: を入力してください
+            savings_amount:
+              greater_than_or_equal_to: （1以上の半角数字）を入力してください
     attributes:
       end_user:
         last_name: 姓
@@ -101,6 +117,14 @@ ja:
       bop_detail:
         detail_name: 細目名
         detail_price: 税込金額
+      source_of_income:
+        source_name: 収入元
+      savings_estination:
+        savings_estination_name: 貯金先名
+      deposit_balance:
+          savings_estination_id: 貯金先
+          savings_estination: 貯金先
+          savings_amount: 貯金額
 
 
 

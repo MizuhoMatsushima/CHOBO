@@ -1,2 +1,21 @@
-<h1>Public::SavingsEstinations#edit</h1>
-<p>Find me in app/views/public/savings_estinations/edit.html.erb</p>
+<div class="col-lg-10 col-md-12 mt-5 mx-auto">
+  <div class="card">
+    <div class="m-5">
+      <h3>貯金先登録編集</h3>
+      <%= form_with model: @savings_estination, url: savings_estination_path, method: :patch do |f| %>
+        <div class="row ml-1">
+          <div class="mt-2">
+            <%= f.label :savings_estination_name, "貯金先名" %>
+          </div>
+          <div class="col-8">
+            <%= f.text_field :savings_estination_name, class:"form-control" %>
+            <% if @savings_estination.errors.include?(:savings_estination_name) %>
+              <p class="text-danger"><%= @savings_estination.errors.full_messages_for(:savings_estination_name).first %>
+            <% end %>
+          </div>
+          <div class="col-2"><%= f.submit "更新", class: "btn btn-success" %></div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

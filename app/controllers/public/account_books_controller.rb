@@ -1,15 +1,19 @@
 class Public::AccountBooksController < ApplicationController
 
   def new
+    @end_user = current_end_user
     @account_book = AccountBook.new
+    @source_of_incomes = @end_user.source_of_incomes
   end
 
   def create
+    @end_user = current_end_user
     @account_book = AccountBook.new(account_book_params)
     @account_book.end_user_id = current_end_user.id
     if @account_book.save
       redirect_to end_users_path
     else
+      @source_of_incomes = @end_user.source_of_incomes
       render :new
     end
   end
@@ -20,14 +24,18 @@ class Public::AccountBooksController < ApplicationController
   end
 
   def edit
+    @end_user = current_end_user
     @account_book = AccountBook.find(params[:id])
+    @source_of_incomes = @end_user.source_of_incomes
   end
 
   def update
+    @end_user = current_end_user
     @account_book = AccountBook.find(params[:id])
     if @account_book.update(account_book_params)
       redirect_to account_books_path
     else
+      @source_of_incomes = @end_user.source_of_incomes
       render :edit
     end
   end

@@ -23,12 +23,14 @@ class Public::BopSubjectsController < ApplicationController
   end
 
   def index
+    @current_time = DateTime.current
+    bop = params[:bop]
     @dt = params[:date].nil? ? DateTime.current : DateTime.parse("#{params[:date]}-01").in_time_zone('Asia/Tokyo')
     beginning_of_month = @dt.beginning_of_month # 月初
     end_of_month = @dt.end_of_month # 月末
     @end_user = current_end_user
-    @balance = @end_user.bop_subjects.where(bop: 0)
-    @end_user_balance = @balance.where(date: beginning_of_month...end_of_month)
+    @bop_month = @end_user.bop_subjects.where(date: beginning_of_month...end_of_month, bop: bop)
+    @bop_day = @bop_month.order(date: "DESC").pluck(:date).uniq
   end
 
   def destroy

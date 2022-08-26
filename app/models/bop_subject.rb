@@ -26,5 +26,4 @@ class BopSubject < ApplicationRecord
   def pay_day_select
     self.pay_day.strftime('%Y年%m月%d日') + "の収入"
   end
-
 end
