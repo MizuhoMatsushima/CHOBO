@@ -1,7 +1,8 @@
 /* global $*/
   $(document).ready(function () {
-    var total_price = 0;
-    if( $('#bop_subject_price').length ){
+    //if( $('#bop_subject_price').length ){
+    if ( $('.detail_price form-control').length){
+      var total_price = 0;
 	    $('#bop_subject_price').val( total_price );
 	    $('#bop_subject_total_price').val( total_price );
 	    $('#bop_subject_point').val(0);
@@ -29,6 +30,9 @@
         $('#bop_subject_total_price').val(total_detail_price-subject_point);
       });
 	  });
+
+
+
 
     $('.bop_group .bop_btn').click(function() {
     	var index = $('.bop_group .bop_btn').index(this);

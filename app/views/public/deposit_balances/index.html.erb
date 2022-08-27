@@ -1,52 +1,31 @@
 <div class="col-lg-10 col-md-12 mt-5 mx-auto">
   <div class="card">
-    <div class="m-5">
-      <h3>貯金登録</h3>
-      <%= form_with model: @deposit_balance, url: deposit_balances_path, method: :post do |f| %>
-        <div class="row ml-1">
-          <div class="mt-2">
-            <%= f.label :savings_estination_id, "貯金先" %>
-          </div>
-          <div class="col-4">
-            <%= f.collection_select( :savings_estination_id, @savings_estinations, :id, :savings_estination_name, {include_blank: "--選択して下さい--"}, {class: "form-control"}) %>
-            <% if @deposit_balance.errors.include?(:savings_estination_id) %>
-              <p class="text-danger"><%= @deposit_balance.errors.full_messages_for(:savings_estination_id).first %>
-            <% end %>
-          </div>
-          <div class="mt-2">
-            <%= f.label :savings_amount, "貯金額" %>
-          </div>
-          <div class="col-4">
-            <%= f.text_field :savings_amount, class:"form-control" %>
-            <% if @deposit_balance.errors.include?(:savings_amount) %>
-              <p class="text-danger"><%= @deposit_balance.errors.full_messages_for(:savings_amount).first %>
-            <% end %>
-          </div>
-          <div class="col-2"><%= f.submit "登録", class: "btn btn-success" %></div>
-        </div>
-      <% end %>
+    <div class="m-5"><%= line_chart @deposit_balance %></div>
+    <div class="mx-5">
+      <div class="d-flex justify-content-between mb-1">
+        <h5 class="my-auto">貯金履歴一覧</h5>
+        <div><%= link_to "貯金登録", new_deposit_balance_path, class: "btn btn-outline-secondary" %></div>
       </div>
-      <div class="mx-5">
-        <h5>貯金履歴一覧</h5>
-        <table class="table">
-          <thead>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>貯金先名</th>
+            <th>貯金額</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @deposit_balances.each do |deposit_balance| %>
             <tr>
-              <th>貯金先名</th>
-              <th>貯金額</th>
-              <th></th>
+              <td><%= deposit_balance.savings_estination.savings_estination_name %></td>
+              <td>￥<%= deposit_balance.savings_amount.to_s(:delimited) %></td>
+              <td><%= link_to "編集", edit_deposit_balance_path(deposit_balance) %></td>
+              <td><%= link_to "削除", deposit_balance_path(deposit_balance), method: :delete %></td>
             </tr>
-          </thead>
-          <tbody>
-            <% @deposit_balances.each do |deposit_balance| %>
-              <tr>
-                <td><%= deposit_balance.savings_estination.savings_estination_name %></td>
-                <td>￥<%= deposit_balance.savings_amount.to_s(:delimited) %></td>
-                <td><%= link_to "編集", edit_savings_estination_path(deposit_balance) %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

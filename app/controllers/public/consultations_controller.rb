@@ -20,10 +20,15 @@ class Public::ConsultationsController < ApplicationController
     @consultation = Consultation.new(consultation_params)
     @consultation.end_user_id = current_end_user.id
     tag_list = params[:consultation][:name].split(',')
-    if @consultation.save
+    tag_valid = Tag.valid_tags(tag_list)
+    if @consultation.valid? && tag_valid
+      @consultation.save!
       @consultation.save_tag(tag_list)
       redirect_to consultation_path(@consultation)
     else
+      if ! tag_valid
+        @consultation.errors.add(:name, "を正しく入力してください")
+      end
       render :new
     end
   end

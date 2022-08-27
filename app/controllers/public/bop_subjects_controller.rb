@@ -8,10 +8,8 @@ class Public::BopSubjectsController < ApplicationController
     @bop_subject = BopSubject.new(bop_subject_params)
     @bop_subject.end_user_id = current_end_user.id
     if @bop_subject.save
-      #binding.pry
       redirect_to bop_subject_path(@bop_subject)
     else
-      #pp @bop_subject.errors.attribute_names
       render :new
     end
   end

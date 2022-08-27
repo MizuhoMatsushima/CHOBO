@@ -1,6 +1,6 @@
 class Admin::ConsultationsController < ApplicationController
   def index
-    @consultations = Consultation.all
+    @consultations = Consultation.all.order(created_at: "DESC")
     @tags = Tag.all
   end
 

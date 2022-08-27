@@ -89,6 +89,19 @@ ja:
               required: を入力してください
             savings_amount:
               greater_than_or_equal_to: （1以上の半角数字）を入力してください
+              blank: （1以上の半角数字）を入力してください
+            deposit_date:
+              blank: を入力してください
+        consultation:
+          attributes:
+            title:
+              blank: を入力してください
+            body:
+              blank: を入力してください
+        comment:
+          attributes:
+            body:
+              blank: を400文字以内で入力してください
     attributes:
       end_user:
         last_name: 姓
@@ -122,9 +135,16 @@ ja:
       savings_estination:
         savings_estination_name: 貯金先名
       deposit_balance:
-          savings_estination_id: 貯金先
-          savings_estination: 貯金先
-          savings_amount: 貯金額
+        savings_estination_id: 貯金先
+        savings_estination: 貯金先
+        savings_amount: 貯金額
+        deposit_date: 貯金月
+      consultation:
+        title: タイトル
+        body: 本文
+        name: タグ
+      comment:
+        body: コメント
 
 
 

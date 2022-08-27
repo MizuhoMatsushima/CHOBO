@@ -5,6 +5,10 @@ class Consultation < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
+  validates :title, presence: true
+  validates :body, presence: true
+
+
   def save_tag(sent_tags)
     current_tags = self.tags.pluck(:name) unless self.tags.nil?
     old_tags = current_tags - sent_tags

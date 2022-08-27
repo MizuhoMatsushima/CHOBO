@@ -1,22 +1,26 @@
 class Public::DepositBalancesController < ApplicationController
 
-  def index
+  def new
     @end_user = current_end_user
-    @deposit_balances = @end_user.deposit_balances.order(created: "DESC")
     @deposit_balance = DepositBalance.new
     @savings_estinations = @end_user.savings_estinations
   end
 
-  def create
+  def index
     @end_user = current_end_user
-    @deposit_balances = @end_user.deposit_balances
+    @deposit_balances = @end_user.deposit_balances.order(created: "DESC")
+  end
+
+  def create
     @deposit_balance = DepositBalance.new(deposit_balance_params)
     @deposit_balance.end_user_id = current_end_user.id
+    deposit_date = (params[:deposit_balance][:deposit_date]+"-01").to_datetime
+    @deposit_balance.deposit_date = deposit_date
     if @deposit_balance.save
       redirect_to deposit_balances_path
     else
       @savings_estinations = @end_user.savings_estinations
-      render :index
+      render :new
     end
   end
 

@@ -1,0 +1,4 @@
+<% pp comment.errors.full_messages %>
+<% if comment.errors.include?(:body) %>
+  <p class="text-danger"><%= comment.errors.full_messages_for(:body).first %></p>
+<% end %>
