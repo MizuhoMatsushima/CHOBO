@@ -3,5 +3,5 @@
     <%= f.text_field :keyword, class: "form-control col-8" %>
     <%= f.submit "検索", class: "btn btn-secondary col-2 ml-3" %>
   </div>
-  <div class="text-danger"><%= flash[:notice] %></div>
+  <div class="text-danger"><%= flash.now[:keyword] %></div>
 <% end %>

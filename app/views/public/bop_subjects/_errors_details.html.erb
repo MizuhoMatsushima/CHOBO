@@ -1,0 +1,9 @@
+<% if @bop_subject.errors.include?(:"bop_details.detail_name") %>
+  <li class="text-danger"><%= @bop_subject.errors.full_messages_for(:"bop_details.detail_name").first %></li>
+<% end %>
+<% if @bop_subject.errors.include?(:"bop_details.amount") %>
+  <li class="text-danger"><%= @bop_subject.errors.full_messages_for(:"bop_details.amount").first %></li>
+<% end %>
+<% if @bop_subject.errors.include?(:"bop_details.detail_price") %>
+  <li class="text-danger"><%= @bop_subject.errors.full_messages_for(:"bop_details.detail_price").first %></li>
+<% end %>

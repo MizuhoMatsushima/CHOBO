@@ -1,2 +1,41 @@
-<h1>Public::SavingsEstinations#index</h1>
-<p>Find me in app/views/public/savings_estinations/index.html.erb</p>
+<div class="col-lg-10 col-md-12 mt-5 mx-auto">
+  <div class="card">
+    <div class="m-5">
+      <h3>貯金先登録</h3>
+      <%= form_with model: @savings_estination, url: savings_estinations_path, method: :post do |f| %>
+        <div class="row ml-1">
+          <div class="mt-2">
+            <%= f.label :savings_estination_name, "貯金先名" %>
+          </div>
+          <div class="col-8">
+            <%= f.text_field :savings_estination_name, class:"form-control" %>
+            <% if @savings_estination.errors.include?(:savings_estination_name) %>
+              <p class="text-danger"><%= @savings_estination.errors.full_messages_for(:savings_estination_name).first %>
+            <% end %>
+          </div>
+          <div class="col-2"><%= f.submit "登録", class: "btn btn-success" %></div>
+        </div>
+      <% end %>
+      </div>
+      <div class="mx-5">
+        <h5>貯金先の一覧</h5>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>貯金先名</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @savings_estinations.each do |savings_estination| %>
+              <tr>
+                <td><%= savings_estination.savings_estination_name %></td>
+                <td><%= link_to "編集", edit_savings_estination_path(savings_estination) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

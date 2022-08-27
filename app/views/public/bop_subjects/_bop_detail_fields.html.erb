@@ -6,7 +6,7 @@
     <% end %>
   </td>
   <td>
-    <%= f.text_field :amount, :value => 1, class: "form-control mr-3" %>
+    <%= f.text_field :amount, class: "form-control mr-3" %>
     <% if @bop_subject.errors.include?(:"bop_details.amount") %>
       <p class="text-danger"><%= @bop_subject.errors.full_messages_for(:"bop_details.amount").first %>
     <% end %>
@@ -18,6 +18,8 @@
     <% end %>
   </td>
   <td>
-    <%= link_to_remove_association '削除', f, class: 'bg-orange btn-type-s' %>
+    <%= link_to_remove_association f, class: 'bg-orange btn-type-s' do %>
+      <i class="fas fa-trash" style="font-size: 20px; color: black;"></i>
+    <% end %>
   </td>
 </tr>

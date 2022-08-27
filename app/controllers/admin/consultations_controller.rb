@@ -1,6 +1,6 @@
 class Admin::ConsultationsController < ApplicationController
   def index
-    @consultations = Consultation.all
+    @consultations = Consultation.all.order(created_at: "DESC")
     @tags = Tag.all
   end
 
@@ -19,7 +19,10 @@ class Admin::ConsultationsController < ApplicationController
   def search
     @consultations = Consultation.all
     @tags = Tag.all
-    if (params[:keyword])[0] == '#'
+    if params[:keyword] == ""
+      flash[:keyword] = "キーワードを入力してください"
+      redirect_to admin_consultations_path
+    elsif (params[:keyword])[0] == '#'
       @consultation = Tag.search(params[:keyword]).order('created_at DESC')
     else
       @consultation = Consultation.search(params[:keyword]).order('created_at DESC')

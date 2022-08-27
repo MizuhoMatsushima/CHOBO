@@ -6,7 +6,7 @@
       <%= form_with model: @account_book, url: account_book_path, method: :patch do |f| %>
         <div class="form-group">
           <%= f.label :source_of_income_id, "収入元" %>
-          <%= f.collection_select( :source_of_income_id, SourceOfIncome.all, :id, :source_name, {include_blank: "--選択して下さい--"}, {class: "form-control inpur-sm"}) %>
+          <%= f.collection_select( :source_of_income_id, @source_of_incomes, :id, :source_name, {include_blank: "--選択して下さい--"}, {class: "form-control inpur-sm"}) %>
           <% if @account_book.errors.include?(:source_of_income_id) %>
             <p class="text-danger"><%= @account_book.errors.full_messages_for(:source_of_income_id).first %>
           <% end %>

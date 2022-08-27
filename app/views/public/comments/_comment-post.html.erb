@@ -1,4 +1,6 @@
 <%= form_with model: [consultation, comment], local: false do |f| %>
   <%= f.text_area :body, rows: '5', placeholder: "ここにコメントを入力してください", class: "form-control" %>
+  <div style="font-size: 14px;">※400字以内でご入力ください</div>
+  <div class="comment_error"><%= render "public/comments/error", consultation: consultation, comment: comment %></div>
   <%= f.submit "送信する", class: "btn btn-secondary mt-3" %>
 <% end %>

@@ -34,6 +34,9 @@ ja:
       bop_subject: 利用科目
       bop_detail: 利用細目
       bop_details.detail_price: 税込金額
+      savings_estination: 貯金先
+      deposit_balance: 貯金登録
+      comment: コメント
 
   devise:
     confirmations:

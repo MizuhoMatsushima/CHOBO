@@ -3,32 +3,33 @@
     <div class="m-5">
       <div class="">
         <h3>相談詳細</h3>
-        <table>
-          <tr>
-            <th class="col-2">タイトル</th>
-            <td height="50"><%= @consultation.title %></td>
-          </tr>
-          <tr>
-            <th class="col-2">相談内容</th>
-            <td><%= @consultation.body %></td>
-          </tr>
-          <tr>
-            <th></th>
-          </tr>
-          <tr>
-            <th class="col-2">タグ</th>
-            <td height="50">
+        <div class="mt-4">
+          <div class="row">
+            <div class="col-lg-2 col-md-3">相談者</div>
+            <div class="col-lg-9 col-md-9"><%= @consultation.full_name %></div>
+          </div>
+          <div class="row mt-4">
+            <div class="col-lg-2 col-md-3">タイトル</div>
+            <div class="col-lg-9 col-md-9"><%= @consultation.title %></div>
+          </div>
+          <div class="row mt-4">
+            <div class="col-lg-2 col-md-3 align-top">相談内容</div>
+            <div class="col-lg-9 col-md-9"><%= @consultation.body %></div>
+          </div>
+          <div class="row mt-4">
+            <div class="col-lg-2 col-md-3">タグ</div>
+            <div class="col-lg-9 col-md-9">
               <% @consultation_tags.each do |consultation_tag| %>
                 <%= consultation_tag.name %>
               <% end %>
-            </td>
-          </tr>
-        </table>
-        <!--<div class="favorite-btn">-->
-        <!--  <%#= render 'public/favorites/favorite-btn', consultation: @consultation %>-->
-        <!--</div>-->
-        <div class="comment-count">
-          <p>コメント数：<%= @consultation.comments.count %></p>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-lg-2 col-md-3">♥<%= @consultation.favorites.count %> いいね</div>
+          <div class="comment-count col-lg-2 col-md-3">
+            <p>コメント数：<%= @consultation.comments.count %></p>
+          </div>
         </div>
       </div>
       <div class="comment-index">

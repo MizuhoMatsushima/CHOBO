@@ -1,0 +1,81 @@
+<div class="col-lg-10 col-md-12 mt-5 mx-auto">
+  <div class="card">
+    <div class="m-5">
+      <% if params[:bop] == "0" %>
+        <h3 style="display:inline-flex;">割当予算の一覧</h3>
+        <% if @bop_month.count == 0 %>
+          <h4 class="text-center">データがありません。</h4>
+        <% else %>
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="text-center">日付</th>
+                <th class="text-center">割当科目名</th>
+                <th class="text-center">金額</th>
+                <th class="text-center">メモ</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @bop_month.each do |bop_subject| %>
+                <tr>
+                  <td><%= bop_subject.date.strftime('%Y年%m月%d日') %></td>
+                  <td><%= bop_subject.subject_name %></td>
+                  <td>
+                    <%= link_to bop_subject_path(bop_subject) do %>
+                      <%= bop_subject.total_price.to_s(:delimited) %>円</td>
+                    <% end %>
+                  <td><%= bop_subject.memo.truncate(15) %></td>
+                  <td><%= link_to "編集", edit_bop_subject_path(bop_subject) %></td>
+                  <td><%= link_to "削除", bop_subject_path(bop_subject), method: :delete, data: { confirm: '削除しますか？' } %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% end %>
+        <%= render "public/shared/subject_index_links", dt: @dt, current_time: @current_time, bop: 0 %>
+      <% else%>
+        <h3 style="display:inline-flex;">利用科目の一覧</h3>
+        <% if @bop_day.count == 0 %>
+          <h4 class="text-center">データがありません。</h4>
+        <% else %>
+          <% @bop_day.each do |date| %>
+            <div class="my-4">
+              <h4 class="fw-bold"><%= date.strftime('%Y年%m月%d日') %></h4>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th class="text-center">科目名</th>
+                    <th class="text-center">支払金額</th>
+                    <th class="text-center">メモ</th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @bop_month.where(date: date).each do |day_index| %>
+                    <tr>
+                      <td><%= day_index.subject_name %></td>
+                      <td>
+                        <%= link_to bop_subject_path(day_index) do %>
+                          <%= day_index.total_price.to_s(:delimited) %>円</td>
+                        <% end %>
+                      <td><%= day_index.memo.truncate(15) %></td>
+                      <td><%= link_to "編集", edit_bop_subject_path(day_index) %></td>
+                      <td><%= link_to "削除", bop_subject_path(day_index), method: :delete, data: { confirm: '削除しますか？' } %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          <% end %>
+        <% end %>
+        <%= render "public/shared/subject_index_links", dt: @dt, current_time: @current_time, bop: 1 %>
+      <% end %>
+      <div class="mt-4 text-center col-12">
+        <%= link_to "TOPへ戻る", end_users_path, class: "text-center btn btn-secondary" %>
+      </div>
+    </div>
+  </div>
+</div>

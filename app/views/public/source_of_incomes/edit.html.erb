@@ -1,2 +1,19 @@
-<h1>Public::SourceOfIncomes#edit</h1>
-<p>Find me in app/views/public/source_of_incomes/edit.html.erb</p>
+<div class="col-lg-10 col-md-12 mt-5 mx-auto">
+  <div class="card">
+    <div class="m-5">
+      <h3>収入元の編集</h3>
+      <div>
+        <%= form_with model: @source_of_income, url: source_of_income_path, method: :patch do |f| %>
+          <div class="form-group">
+            <%= f.label :source_name, "収入元の名前" %>
+            <%= f.text_field :source_name, class:"form-control" %>
+            <% if @source_of_income.errors.include?(:source_name) %>
+              <p class="text-danger"><%= @source_of_income.errors.full_messages_for(:source_name).first %>
+            <% end %>
+          </div>
+          <%= f.submit "変更", class: "btn btn-success" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

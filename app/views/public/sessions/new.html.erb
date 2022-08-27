@@ -4,7 +4,9 @@
       <div class="mb-5">
         <h2 class="mx-auto">ログイン</h2>
         <% flash.each do |key, value| %>
-          <%= content_tag :div, value, class: key, class: "text-danger" %>
+          <% unless value == "ログアウトしました。" %>
+            <%= content_tag :div, value, class: key, class: "text-danger" %>
+          <% end %>
         <% end %>
       </div>
       <div class="mx-auto">

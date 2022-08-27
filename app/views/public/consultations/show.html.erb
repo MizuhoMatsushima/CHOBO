@@ -1,6 +1,7 @@
 <div class="col-lg-10 col-md-12 mt-5 mx-auto">
   <div class="card">
     <div class="m-5">
+      <%= render "public/shared/error_messages", resource: @comment %>
       <h3>相談詳細</h3>
       <table>
         <tr>
@@ -23,7 +24,7 @@
           </td>
         </tr>
       </table>
-      <div class="favorite-btn" id="favorite-btn">
+      <div class="favorite-btn_<%= @consultation.id %>" id="favorite-btn">
         <%= render 'public/favorites/favorite-btn', consultation: @consultation %>
       </div>
       <div class="comment-count">

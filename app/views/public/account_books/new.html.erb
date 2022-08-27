@@ -1,13 +1,12 @@
-<%#= javascript_pack_tag "validation" %>
 <div class="col-lg-10 col-md-12 mt-5 mx-auto">
   <div class="card">
     <div class="m-5">
       <%= render "layouts/error_count", resource: @account_book %>
       <h3 class="mt-4">収入登録</h3>
-      <%= form_with model: @account_book, url: account_books_path, method: :post, class: "needs-validation" do |f| %>
+      <%= form_with model: @account_book, url: account_books_path, method: :post do |f| %>
         <div class="form-group">
           <%= f.label :source_of_income_id, "収入元" %>
-          <%= f.collection_select( :source_of_income_id, SourceOfIncome.all, :id, :source_name, {include_blank: "--選択して下さい--"}, {class: "form-control inpur-sm"}) %>
+          <%= f.collection_select( :source_of_income, @source_of_incomes, :id, :source_name, {include_blank: "--選択して下さい--"}, {class: "form-control"}) %>
           <% if @account_book.errors.include?(:source_of_income_id) %>
             <p class="text-danger"><%= @account_book.errors.full_messages_for(:source_of_income_id).first %>
           <% end %>
@@ -26,8 +25,9 @@
             <p class="text-danger"><%= @account_book.errors.full_messages_for(:pay_day).first %>
           <% end %>
         </div>
-        <%= f.submit "登録", class: "btn btn-success" %>
+        <%= f.submit "登録", class: "btn btn-success col-12 mt-4" %>
       <% end %>
     </div>
+    <%= link_to "収入一覧をみる", account_books_path, class: "col-12 mb-5 text-center" %>
   </div>
 </div>

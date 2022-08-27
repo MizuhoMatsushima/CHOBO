@@ -1,0 +1,16 @@
+<div class="col-12 d-flex justify-content-between">
+  <% if params[:date].nil? or params[:date] == "#{current_time.strftime("%Y-%m")}" %>
+    <%= link_to "<先月", bop_subjects_path({date: dt.prev_month.strftime("%Y-%m"), bop: bop})%>
+    <%= link_to "翌月>", bop_subjects_path({date: dt.next_month.strftime("%Y-%m"), bop: bop}) %>
+  <% elsif params[:date] == current_time.prev_month.strftime("%Y-%m") %>
+    <%= link_to "<#{dt.prev_month.strftime("%Y年%-m月")}", bop_subjects_path({date: dt.prev_month.strftime("%Y-%m"), bop: bop}) %>
+    <%= link_to "今月>", bop_subjects_path({date: current_time.strftime("%Y-%m"), bop: bop}), class: "ml-auto" %>
+  <% elsif params[:date] == current_time.next_month.strftime("%Y-%m") %>
+    <%= link_to "<今月", bop_subjects_path({date: current_time.strftime("%Y-%m"), bop: bop}) %>
+    <%= link_to "#{dt.next_month.strftime("%Y年%-m月")}>", bop_subjects_path({date: dt.next_month.strftime("%Y-%m"), bop: bop}) %>
+  <% else %>
+    <%= link_to "<#{dt.prev_month.strftime("%Y年%-m月")}", bop_subjects_path({date: dt.prev_month.strftime("%Y-%m"), bop: bop}) %>
+    <%= link_to "今月", bop_subjects_path({date: current_time.strftime("%Y-%m"), bop: bop}) %>
+    <%= link_to "#{dt.next_month.strftime("%Y年%-m月")}>", bop_subjects_path({date: dt.next_month.strftime("%Y-%m"), bop: bop}) %>
+  <% end %>
+</div>

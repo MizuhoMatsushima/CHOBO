@@ -13,3 +13,14 @@
     </ul>
   </div>
 <% end %>
+<% if alert.present? %>
+  <div class="alert alert-danger" role="alert" style="width:26%; margin: 15px 400px;">
+    <div id="error_explanation">
+      <%= alert %>
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+  </div>
+<% end %>
+<% if flash.now[:notice].present? %>
+  <%= flash[:notice] %>
+<% end %>

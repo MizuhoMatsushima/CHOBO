@@ -2,14 +2,21 @@
   <div class="bop_form" id="balance_form">
     <h3 class="text-center">収入登録の編集</h3>
     <div class="form-group">
-        <%= f.label :date, "収入日" %>
+        <%= f.label :date, "日付" %>
         <%= f.date_field :date, class: "form-control" %>
         <% if @bop_subject.errors.include?(:date) %>
           <p class="text-danger"><%= @bop_subject.errors.full_messages_for(:date).first %>
         <% end %>
     </div>
     <div class="form-group">
-      <%= f.label :total_price, "収入金額" %>
+        <%= f.label :subject_name, "割当科目名" %>
+        <%= f.text_field :subject_name, class: "form-control" %>
+        <% if @bop_subject.errors.include?(:subject_name) %>
+          <p class="text-danger"><%= @bop_subject.errors.full_messages_for(:subject_name).first %>
+        <% end %>
+    </div>
+    <div class="form-group">
+      <%= f.label :total_price, "金額" %>
       <%= f.text_field :total_price, class: "total_price form-control" %>
       <% if @bop_subject.errors.include?(:total_price) %>
         <p class="text-danger"><%= @bop_subject.errors.full_messages_for(:total_price).first %>
@@ -20,6 +27,6 @@
       <%= f.text_field :memo, class: "form-control" %>
     </div>
     <%= f.hidden_field :bop, value: "balance" %>
-    <%= f.submit "登録", class: "btn btn-success col-12" %>
+    <%= f.submit "変更", class: "btn btn-success col-12" %>
   </div>
 <% end %>

@@ -10,63 +10,98 @@ ja:
         end_user:
           attributes:
             last_name:
-              blank: を入力してください。
+              blank: を入力してください
+              too_short: を入力してください
             first_name:
-              blank: を入力してください。
+              blank: を入力してください
+              too_short: を入力してください
             last_name_kana:
-              blank: （全角カタカナ）を入力してください。
-              invalid: は全角カタカナで入力してください。
+              blank: （全角カタカナ）を入力してください
+              invalid: （全角カタカナ）を入力してください
+              too_short: （全角カタカナ）を入力してください
             first_name_kana:
-              blank: （全角カタカナ）を入力してください。
-              invalid: は全角カタカナで入力してください。
+              blank: （全角カタカナ）を入力してください
+              invalid: （全角カタカナ）を入力してください
+              too_short: （全角カタカナ）を入力してください
             phone_number:
-              blank: を入力してください。
-              invalid: を10～11桁（ハイフン無し）で入力してください。
+              blank: を10～11桁（ハイフン無し）で入力してください
+              invalid: を10～11桁（ハイフン無し）で入力してください
             email:
-              blank: を入力してください。
+              blank: を入力してください
+              taken: を入力してください
             password:
-              blank: を入力してください。
+              blank: を入力してください
             password_confirmation:
-              blank: を入力してください。
+              blank: を入力してください
+              confirmation: を入力してください
             title:
         account_book:
           attributes:
             source_of_income:
-              required: は必要です。
+              required: は必要です
             source_of_income_id:
-              blank: を入力してください。
+              blank: を入力してください
             pay_day:
-              blank: を入力してください。
+              blank: を入力してください
             income:
-              blank: （1以上の半角数字）を入力してください。
-              greater_than_or_equal_to: （1以上の半角数字）を入力してください。
-              not_a_number: （1以上の半角数字）みで入力してください。
+              blank: （1以上の半角数字）を入力してください
+              greater_than_or_equal_to: （1以上の半角数字）を入力してください
+              not_a_number: （1以上の半角数字）みで入力してください
         bop_subject:
           attributes:
             date:
-              blank: を入力してください。
+              blank: を入力してください
             subject_name:
-              blank: を入力してください。
+              blank: を入力してください
             point:
-              greater_than_or_equal_to: （1以上の半角数字）を入力してください。
+              greater_than_or_equal_to: （1以上の半角数字）を入力してください
             total_price:
-              greater_than_or_equal_to: （1以上の半角数字）を入力してください。
-              not_a_number: （1以上の半角数字）を入力してください。
-              blank: （1以上の半角数字）を入力してください。
+              greater_than_or_equal_to: （1以上の半角数字）を入力してください
+              not_a_number: （1以上の半角数字）を入力してください
+              blank: （1以上の半角数字）を入力してください
             store:
-              blank: を入力してください。
+              blank: を入力してください
         bop_detail:
           attributes:
             detail_price:
-              blank: （1以上の半角数字）を全て入力してください。
-              not_a_number: （1以上の半角数字）を全て入力してください。
+              blank: （1以上の半角数字）を全て入力してください
+              not_a_number: （1以上の半角数字）を全て入力してください
               invalid: 無効な値
             detail_name:
-              blank: を全て入力してください。
+              blank: を全て入力してください
             amount:
-              blank: （1以上の半角数字）を全て入力してください。
-              not_a_number: （1以上の半角数字）を全て入力してください。
+              blank: （1以上の半角数字）を全て入力してください
+              not_a_number: （1以上の半角数字）を全て入力してください
               invalid: 無効な値
+        source_of_income:
+          attributes:
+            source_name:
+              blank: を入力してください
+        savings_estination:
+          attributes:
+            savings_estination_name:
+              blank: を入力してください
+        deposit_balance:
+          attributes:
+            savings_estination_id:
+              blank: を入力してください
+            savings_estination:
+              required: を入力してください
+            savings_amount:
+              greater_than_or_equal_to: （1以上の半角数字）を入力してください
+              blank: （1以上の半角数字）を入力してください
+            deposit_date:
+              blank: を入力してください
+        consultation:
+          attributes:
+            title:
+              blank: を入力してください
+            body:
+              blank: を入力してください
+        comment:
+          attributes:
+            body:
+              blank: を400文字以内で入力してください
     attributes:
       end_user:
         last_name: 姓
@@ -85,16 +120,31 @@ ja:
         income: 収入
       bop_subject:
         date: 日付
-        subject_name: 利用科目
+        subject_name: 科目名
         total_price: 金額
         store: 利用店
       bop_subject/bop_details:
-        detail_name: 利用細目
+        detail_name: 細目名
         amount: 数量
         detail_price: 税込金額
       bop_detail:
-        detail_name: 利用細目
+        detail_name: 細目名
         detail_price: 税込金額
+      source_of_income:
+        source_name: 収入元
+      savings_estination:
+        savings_estination_name: 貯金先名
+      deposit_balance:
+        savings_estination_id: 貯金先
+        savings_estination: 貯金先
+        savings_amount: 貯金額
+        deposit_date: 貯金月
+      consultation:
+        title: タイトル
+        body: 本文
+        name: タグ
+      comment:
+        body: コメント
 
 
 

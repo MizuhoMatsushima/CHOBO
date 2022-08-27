@@ -24,6 +24,14 @@
   margin: auto;
 }
 
+.index_more {
+  text-align: center;
+}
+
+.index_more_text {
+  writing-mode: vertical-lr;
+}
+
 .btn-center .btn {
   display: block;
   margin: auto;
@@ -110,4 +118,12 @@
 
 .bop_group .bop_form.active {
     display:block;
+}
+
+
+@media screen and (max-width:768px) {
+  .top-3btn {
+    justify-content: center;
+  }
+
 }

@@ -8,9 +8,9 @@ class BopSubject < ApplicationRecord
   NUMBERS_REGEX = /\A[0-9]+\z/
   validates :total_price, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 1, allow_blank: true}, format: { with: NUMBERS_REGEX, allow_blank: true }
   validates :date, presence: true
+  validates :subject_name, presence: true
 
   with_options if: :bop_payments? do
-    validates :subject_name, presence: true
     validates :store, presence: true
   end
 
@@ -26,5 +26,4 @@ class BopSubject < ApplicationRecord
   def pay_day_select
     self.pay_day.strftime('%Y年%m月%d日') + "の収入"
   end
-
 end

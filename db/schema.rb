@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_18_050300) do
+ActiveRecord::Schema.define(version: 2022_08_27_003331) do
 
   create_table "account_books", force: :cascade do |t|
     t.integer "end_user_id"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2022_08_18_050300) do
     t.datetime "pay_day", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "book_date"
     t.index ["end_user_id"], name: "index_account_books_on_end_user_id"
     t.index ["source_of_income_id"], name: "index_account_books_on_source_of_income_id"
   end
@@ -85,12 +86,11 @@ ActiveRecord::Schema.define(version: 2022_08_18_050300) do
 
   create_table "deposit_balances", force: :cascade do |t|
     t.integer "end_user_id"
-    t.integer "account_book_id"
     t.integer "savings_estination_id"
     t.integer "savings_amount", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["account_book_id"], name: "index_deposit_balances_on_account_book_id"
+    t.datetime "deposit_date"
     t.index ["end_user_id"], name: "index_deposit_balances_on_end_user_id"
     t.index ["savings_estination_id"], name: "index_deposit_balances_on_savings_estination_id"
   end
@@ -176,7 +176,6 @@ ActiveRecord::Schema.define(version: 2022_08_18_050300) do
   add_foreign_key "comments", "consultations"
   add_foreign_key "comments", "end_users"
   add_foreign_key "consultations", "end_users"
-  add_foreign_key "deposit_balances", "account_books"
   add_foreign_key "deposit_balances", "end_users"
   add_foreign_key "deposit_balances", "savings_estinations"
   add_foreign_key "details", "subjects"

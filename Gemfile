@@ -70,3 +70,6 @@ gem "net-imap"
 
 #支出円グラフ
 gem 'chartkick'
+
+#ページネーション
+gem 'kaminari','~> 1.2.1'
