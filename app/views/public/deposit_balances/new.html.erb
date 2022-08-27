@@ -1,30 +1,33 @@
 <div class="col-lg-10 col-md-12 mt-5 mx-auto">
   <div class="card">
     <div class="m-5">
-      <h3>貯金登録変更</h3>
-      <%= form_with model: @deposit_balance, url: deposit_balance_path, method: :patch do |f| %>
-        <div class="row ml-1">
-          <div class="mt-2">
-            <%= f.label :savings_estination_id, "貯金先" %>
+      <h3>貯金登録</h3>
+      <%= form_with model: @deposit_balance, url: deposit_balances_path, method: :post do |f| %>
+        <div class="my-4">
+          <div class="form-group">
+            <%= f.label :deposit_date, "貯金月", class: "" %>
+            <%= f.month_field :deposit_date, class: "form-control" %>
+            <% if @deposit_balance.errors.include?(:deposit_date) %>
+              <p class="text-danger"><%= @deposit_balance.errors.full_messages_for(:deposit_date).first %>
+            <% end %>
           </div>
-          <div class="col-4">
+          <div class="form-group">
+            <%= f.label :savings_estination_id, "貯金先" %>
             <%= f.collection_select( :savings_estination_id, @savings_estinations, :id, :savings_estination_name, {include_blank: "--選択して下さい--"}, {class: "form-control"}) %>
             <% if @deposit_balance.errors.include?(:savings_estination_id) %>
               <p class="text-danger"><%= @deposit_balance.errors.full_messages_for(:savings_estination_id).first %>
             <% end %>
           </div>
-          <div class="mt-2">
+          <div class="form-group">
             <%= f.label :savings_amount, "貯金額" %>
-          </div>
-          <div class="col-4">
             <%= f.text_field :savings_amount, class:"form-control" %>
             <% if @deposit_balance.errors.include?(:savings_amount) %>
               <p class="text-danger"><%= @deposit_balance.errors.full_messages_for(:savings_amount).first %>
             <% end %>
           </div>
-          <div class="col-2"><%= f.submit "変更", class: "btn btn-success" %></div>
+          <div><%= f.submit "登録", class: "btn btn-success col-12 mt-4" %></div>
         </div>
       <% end %>
+      </div>
     </div>
   </div>
-</div>

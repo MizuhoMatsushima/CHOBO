@@ -1,11 +1,11 @@
   <div class="card col-11 mx-auto my-4">
     <div class="column flex-direction:row">
       <div class="row">
-        <div style="width: 55%;">
+        <div class="col-md-6 col-sm-12">
           <div class="my-4">
             <h3 class="text-center"><%= @dt.strftime("%Y年%-m月") %>の支出</h3>
             <div style="display:inline-flex; width: 100%;">
-              <table class="mx-auto" style="">
+              <table class="mx-auto my-2" style="">
                 <thead class="text-center">
                   <tr>
                     <td style="border: none;">収入</td>
@@ -23,61 +23,72 @@
                       <% end %>
                     </td>
                     <td>－</td>
-                    <td>
-                      ￥<%= @end_user.bop_subject_total(@dt).to_s(:delimited) %>
-                    </td>
-                    <td>＝</td>
-                    <td>￥<%= @end_user.bop(@dt).to_s(:delimited) %></td>
+                    <% if @end_user_balance.count > 0 %>
+                      <td>
+                        ￥<%= @end_user.balance(@dt).to_s(:delimited) %></td>
+                      <td>＝</td>
+                      <% if @end_user.balance_bop(@dt) < 0 %>
+                        <td class="text-danger">￥<%= @end_user.balance_bop(@dt).to_s(:delimited) %></td>
+                      <% else %>
+                          <td>￥<%= @end_user.balance_bop(@dt).to_s(:delimited) %></td>
+                      <% end %>
+                    <% else %>
+                      <td>￥<%= @end_user.payments(@dt).to_s(:delimited) %></td>
+                      <td>＝</td>
+                      <td>￥<%= @end_user.payments_bop(@dt).to_s(:delimited) %></td>
+                    <% end %>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <div>
-              <%= pie_chart @bop_subject_graph,colors: ["#82cddd","#f0908d","#339966","333"] %>
+            <div class="my-4">
+              <%= pie_chart @bop_subject_graph,colors: ["#f0908d","#a0d8ef","#de82a7","#f0e68c","#ff9966","#f5f5f5","#efe0ff","#c7dc68","#ffae8a","#f6bfbc","#82cddd","#ff9966","#ffe4b5","#fff8dc","#e6e6e6","#e2c6ff","#98d98e","#ff9966","#fa8072","#c1e4e9","#ffc0cb","#fbd26b","#caac71","#d3d3d3","#dbd0e6","#ccffcc","#ffdab9","#eebbcb","#ccffff","#ffefef","#ffff9e","#caac71","#c0a2c7","#ffaf60"] %>
             </div>
-            <div class="col-12">
-              <% if params[:date].nil? or params[:date] == "#{@current_time.strftime("%Y-%m")}" %>
-                <%= link_to "<先月", end_users_path({date: @dt.prev_month.strftime("%Y-%m")}) %>
-                <%= link_to "翌月>", end_users_path({date: @dt.next_month.strftime("%Y-%m")}) %>
-              <% elsif params[:date] == @current_time.prev_month.strftime("%Y-%m") %>
-                <%= link_to "<#{@dt.prev_month.strftime("%Y年%-m月")}", end_users_path({date: @dt.prev_month.strftime("%Y-%m")}) %>
-                <%= link_to "今月>", end_users_path, class: "ml-auto" %>
-              <% elsif params[:date] == @current_time.next_month.strftime("%Y-%m") %>
-                <%= link_to "<今月", end_users_path %>
-                <%= link_to "#{@dt.next_month.strftime("%Y年%-m月")}>", end_users_path({date: @dt.next_month.strftime("%Y-%m")}) %>
-              <% else %>
-                <%= link_to "<#{@dt.prev_month.strftime("%Y年%-m月")}", end_users_path({date: @dt.prev_month.strftime("%Y-%m")}) %>
-                <%= link_to "今月", end_users_path %>
-                <%= link_to "#{@dt.next_month.strftime("%Y年%-m月")}>", end_users_path({date: @dt.next_month.strftime("%Y-%m")}) %>
+            <%= render "public/shared/top_links", dt: @dt, current_time: @current_time %>
+          </div>
+        </div>
+        <div class="my-4 col-md-6 col-sm-12">
+          <div class="row top-3btn">
+            <div class="ml-3 mt-4">
+              <%= link_to  new_bop_subject_path, class: "btn btn-outline-secondary" do %>
+                <i class="fas fa-book-open mx-1"></i>利用科目登録
+              <% end %>
+            </div>
+            <div class=" ml-3 mt-4">
+              <%= link_to new_account_book_path, method: :get, class: "btn btn-outline-secondary" do %>
+                <i class="fas fa-money-bill mx-1"></i>収入登録
+              <% end %>
+            </div>
+            <div class="ml-3 mt-4">
+              <%= link_to deposit_balances_path, class: "btn btn-outline-secondary" do %>
+                <i class="fas fa-piggy-bank mx-1"></i>貯金
               <% end %>
             </div>
           </div>
-        </div>
-        <div class="my-4" style="width: 40%;">
-          <div>
-            <%= link_to new_account_book_path, method: :get do %>
-              <i class="fas fa-plus-circle"></i>収入登録
-            <% end %>
-          </div>
-          <div>
-            <%= link_to  new_bop_subject_path do %>
-              <i class="fas fa-plus-circle"></i>利用科目
-            <% end %>
-          </div>
           <% @bop_subject_name.each do |bop_subject| %>
-            <table class="table table-sm my-4">
+            <table class="table table-sm my-4 col-sm-11 mx-auto">
               <thead>
                 <tr>
-                  <th style="border-top: none; border-bottom: none; display:inline-flex;">
-                    <div><%= bop_subject %></div>
-                    <div>￥<%= @end_user.bop_subject(bop_subject, @dt).to_s(:delimited) %></div>
+                  <th colspan="7" style="border-top: none;">
+                    <%= bop_subject %>
+                    <% if @end_user_balance.where(subject_name: bop_subject).count > 0 %>
+                      <%= link_to bop_subjects_path({date: @dt,bop: 0}) do %>
+                        ￥<%= @end_user.subject_balance(bop_subject, @dt).to_s(:delimited) %>
+                      <% end %>
+                      －
+                      ￥<%= @end_user.subject_payments(bop_subject, @dt).to_s(:delimited) %>
+                      ＝
+                      ￥<%= @end_user.subject_bop(bop_subject, @dt).to_s(:delimited) %>
+                    <% else %>
+                      ￥<%= @end_user.subject_payments(bop_subject, @dt).to_s(:delimited) %>
+                    <% end %>
                   </th>
                 </tr>
               </thead>
               <tbody>
-                <% @end_user_bop.where(subject_name: bop_subject).each do |bop_subject_index| %>
+                <% @end_user_pay.where(subject_name: bop_subject).first(5).each do |bop_subject_index| %>
                   <tr>
-                    <td>
+                    <td colspan="5">
                       <%= link_to bop_subject_path(bop_subject_index) do %>
                         <%= bop_subject_index.date.strftime('%Y年%m月%d日') %>
                         ￥<%= bop_subject_index.total_price.to_s(:delimited) %>
@@ -88,6 +99,13 @@
                     </td>
                     <td>
                       <%= link_to "削除", bop_subject_path(bop_subject_index), method: :delete, data: { confirm: '削除しますか？' } %>
+                    </td>
+                  </tr>
+                <% end %>
+                <% if @end_user_pay.where(subject_name: bop_subject).count > 5 %>
+                  <tr>
+                    <td colspan="7" class="index_more">
+                      <%= link_to "･･･", bop_subjects_path({date: @dt, bop: 1}), class:"index_more_text" %>
                     </td>
                   </tr>
                 <% end %>

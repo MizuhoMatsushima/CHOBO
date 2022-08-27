@@ -1,2 +1,31 @@
-<h1>Public::DepositBalances#index</h1>
-<p>Find me in app/views/public/deposit_balances/index.html.erb</p>
+<div class="col-lg-10 col-md-12 mt-5 mx-auto">
+  <div class="card">
+    <div class="m-5"><%= line_chart @deposit_balance %></div>
+    <div class="mx-5">
+      <div class="d-flex justify-content-between mb-1">
+        <h5 class="my-auto">貯金履歴一覧</h5>
+        <div><%= link_to "貯金登録", new_deposit_balance_path, class: "btn btn-outline-secondary" %></div>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>貯金先名</th>
+            <th>貯金額</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @deposit_balances.each do |deposit_balance| %>
+            <tr>
+              <td><%= deposit_balance.savings_estination.savings_estination_name %></td>
+              <td>￥<%= deposit_balance.savings_amount.to_s(:delimited) %></td>
+              <td><%= link_to "編集", edit_deposit_balance_path(deposit_balance) %></td>
+              <td><%= link_to "削除", deposit_balance_path(deposit_balance), method: :delete %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

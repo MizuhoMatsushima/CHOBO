@@ -8,6 +8,7 @@ class AccountBook < ApplicationRecord
   INCOME_REGEX = /\A[0-9]+\z/
   validates :income, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 1}, format: { with: INCOME_REGEX }
   validates :pay_day, presence: true
+  validates :book_date, presence: true
 
   def income_total
     array = [] #空の配列を用意し、

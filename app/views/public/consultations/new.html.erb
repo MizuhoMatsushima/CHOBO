@@ -1,18 +1,32 @@
-<div class="col-7 mx-auto mt-5">
+<div class="col-md-8 sm-10 mx-auto mt-5">
   <div class="card">
     <div class="m-5">
       <h3>相談入力画面</h3>
       <%= form_with model: @consultation, url: consultations_path, method: :post, local: true do |f| %>
-        <%= f.label :title, "タイトル" %>
-        <%= f.text_field :title, class: "form-control" %>
-        <%= f.label :body, "本文" %>
-        <%= f.text_area :body, class: "form-control" %>
-        <p>タグ</p>
+        <%= f.label :title, "タイトル", class: "mt-4" %>
+        <%= f.text_field :title, class: "form-control " %>
+        <% if @consultation.errors.include?(:title) %>
+          <p class="text-danger"><%= @consultation.errors.full_messages_for(:title).first %></p>
+        <% end %>
+        <%= f.label :body, "本文", class: "mt-4" %>
+        <%= f.text_area :body, class: "form-control", rows:"7" %>
+        <% if @consultation.errors.include?(:body) %>
+          <p class="text-danger"><%= @consultation.errors.full_messages_for(:body).first %></p>
+        <% end %>
+        <%= f.label :name, "タグ", class: "mt-4" %>
         <%= f.text_field :name, class: "form-control" %>
+        <div style="font-size: 8px;">※タグは、先頭に#（半角)を付けてください</div>
+        <div style="font-size: 8px;">※複数のタグを設定する場合は、","（半角カンマ）で区切って入力してください</div>
+        <% if @consultation.errors.include?(:name) %>
+          <p class="text-danger"><%= @consultation.errors.full_messages_for(:name).first %></p>
+        <% end %>
         <div class="mx-auto">
           <%= f.submit "相談する", class:"col-12 btn btn-secondary mt-5" %>
         </div>
       <% end %>
+      <div class="col-12 text-center my-4">
+        <%= link_to "相談広場へ戻る", consultations_path %>
+      </div>
     </div>
   </div>
 </div>

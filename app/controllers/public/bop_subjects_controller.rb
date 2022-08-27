@@ -8,10 +8,8 @@ class Public::BopSubjectsController < ApplicationController
     @bop_subject = BopSubject.new(bop_subject_params)
     @bop_subject.end_user_id = current_end_user.id
     if @bop_subject.save
-      #binding.pry
       redirect_to bop_subject_path(@bop_subject)
     else
-      #pp @bop_subject.errors.attribute_names
       render :new
     end
   end
@@ -20,6 +18,17 @@ class Public::BopSubjectsController < ApplicationController
     @bop_subject = BopSubject.find(params[:id])
     @bop_details = @bop_subject.bop_details
     @bop_details_total = @bop_details.sum(:detail_price)
+  end
+
+  def index
+    @current_time = DateTime.current
+    bop = params[:bop]
+    @dt = params[:date].nil? ? DateTime.current : DateTime.parse("#{params[:date]}-01").in_time_zone('Asia/Tokyo')
+    beginning_of_month = @dt.beginning_of_month # 月初
+    end_of_month = @dt.end_of_month # 月末
+    @end_user = current_end_user
+    @bop_month = @end_user.bop_subjects.where(date: beginning_of_month...end_of_month, bop: bop)
+    @bop_day = @bop_month.order(date: "DESC").pluck(:date).uniq
   end
 
   def destroy

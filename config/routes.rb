@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     end
 
     resources :account_books, only: [:new, :index, :edit, :create, :update, :destroy]
-    resources :deposit_balances, only: [:index, :edit, :create, :update]
+    resources :deposit_balances, only: [:new, :index, :edit, :create, :update, :destroy]
     resources :source_of_incomes, only: [:index, :edit, :create, :update]
     resources :savings_estinations, only: [:index, :edit, :create, :update]
     resources :subjects, only: [:new, :index, :edit, :create, :update, :destroy]
