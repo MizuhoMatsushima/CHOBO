@@ -30,7 +30,8 @@ ja:
               blank: を入力してください
               taken: を入力してください
             password:
-              blank: を入力してください
+              blank: を英数字6文字以上で入力してください
+              too_short: を英数字6文字以上で入力してください
             password_confirmation:
               blank: を入力してください
               confirmation: を入力してください
@@ -102,6 +103,7 @@ ja:
           attributes:
             body:
               blank: を400文字以内で入力してください
+
     attributes:
       end_user:
         last_name: 姓
