@@ -1,7 +1,6 @@
 class AccountBook < ApplicationRecord
 
   belongs_to :end_user
-  has_many :deposit_balances, dependent: :destroy
   belongs_to :source_of_income
 
   validates :source_of_income_id, presence: true

@@ -1,19 +1,24 @@
 <div class="col-lg-10 col-md-12 mt-5 mx-auto">
   <div class="card">
     <div class="m-5">
-      <h3>収入元の追加</h3>
+      <h3>収入元の登録・一覧</h3>
+      <div class="mt-5">
+        <h5>収入元の登録</h5>
         <%= form_with model: @source_of_income, url: source_of_incomes_path, method: :post do |f| %>
-          <div class="form-inline">
-            <div class="form-group">
-              <%= f.label :source_name, "収入元の名前" %>
-              <%= f.text_field :source_name, class:"form-control col-9" %>
-              <% if @source_of_income.errors.include?(:source_name) %>
-                <p class="text-danger"><%= @source_of_income.errors.full_messages_for(:source_name).first %>
-              <% end %>
+          <div class="form-group" style="display:inline-flex">
+            <div style="display:inline-flex">
+              <%= f.label :source_name, "収入元の名前", class:"d-flex align-items-center", style:"width: 130px;" %>
             </div>
-            <%= f.submit "登録", class: "btn btn-success mt-auto" %>
+            <div>
+                <%= f.text_field :source_name, class:"form-control my-auto" %>
+                <% if @source_of_income.errors.include?(:source_name) %>
+                  <p class="text-danger"><%= @source_of_income.errors.full_messages_for(:source_name).first %>
+                <% end %>
+            </div>
           </div>
+          <%= f.submit "登録", class: "btn btn-success mt-2", style:"display:inline-flex" %>
         <% end %>
+      </div>
       <div class="mt-5">
         <h5>収入元の一覧</h5>
         <table class="table">
@@ -32,6 +37,9 @@
             <% end %>
           </tbody>
         </table>
+      </div>
+      <div class="text-center mt-4">
+        <%= link_to "収入一覧", account_books_path %>
       </div>
     </div>
   </div>
