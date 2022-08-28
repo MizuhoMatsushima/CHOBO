@@ -15,6 +15,7 @@
         <thead>
           <tr>
             <th>収入日</th>
+            <th>利用年月</th>
             <th>金額</th>
             <th>収入元</th>
             <th></th>
@@ -25,6 +26,7 @@
           <% @account_books.each do |account_book| %>
             <tr>
               <td><%= account_book.pay_day.strftime('%Y年%m月%d日') %></td>
+              <td><%= account_book.book_date.strftime('%Y年%m月') %></td>
               <td><%= account_book.income.to_s(:delimited) %>円</td>
               <td><%= account_book.source_of_income.source_name %></td>
               <td><%= link_to "編集", edit_account_book_path(account_book) %></td>
@@ -35,7 +37,7 @@
       </table>
       <div class="mt-4 d-flex justify-content-center"><%= paginate @account_books %></div>
       <div class="mt-4 text-center col-12">
-        <%= link_to "今月の収支一覧", end_users_path, class: "text-center btn btn-secondary" %>
+        <%= link_to "今月の収支一覧", end_users_path %>
       </div>
     </div>
   </div>

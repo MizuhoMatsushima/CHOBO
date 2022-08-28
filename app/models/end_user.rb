@@ -51,7 +51,7 @@ class EndUser < ApplicationRecord
     #   #テーブルのレコードを１件ずつ取り出し、incomeカラムのデータを配列に入れる
     # end
     # array.sum
-    self.account_books.where(pay_day: dt.beginning_of_month...dt.end_of_month).map{|k| k.income}.sum
+    self.account_books.where(book_date: dt.beginning_of_month...dt.end_of_month).map{|k| k.income}.sum
   end
 
   def balance(dt)
@@ -80,12 +80,16 @@ class EndUser < ApplicationRecord
     self.bop_subjects.where(date: dt.beginning_of_month...dt.end_of_month, bop: 1).map{|k| k.total_price}.sum
   end
 
+  def savings_amount(dt)
+    self.deposit_balances.where(deposit_date: dt.beginning_of_month...dt.end_of_month).map{|k| k.savings_amount}.sum
+  end
+
   def balance_bop(dt)
-    income_total(dt).to_i - balance(dt).to_i
+    income_total(dt) - balance(dt) - savings_amount(dt)
   end
 
   def payments_bop(dt)
-    income_total(dt).to_i - payments(dt).to_i
+    income_total(dt) - payments(dt) - savings_amount(dt)
   end
 
   #groupにしたカラムのgroupごとの小計
