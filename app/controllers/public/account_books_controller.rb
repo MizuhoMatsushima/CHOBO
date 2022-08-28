@@ -10,6 +10,8 @@ class Public::AccountBooksController < ApplicationController
     @end_user = current_end_user
     @account_book = AccountBook.new(account_book_params)
     @account_book.end_user_id = current_end_user.id
+    book_date = (params[:account_book][:book_date]+"-01").to_datetime
+    @account_book.book_date = book_date
     if @account_book.save
       redirect_to end_users_path
     else
@@ -32,6 +34,8 @@ class Public::AccountBooksController < ApplicationController
   def update
     @end_user = current_end_user
     @account_book = AccountBook.find(params[:id])
+    book_date = (params[:account_book][:book_date]+"-01").to_datetime
+    @account_book.book_date = book_date
     if @account_book.update(account_book_params)
       redirect_to account_books_path
     else
@@ -44,6 +48,8 @@ class Public::AccountBooksController < ApplicationController
     @account_book = AccountBook.find(params[:id])
     if @account_book.destroy
       redirect_to account_books_path
+    else
+      render template: "end_users/top"
     end
   end
 

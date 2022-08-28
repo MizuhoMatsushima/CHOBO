@@ -57,11 +57,11 @@ class EndUser < ApplicationRecord
   def balance(dt)
     array = [] #空の配列を用意し
     BopSubject.pluck(:subject_name).uniq.each do |name|
-     
+
       group = BopSubject.where(subject_name: name, date: dt.beginning_of_month...dt.end_of_month)
-   
+
       if group.where(bop: 0).count > 0
-     
+
         array << group.where(bop: 0).sum{|k| k.total_price}
       else
         array << group.where(bop: 1).sum{|k| k.total_price}
@@ -110,9 +110,22 @@ class EndUser < ApplicationRecord
   def subject_bop(bop_subject, dt)
     subject_balance(bop_subject, dt).to_i - subject_payments(bop_subject, dt).to_i
   end
-  
+
   def balance_index(dt)
     BopSubject.where(date: dt.beginning_of_month...dt.end_of_month, bop: 0)
+  end
+
+  def self.grapf(dt)
+    payments = BopSubject.where(bop: 1).group(:subject_name).sum(:total_price)
+    balance = BopSubject.where(bop: 0).group(:subject_name).sum(:total_price)
+
+    balance.each do |balance|
+      payments["balance"] = balance
+    end
+  end
+
+  def savings_amount(dt)
+    self.deposit_balances.where(deposit_date: dt.beginning_of_month...dt.end_of_month).map{|k| k.savings_amount}.sum
   end
 
 end

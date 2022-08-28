@@ -19,6 +19,7 @@ class Public::EndUsersController < ApplicationController
     @bop_subject_name = @end_user_pay.group(:subject_name).pluck(:subject_name)
     @bop_subject_price = @end_user_pay.group(:subject_name).sum(:total_price)
     @bop_subject_graph = @bop_subject_price.sort_by { |_, v| v }.reverse.to_h
+    #@deposit_balance = @end_user.deposit_balances.where(date: beginning_of_month...end_of_month).sum(:savings_amount)
   end
 
   def show
@@ -32,6 +33,7 @@ class Public::EndUsersController < ApplicationController
   def update
     @end_user = current_end_user
     if @end_user.update(end_user_params)
+      flash[:notice] = "登録情報を更新しました"
       redirect_to my_page_end_users_path(@end_user)
     else
       render :edit

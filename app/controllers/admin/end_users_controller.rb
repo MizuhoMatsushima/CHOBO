@@ -9,7 +9,7 @@ class Admin::EndUsersController < ApplicationController
       flash[:keyword] = "キーワードを入力してください"
       redirect_to admin_root_path
     else
-      @end_user = EndUser.search(params[:keyword]).order('created_at asc')
+      @end_user = EndUser.search(params[:keyword]).order('created_at asc').page(params[:page])
     end
   end
 

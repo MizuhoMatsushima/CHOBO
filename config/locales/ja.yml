@@ -30,7 +30,8 @@ ja:
               blank: を入力してください
               taken: を入力してください
             password:
-              blank: を入力してください
+              blank: を英数字6文字以上で入力してください
+              too_short: を英数字6文字以上で入力してください
             password_confirmation:
               blank: を入力してください
               confirmation: を入力してください
@@ -47,6 +48,8 @@ ja:
               blank: （1以上の半角数字）を入力してください
               greater_than_or_equal_to: （1以上の半角数字）を入力してください
               not_a_number: （1以上の半角数字）みで入力してください
+            book_date:
+              blank: を入力してください
         bop_subject:
           attributes:
             date:
@@ -102,6 +105,8 @@ ja:
           attributes:
             body:
               blank: を400文字以内で入力してください
+
+
     attributes:
       end_user:
         last_name: 姓
@@ -116,6 +121,7 @@ ja:
         email: メールアドレス
       account_book:
         source_of_income_id: 収入元
+        book_date: 利用月
         pay_day: 収入があった日
         income: 収入
       bop_subject:

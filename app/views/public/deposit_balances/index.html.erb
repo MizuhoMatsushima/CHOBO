@@ -1,7 +1,24 @@
 <div class="col-lg-10 col-md-12 mt-5 mx-auto">
   <div class="card">
-    <div class="m-5"><%= line_chart @deposit_balance %></div>
-    <div class="mx-5">
+    <!--<div class="m-5">-->
+      <%#= area_chart @grapf %>
+    <!--</div>-->
+    <div class="mx-5 my-5">
+      <div class="my-4">
+        <div class="row col-10">
+          <h5>貯金先別貯金額</h5>
+          <h5 class="ml-auto">貯金総額　<%= @deposit_balances.sum(:savings_amount).to_s(:delimited) %>円</h5>
+        </div>
+        <table class="table">
+          <% @savings_estinations.each do |savings_estination| %>
+            <tr>
+              <td><%= savings_estination.savings_estination_name %></td>
+              <td><%= @deposit_balances.where(savings_estination_id: savings_estination.id).sum(:savings_amount).to_s(:delimited)  %>円</td>
+            </tr>
+          <% end %>
+        </table>
+        <div class="mt-4 d-flex justify-content-center"><%= paginate @savings_estinations %></div>
+      </div>
       <div class="d-flex justify-content-between mb-1">
         <h5 class="my-auto">貯金履歴一覧</h5>
         <div><%= link_to "貯金登録", new_deposit_balance_path, class: "btn btn-outline-secondary" %></div>
@@ -9,6 +26,7 @@
       <table class="table">
         <thead>
           <tr>
+            <th>預金月</th>
             <th>貯金先名</th>
             <th>貯金額</th>
             <th></th>
@@ -18,14 +36,22 @@
         <tbody>
           <% @deposit_balances.each do |deposit_balance| %>
             <tr>
+              <td><%= deposit_balance.deposit_date.strftime('%Y年%m月') %></td>
               <td><%= deposit_balance.savings_estination.savings_estination_name %></td>
-              <td>￥<%= deposit_balance.savings_amount.to_s(:delimited) %></td>
+              <td><%= deposit_balance.savings_amount.to_s(:delimited) %>円</td>
               <td><%= link_to "編集", edit_deposit_balance_path(deposit_balance) %></td>
               <td><%= link_to "削除", deposit_balance_path(deposit_balance), method: :delete %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
+      <div class="mt-4 d-flex justify-content-center"><%= paginate @deposit_balances %></div>
+      <div class="text-center">
+        <%= link_to "貯金先登録", savings_estinations_path %>
+      </div>
+      <div class="text-center">
+        <%= link_to "今月の収支一覧", end_users_path %>
+      </div>
     </div>
   </div>
 </div>

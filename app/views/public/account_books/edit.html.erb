@@ -12,6 +12,13 @@
           <% end %>
         </div>
         <div class="form-group">
+          <%= f.label :book_date, "利用月" %>
+          <%= f.month_field :book_date, class: "form-control" %>
+          <% if @account_book.errors.include?(:book_date) %>
+            <p class="text-danger"><%= @account_book.errors.full_messages_for(:book_date).first %>
+          <% end %>
+        </div>
+        <div class="form-group">
           <%= f.label :income, "収入金額" %>
           <%= f.text_field :income, class:"form-control" %>
           <% if @account_book.errors.include?(:income) %>
