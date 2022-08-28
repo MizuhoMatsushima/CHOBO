@@ -5,9 +5,7 @@
         <h2 class="mx-auto">ログイン</h2>
         <% flash.each do |key, value| %>
           <% unless value == "ログアウトしました。" %>
-            <%# unless value == "ありがとうございました。またのご利用を心よりお待ちしております。" %>
               <%= content_tag :div, value, class: key, class: "text-danger" %>
-            <%# end %>
           <% end %>
         <% end %>
       </div>
