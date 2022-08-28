@@ -40,7 +40,11 @@
                       <td>－</td>
                       <td><%= @end_user.savings_amount(@dt).to_s(:delimited) %>円</td>
                       <td>＝</td>
-                      <td><%= @end_user.payments_bop(@dt).to_s(:delimited) %>円</td>
+                      <% if @end_user.balance_bop(@dt) < 0 %>
+                        <td class="text-danger"><%= @end_user.payments_bop(@dt).to_s(:delimited) %>円</td>
+                      <% else %>
+                        <td><%= @end_user.payments_bop(@dt).to_s(:delimited) %>円</td>
+                      <% end %>
                     <% end %>
                   </tr>
                 </tbody>
@@ -74,18 +78,36 @@
             <table class="table table-sm my-4 col-sm-11 mx-auto">
               <thead>
                 <tr>
-                  <th colspan="7" style="border-top: none;">
+                  <th colspan="3" style="border: none; display:inline-flex;">
                     <%= bop_subject %>
                     <% if @end_user_balance.where(subject_name: bop_subject).count > 0 %>
-                      <%= link_to bop_subjects_path({date: @dt,bop: 0}) do %>
-                        ￥<%= @end_user.subject_balance(bop_subject, @dt).to_s(:delimited) %>
+                      <div>
+                        <%= link_to bop_subjects_path({date: @dt,bop: 0}) do %>
+                          ￥<%= @end_user.subject_balance(bop_subject, @dt).to_s(:delimited) %>
+                        <% end %>
+                      </div>
+                      <div>－</div>
+                      <div>
+                        <%= link_to bop_subjects_path({date: @dt,bop: 1}) do %>
+                          ￥<%= @end_user.subject_payments(bop_subject, @dt).to_s(:delimited) %>
+                        <% end %>
+                      </div>
+                      <div>＝</div>
+                      <% if @end_user.subject_bop(bop_subject, @dt) < 0 %>
+                        <div class="text-danger">
+                          ￥<%= @end_user.subject_bop(bop_subject, @dt).to_s(:delimited) %>
+                        </div>
+                      <% else %>
+                        <div>
+                          ￥<%= @end_user.subject_bop(bop_subject, @dt).to_s(:delimited) %>
+                        </div>
                       <% end %>
-                      －
-                      ￥<%= @end_user.subject_payments(bop_subject, @dt).to_s(:delimited) %>
-                      ＝
-                      ￥<%= @end_user.subject_bop(bop_subject, @dt).to_s(:delimited) %>
                     <% else %>
-                      ￥<%= @end_user.subject_payments(bop_subject, @dt).to_s(:delimited) %>
+                      <div>
+                        <%= link_to bop_subjects_path({date: @dt,bop: 1}) do %>
+                          ￥<%= @end_user.subject_payments(bop_subject, @dt).to_s(:delimited) %>
+                        <% end %>
+                      </div>
                     <% end %>
                   </th>
                 </tr>
@@ -93,7 +115,7 @@
               <tbody>
                 <% @end_user_pay.where(subject_name: bop_subject).first(5).each do |bop_subject_index| %>
                   <tr>
-                    <td colspan="5">
+                    <td colspan="" >
                       <%= link_to bop_subject_path(bop_subject_index) do %>
                         <%= bop_subject_index.date.strftime('%Y年%m月%d日') %>
                         ￥<%= bop_subject_index.total_price.to_s(:delimited) %>
