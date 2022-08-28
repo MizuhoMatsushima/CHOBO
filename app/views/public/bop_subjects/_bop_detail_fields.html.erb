@@ -1,21 +1,12 @@
 <tr class="nested-fields">
   <td>
     <%= f.text_field :detail_name, :placeholder => "細目名（例：バナナなど）", class: "form-control mr-3" %>
-    <% if @bop_subject.errors.include?(:"bop_details.detail_name") %>
-      <p class="text-danger"><%= @bop_subject.errors.full_messages_for(:"bop_details.detail_name").first %>
-    <% end %>
   </td>
   <td>
     <%= f.text_field :amount, class: "form-control mr-3" %>
-    <% if @bop_subject.errors.include?(:"bop_details.amount") %>
-      <p class="text-danger"><%= @bop_subject.errors.full_messages_for(:"bop_details.amount").first %>
-    <% end %>
   </td>
   <td>
     <%= f.text_field :detail_price, :placeholder => "1000", class: "detail_price form-control" %>
-    <% if @bop_subject.errors.include?(:"bop_details.detail_price") %>
-      <p class="text-danger"><%= @bop_subject.errors.full_messages_for(:"bop_details.detail_price").first %>
-    <% end %>
   </td>
   <td>
     <%= link_to_remove_association f, class: 'bg-orange btn-type-s' do %>
