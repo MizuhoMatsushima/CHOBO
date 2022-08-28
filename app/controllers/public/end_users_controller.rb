@@ -52,7 +52,7 @@ class Public::EndUsersController < ApplicationController
     @end_user.update(is_deleted: true)
     # ログアウトさせる
     reset_session
-    flash[:notice] = "ありがとうございました。またのご利用を心よりお待ちしております。"
+    flash.now[:notice] = "ありがとうございました。またのご利用を心よりお待ちしております。"
     redirect_to root_path
   end
 
