@@ -2,10 +2,10 @@
   <div class="card">
     <div class="m-5">
       <h2 class="text-center mb-4">利用者詳細画面</h2>
-      <table class="col-md-6 mx-auto">
+      <table class="table col-md-6 mx-auto">
         <tbody>
           <tr>
-            <th width=200>氏名</th>
+            <th width=150>氏名</th>
             <td height=50><%= @end_user.full_name %></td>
           </tr>
           <tr>
@@ -36,11 +36,9 @@
           </tr>
         </tbody>
       </table>
-      <!--検索で表示できるか？？-->
-      <%#= link_to "相談履歴一覧", favorites_my_index_path %>
       <div class="mx-auto my-5">
         <div class="text-center">
-          <%= link_to "編集", edit_admin_end_user_path(@end_user), class: "btn btn-secondary col-6" %>
+          <%= link_to "利用者情報の編集", edit_admin_end_user_path(@end_user), class: "btn btn-secondary col-6" %>
         </div>
       </div>
     </div>

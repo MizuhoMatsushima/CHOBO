@@ -1,4 +1,4 @@
-<div class="col-lg-10 col-md-12 mt-5 mx-auto">
+<div class="col-lg-10 col-md-12 m-5 mx-auto">
   <div class="card">
     <div class="m-5">
       <%= render "public/shared/error_messages", resource: @comment %>
@@ -24,9 +24,11 @@
           </td>
         </tr>
       </table>
-      <div class="favorite-btn_<%= @consultation.id %>" id="favorite-btn">
-        <%= render 'public/favorites/favorite-btn', consultation: @consultation %>
-      </div>
+      <% unless @consultation.end_user_id == current_end_user.id %>
+        <div class="favorite-btn_<%= @consultation.id %>" id="favorite-btn">
+          <%= render 'public/favorites/favorite-btn', consultation: @consultation %>
+        </div>
+      <% end %>
       <div class="comment-count">
         <p>コメント数：<%= @consultation.comments.count %></p>
       </div>
@@ -35,6 +37,9 @@
       </div>
       <div class="comment-index">
         <%= render "public/comments/comment-index", consultation: @consultation %>
+      </div>
+      <div class="text-center mt-5">
+        <%= link_to "相談広場へ戻る", consultations_path %>
       </div>
     </div>
   </div>

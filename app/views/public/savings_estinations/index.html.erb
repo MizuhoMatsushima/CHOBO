@@ -35,6 +35,10 @@
             <% end %>
           </tbody>
         </table>
+        <div class="mt-4 d-flex justify-content-center"><%= paginate @savings_estinations %></div>
+        <div class="text-center mb-5">
+          <%= link_to "貯金一覧", deposit_balances_path %>
+        </div>
       </div>
     </div>
   </div>

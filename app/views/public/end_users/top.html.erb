@@ -12,6 +12,8 @@
                     <td></td>
                     <td>支出</td>
                     <td></td>
+                    <td>貯金</td>
+                    <td></td>
                     <td>残金</td>
                   </tr>
                 </thead>
@@ -19,23 +21,30 @@
                   <tr>
                     <td>
                       <%= link_to account_books_path do %>
-                      ￥<%= @end_user.income_total(@dt).to_s(:delimited) %>
+                      <%= @end_user.income_total(@dt).to_s(:delimited) %>円
                       <% end %>
                     </td>
                     <td>－</td>
                     <% if @end_user_balance.count > 0 %>
-                      <td>
-                        ￥<%= @end_user.balance(@dt).to_s(:delimited) %></td>
-                      <td>＝</td>
+                      <td><%= @end_user.balance(@dt).to_s(:delimited) %>円</td>
+                      <!--<td>＝</td>-->
                       <% if @end_user.balance_bop(@dt) < 0 %>
-                        <td class="text-danger">￥<%= @end_user.balance_bop(@dt).to_s(:delimited) %></td>
+                        <td>－</td>
+                        <td><%= @end_user.savings_amount(@dt).to_s(:delimited) %>円</td>
+                        <td>＝</td>
+                        <td class="text-center"><%= @end_user.balance_bop(@dt).to_s(:delimited) %>円</td>
                       <% else %>
-                          <td>￥<%= @end_user.balance_bop(@dt).to_s(:delimited) %></td>
+                        <td>－</td>
+                        <td><%= @end_user.savings_amount(@dt).to_s(:delimited) %>円</td>
+                        <td>＝</td>
+                        <td><%= @end_user.balance_bop(@dt).to_s(:delimited) %>円</td>
                       <% end %>
                     <% else %>
-                      <td>￥<%= @end_user.payments(@dt).to_s(:delimited) %></td>
+                      <td><%= @end_user.payments(@dt).to_s(:delimited) %>円</td>
+                      <td>－</td>
+                      <td><%= @end_user.savings_amount(@dt).to_s(:delimited) %>円</td>
                       <td>＝</td>
-                      <td>￥<%= @end_user.payments_bop(@dt).to_s(:delimited) %></td>
+                      <td><%= @end_user.payments_bop(@dt).to_s(:delimited) %>円</td>
                     <% end %>
                   </tr>
                 </tbody>

@@ -1,6 +1,6 @@
 class Admin::ConsultationsController < ApplicationController
   def index
-    @consultations = Consultation.all.order(created_at: "DESC")
+    @consultations = Consultation.all.order(created_at: "DESC").page(params[:page])
     @tags = Tag.all
   end
 

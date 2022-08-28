@@ -2,7 +2,7 @@ class Public::SavingsEstinationsController < ApplicationController
   def index
     @end_user = current_end_user
     @savings_estination = SavingsEstination.new
-    @savings_estinations = @end_user.savings_estinations
+    @savings_estinations = @end_user.savings_estinations.page(params[:page]).per(10)
   end
 
   def create

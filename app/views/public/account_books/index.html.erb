@@ -5,8 +5,8 @@
         <div class="row">
           <h3 class="">収入の一覧</h3>
           <div class="ml-auto my-auto mr-3">
-            <%= link_to new_account_book_path, class: "" do %>
-              <i class="fas fa-money-bill" style="font-size: 25px;"></i>
+            <%= link_to new_account_book_path do %>
+              <i class="fas fa-money-bill" style="font-size: 25px;"></i>収入登録
             <% end %>
           </div>
         </div>
@@ -14,7 +14,7 @@
       <table class="table">
         <thead>
           <tr>
-            <th>日付</th>
+            <th>収入日</th>
             <th>金額</th>
             <th>収入元</th>
             <th></th>
