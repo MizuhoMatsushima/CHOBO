@@ -12,7 +12,7 @@ class Public::SavingsEstinationsController < ApplicationController
     if @savings_estination.save
       redirect_to savings_estinations_path
     else
-      @savings_estinations = @end_user.savings_estinations
+      @savings_estinations = @end_user.savings_estinations.page(params[:page]).per(10)
       render :index
     end
   end
