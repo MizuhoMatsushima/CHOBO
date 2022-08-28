@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_27_003331) do
+ActiveRecord::Schema.define(version: 2022_08_28_190420) do
 
   create_table "account_books", force: :cascade do |t|
     t.integer "end_user_id"
@@ -57,7 +57,6 @@ ActiveRecord::Schema.define(version: 2022_08_27_003331) do
     t.string "memo"
     t.string "store"
     t.integer "registered_person_id"
-    t.string "share_code"
     t.integer "share_end_user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -112,7 +111,6 @@ ActiveRecord::Schema.define(version: 2022_08_27_003331) do
     t.string "last_name_kana", default: "", null: false
     t.string "first_name_kana", default: "", null: false
     t.string "phone_number", default: "", null: false
-    t.string "share_code", default: ""
     t.boolean "is_deleted", default: false, null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
