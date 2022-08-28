@@ -17,6 +17,7 @@
             </tr>
           <% end %>
         </table>
+        <div class="mt-4 d-flex justify-content-center"><%= paginate @savings_estinations %></div>
       </div>
       <div class="d-flex justify-content-between mb-1">
         <h5 class="my-auto">貯金履歴一覧</h5>
@@ -25,6 +26,7 @@
       <table class="table">
         <thead>
           <tr>
+            <th>預金月</th>
             <th>貯金先名</th>
             <th>貯金額</th>
             <th></th>
@@ -34,6 +36,7 @@
         <tbody>
           <% @deposit_balances.each do |deposit_balance| %>
             <tr>
+              <td><%= deposit_balance.deposit_date.strftime('%Y年%m月') %></td>
               <td><%= deposit_balance.savings_estination.savings_estination_name %></td>
               <td><%= deposit_balance.savings_amount.to_s(:delimited) %>円</td>
               <td><%= link_to "編集", edit_deposit_balance_path(deposit_balance) %></td>
@@ -42,7 +45,13 @@
           <% end %>
         </tbody>
       </table>
-      <%= link_to "貯金登録", 
+      <div class="mt-4 d-flex justify-content-center"><%= paginate @deposit_balances %></div>
+      <div class="text-center">
+        <%= link_to "貯金先登録", savings_estinations_path %>
+      </div>
+      <div class="text-center">
+        <%= link_to "今月の収支一覧", end_users_path %>
+      </div>
     </div>
   </div>
 </div>
