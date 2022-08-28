@@ -25,15 +25,9 @@ Rails.application.routes.draw do
     resources :deposit_balances, only: [:new, :index, :edit, :create, :update, :destroy]
     resources :source_of_incomes, only: [:index, :edit, :create, :update]
     resources :savings_estinations, only: [:index, :edit, :create, :update]
-    resources :subjects, only: [:new, :index, :edit, :create, :update, :destroy]
     resources :tags, only: [:create]
     resources :bop_subjects, only: [:new, :show, :index, :edit, :create, :update, :destroy]
     resources :bop_details, only: [:index, :create, :update] do
-      collection do
-        get "search"
-      end
-    end
-    resources :details, only: [:index, :edit, :create, :update, :destroy] do
       collection do
         get "search"
       end

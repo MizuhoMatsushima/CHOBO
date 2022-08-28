@@ -1,4 +1,6 @@
 class Public::EndUsersController < ApplicationController
+  before_action :guest, except: [:top, :show, :index, :edit]
+
   def top
     @current_time = DateTime.current
     #@ago = @current_time.strftime("%m") エラーなければ削除
