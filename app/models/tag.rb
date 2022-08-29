@@ -28,7 +28,12 @@ Rails.logger.debug(tags)
   def self.search(search)
     if search.include?('#')
       tag = Tag.where(name: search)
-      tag[0].consultations
+      puts tag.inspect
+      unless tag.empty?
+        tag[0].consultations
+      else
+        Consultation.all
+      end
     else
       Consultation.all
     end
