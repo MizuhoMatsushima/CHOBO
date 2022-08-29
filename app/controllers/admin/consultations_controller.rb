@@ -25,7 +25,7 @@ class Admin::ConsultationsController < ApplicationController
     elsif (params[:keyword])[0] == '#'
       @consultation = Tag.search(params[:keyword]).order('created_at DESC')
     else
-      @consultation = Consultation.search(params[:keyword]).order('created_at DESC')
+      @consultation = Consultation.search(params[:keyword]).order('created_at DESC').page(params[:page])
     end
   end
 end
