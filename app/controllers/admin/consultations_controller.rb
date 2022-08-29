@@ -1,6 +1,6 @@
 class Admin::ConsultationsController < ApplicationController
   def index
-    @consultations = Consultation.all.order(created_at: "DESC").page(params[:page])
+    @consultations = Consultation.all.order(created_at: "DESC")
     @tags = Tag.all
   end
 
@@ -25,7 +25,7 @@ class Admin::ConsultationsController < ApplicationController
     elsif (params[:keyword])[0] == '#'
       @consultation = Tag.search(params[:keyword]).order('created_at DESC')
     else
-      @consultation = Consultation.search(params[:keyword]).order('created_at DESC').page(params[:page])
+      @consultation = Consultation.search(params[:keyword]).order('created_at DESC')
     end
   end
 end
