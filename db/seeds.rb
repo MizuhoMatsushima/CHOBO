@@ -18,6 +18,7 @@ EndUser.create!(
     last_name_kana: "ゲスト",
     first_name_kana: "ユーザー",
     email: "guest@com",
+    password: SecureRandom.urlsafe_base64,
     phone_number: "0312345678",
   },
   {
