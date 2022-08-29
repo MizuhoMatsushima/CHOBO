@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_28_190420) do
+ActiveRecord::Schema.define(version: 2022_08_29_070429) do
 
   create_table "account_books", force: :cascade do |t|
     t.integer "end_user_id"
@@ -77,7 +77,6 @@ ActiveRecord::Schema.define(version: 2022_08_28_190420) do
     t.integer "end_user_id"
     t.string "title", default: "", null: false
     t.text "body", null: false
-    t.boolean "is_draft", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["end_user_id"], name: "index_consultations_on_end_user_id"

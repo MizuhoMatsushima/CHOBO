@@ -4,11 +4,9 @@
       <div class="m-5">
         <div class="row">
           <h3 class="col-9 d-flex align-items-center"><%= name %>相談一覧</h3>
-          <%# unless current_end_user.full_name == "Guest User"? %>
           <div class="d-inline" style="">
             <%= link_to "相談する", new_consultation_path, class: "btn btn-secondary" %>
           </div>
-          <%# end %>
         </div>
         <%= render "layouts/search", search_path: search_path %>
         <% if controller.action_name == "search" %>

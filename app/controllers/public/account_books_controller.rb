@@ -1,5 +1,5 @@
 class Public::AccountBooksController < ApplicationController
-  #before_action :guest, except: [:new, :index, :edit]
+  before_action :guest, except: [:new, :index, :edit]
 
   def new
     @end_user = current_end_user

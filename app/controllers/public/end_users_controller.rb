@@ -1,5 +1,5 @@
 class Public::EndUsersController < ApplicationController
-  #before_action :guest, except: [:top, :show, :index, :edit]
+  before_action :guest, except: [:top, :show, :edit]
 
   def top
     @current_time = DateTime.current
@@ -52,7 +52,7 @@ class Public::EndUsersController < ApplicationController
     @end_user.update(is_deleted: true)
     # ログアウトさせる
     reset_session
-    flash.now[:notice] = "ありがとうございました。またのご利用を心よりお待ちしております。"
+    flash[:notice] = "ありがとうございました。またのご利用を心よりお待ちしております。"
     redirect_to root_path
   end
 

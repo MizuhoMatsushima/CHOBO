@@ -1,5 +1,5 @@
 class Public::ConsultationsController < ApplicationController
-  #before_action :guest, except: [:new, :show, :index, :my_index, :search]
+  before_action :guest, except: [:new, :show, :index, :my_index, :search]
 
   def index
     @consultations = Consultation.all.order(created_at: "DESC").page(params[:page])
