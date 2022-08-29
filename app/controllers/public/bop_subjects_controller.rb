@@ -1,5 +1,5 @@
 class Public::BopSubjectsController < ApplicationController
-  before_action :guest, except: [:new, :show, :index, :edit, :create]
+  #before_action :guest, except: [:new, :show, :index, :edit, :create]
 
   def new
     @bop_subject = BopSubject.new

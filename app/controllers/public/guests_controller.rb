@@ -1,5 +1,5 @@
 class Public::GuestsController < ActionController::Base
-
+  
   def guest_sign_in
     end_user = EndUser.find_or_create_by!(email: 'guest@com') do |end_user|
       end_user.password = SecureRandom.urlsafe_base64
