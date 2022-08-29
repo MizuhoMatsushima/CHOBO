@@ -26,7 +26,7 @@ Rails.logger.debug(tags)
 
   #タグ検索
   def self.search(search)
-    if search != '#'
+    if search.include?('#')
       tag = Tag.where(name: search)
       tag[0].consultations
     else
