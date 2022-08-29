@@ -27,11 +27,6 @@ Rails.application.routes.draw do
     resources :savings_estinations, only: [:index, :edit, :create, :update]
     resources :tags, only: [:create]
     resources :bop_subjects, only: [:new, :show, :index, :edit, :create, :update, :destroy]
-    resources :bop_details, only: [:index, :create, :update] do
-      collection do
-        get "search"
-      end
-    end
     resources :consultations, only: [:index, :show, :new, :create] do
       resources :comments, only: [:create]
       resource :favorites, only: [:create, :destroy]
