@@ -1,4 +1,6 @@
 class Public::SavingsEstinationsController < ApplicationController
+  #before_action :guest, except: [:index, :edit]
+
   def index
     @end_user = current_end_user
     @savings_estination = SavingsEstination.new
