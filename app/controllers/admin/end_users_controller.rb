@@ -4,12 +4,12 @@ class Admin::EndUsersController < ApplicationController
   end
 
   def search
-    @end_users = EndUser.page(params[:page])
+    @end_users = EndUser.all#.page(params[:page])
     if params[:keyword] == ""
       flash[:keyword] = "キーワードを入力してください"
       redirect_to admin_root_path
     else
-      @end_user = EndUser.search(params[:keyword]).order('created_at asc').page(params[:page])
+      @end_user = EndUser.search(params[:keyword]).order('created_at asc')#.page(params[:page])
     end
   end
 
