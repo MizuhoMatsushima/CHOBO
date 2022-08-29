@@ -1,5 +1,5 @@
 class Public::SourceOfIncomesController < ApplicationController
-  #before_action :guest, except: [:index, :edit]
+  before_action :guest, except: [:index, :edit]
 
   def index
     @end_user = current_end_user

@@ -21,10 +21,6 @@
             <td height=50><%= @end_user.email %></td>
           </tr>
           <tr>
-            <th>シェアコード</th>
-            <td height=50><%= @end_user.share_code %></td>
-          </tr>
-          <tr>
             <th>会員ステータス</th>
             <td height=50>
               <% if @end_user.is_deleted == false %>
