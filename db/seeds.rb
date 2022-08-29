@@ -543,7 +543,7 @@ AccountBook.create!(
     end_user_id: 1,
     source_of_income_id: 1,
     income: 180000,
-    pay_day: Time.zone.now5,
+    pay_day: Time.zone.now,
     book_date: Time.zone.now,
   },
   {
@@ -683,7 +683,7 @@ AccountBook.create!(
     end_user_id: 2,
     source_of_income_id: 4,
     income: 6400,
-    pay_day: Time.zone.now4,
+    pay_day: Time.zone.now,
     book_date: Time.zone.now,
   },
   {
@@ -1260,7 +1260,7 @@ BopSubject.create!(
     bop: 1,
     total_price: 55000,
     point: 0,
-    use_at: Time.zone.now5,
+    use_at: Time.zone.now,
   },
   {
     end_user_id: 1,
@@ -1732,7 +1732,7 @@ BopSubject.create!(
     bop: 1,
     total_price: 55000,
     point: 0,
-    use_at: Time.zone.now5,
+    use_at: Time.zone.now,
   },
   {
     end_user_id: 2,
