@@ -1,1 +1,52 @@
-<%= render "layouts/consultation_index", consultations: @consultation, search_path: search_admin_consultations_path %>
+<div class="col-lg-10 col-md-11 mx-auto m-5">
+  <div class="card">
+    <div class="m-5">
+      <h3 class="d-inline">相談管理画面</h3>
+      <%= render "layouts/search", search_path: search_admin_consultations_path %>
+      <h4 class="mt-4">"<%= params[:keyword] %>"の検索結果</h4>
+      <table class="table mt-5">
+        <thead>
+          <thead>
+            <tr>
+              <th class="text-center">相談日時</th>
+              <th class="text-center">相談タイトル</th>
+              <th class="text-center">タグ</th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+        </thead>
+        <tbody>
+          <% @consultation.each do |consultation| %>
+            <tr>
+              <td><%= consultation.created_at.strftime('%Y年%m月%d日 %H時%m分') %></td>
+              <td>
+                <%= link_to admin_consultation_path(consultation) do %>
+                  <%= consultation.title.truncate(20) %>
+                <% end %>
+              </td>
+              <td>
+                <% consultation.tags.each do |tag| %>
+                  <%= tag.name %>
+                <% end %>
+              </td>
+              <td>
+                ♥<%= consultation.favorites.count %>
+              </td>
+              <td>
+                <%= link_to admin_consultation_path(consultation) do %>
+                  コメント数：<%= consultation.comments.count %>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to "削除", admin_consultation_path(consultation), method: :delete, class:  "btn btn-danger" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="mt-4 d-flex justify-content-center"><%= paginate @consultation %></div>
+    </div>
+  </div>
+</div>
