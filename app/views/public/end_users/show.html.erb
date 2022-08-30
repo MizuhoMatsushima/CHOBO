@@ -2,7 +2,11 @@
   <div class="card">
     <div class="m-5">
       <h2 class="text-center mb-4">マイページ</h3>
-      <div class="flash text-success col-6 mx-auto"><%= flash[:notice] %></div>
+      <% flash.each do |key, value| %>
+        <% if value == "登録情報を更新しました" %>
+            <div class="flash text-success col-6 mx-auto"><%= flash[:notice] %></div>
+        <% end %>
+      <% end %>
       <table class="table col-md-6 mx-auto">
         <tbody>
           <tr>

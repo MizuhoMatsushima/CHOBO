@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_end_user!, unless: :admin_url
   before_action :authenticate_admin!, if: :admin_url
-  
+
 
   protected
 
@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   def guest
     if "guest@com" == current_end_user.email
       flash[:notice] = "この機能を使用するには会員登録が必要です。"
-      redirect_to root_path
+      redirect_to request.referer
     end
   end
 end
