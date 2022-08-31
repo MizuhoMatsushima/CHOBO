@@ -1,6 +1,6 @@
 <%= form_with model: @bop_subject, url: bop_subjects_path, method: :post do |f| %>
   <div class="bop_form" id="balance_form_new">
-    <h3 class="text-center">収入登録</h3>
+    <h3 class="text-center">予算登録</h3>
     <div class="form-group">
         <%= f.label :date, "日付" %>
         <%= f.date_field :date, class: "form-control" %>
