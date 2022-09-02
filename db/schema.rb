@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_29_070429) do
+ActiveRecord::Schema.define(version: 2022_09_02_040447) do
 
   create_table "account_books", force: :cascade do |t|
     t.integer "end_user_id"
@@ -79,6 +79,8 @@ ActiveRecord::Schema.define(version: 2022_08_29_070429) do
     t.text "body", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.decimal "score", precision: 5, scale: 3
+    t.integer "emotion_check", default: 0
     t.index ["end_user_id"], name: "index_consultations_on_end_user_id"
   end
 

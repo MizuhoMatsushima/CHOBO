@@ -2,8 +2,7 @@ class Tag < ApplicationRecord
   has_many :middle_of_tags, dependent: :destroy, foreign_key: 'tag_id'
   has_many :consultations, through: :middle_of_tags
 
-#  validates :name, presence: true
-#  validate :required_started_sharp
+
   def self.valid_tags(tags)
     if tags.length == 0
       return false

@@ -48,10 +48,11 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: "homes#top"
-    resources :consultations, only: [:show, :index, :destroy] do
+    resources :consultations, only: [:show, :index, :destroy, :edit, :update] do
       resources :comments, only: [:destroy]
       collection do
         get "search"
+        get "ai_search"
       end
     end
     resources :end_users, only: [:show, :edit, :update] do

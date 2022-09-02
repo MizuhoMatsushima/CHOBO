@@ -42,6 +42,28 @@ class Consultation < ApplicationRecord
     end
   end
 
+  def self.ai_search(score, check)
+    if score == "plus"
+      if check == ""
+        Consultation.where("score >= ?", 0)
+      else
+        Consultation.where("score >= ?", 0).where(emotion_check: check)
+      end
+    elsif score == "minus"
+      if check == ""
+        Consultation.where("score < ?", 0)
+      else
+        Consultation.where("score < ?", 0).where(emotion_check: check)
+      end
+    else
+      if check == ""
+        Consultation.all
+      else
+        Consultation.where(emotion_check: check)
+      end
+    end
+  end
+
 
   #氏名の姓名を合わせるメソッド
   def full_name
