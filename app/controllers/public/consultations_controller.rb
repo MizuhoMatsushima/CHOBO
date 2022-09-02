@@ -19,6 +19,7 @@ class Public::ConsultationsController < ApplicationController
 
   def create
     @consultation = Consultation.new(consultation_params)
+    @consultation.score = Language.get_data(consultation_params[:body])
     @consultation.end_user_id = current_end_user.id
     tag_list = params[:consultation][:name].split(',')
     tag_valid = Tag.valid_tags(tag_list)
