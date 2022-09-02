@@ -1,7 +1,12 @@
 <%= form_with url: search_path, method: :get do |f| %>
-  <div class="form-inline mt-4">
+  <h5 class="mt-4">タブ・キーワード検索</h5>
+  <div class="form-inline">
     <%= f.text_field :keyword, class: "form-control col-8" %>
     <%= f.submit "検索", class: "btn btn-secondary col-2 ml-3" %>
+  </div>
+  <div style="font-size: 10px;">
+      ※#を付けて検索すると、タグを検索出来ます。<br>
+      ※なにも付けない場合は、タイトル・本文を参照します。
   </div>
   <div class="text-danger"><%= flash.now[:keyword] %></div>
 <% end %>

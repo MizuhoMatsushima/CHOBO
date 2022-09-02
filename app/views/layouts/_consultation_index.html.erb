@@ -60,6 +60,14 @@
       <div class="m-5">
         <h3 class="d-inline">相談管理画面</h3>
         <%= render "layouts/search", search_path: search_path %>
+        <h5 class="mt-3">感情分析</h5>
+        <div class="form-group">
+          <%= form_with url: ai_search_path, method: :get, local: true do |f| %>
+            <%= f.select :score, options_for_select({ "選択してください" => "", "マイナス" => "minus", "プラス" => "plus" }), class: "form-select" %>
+            <%= f.select :check, options_for_select({ "選択してください" => "", "未確認" => 0, "確認済" => 1 }), class: "form-select" %>
+            <%= f.submit '検索', class: "btn btn-secondary col-2 ml-3" %>
+          <% end %>
+        </div>
         <% if controller.action_name == "search" %>
           <h4 class="mt-4">"<%= params[:keyword] %>"の検索結果</h4>
         <% end %>
@@ -70,6 +78,9 @@
                 <th class="text-center">相談日時</th>
                 <th class="text-center">相談タイトル</th>
                 <th class="text-center">タグ</th>
+                <th class="text-center" width="90px">感情分析</th>
+                <th class="text-center" width="90px">確認状況</th>
+                <th></th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -90,6 +101,16 @@
                     <%= tag.name %>
                   <% end %>
                 </td>
+                <td class="text-center"><%= consultation.score %></td>
+                <td>
+                  <% if consultation.score < 0 %>
+                    <% if consultation.emotion_check == 1 %>
+                      <p>確認済み</p>
+                    <% else %>
+                      <p class="text-danger">未確認</p>
+                    <% end %>
+                  <% end %>
+                </td>
                 <td>
                   ♥<%= consultation.favorites.count %>
                 </td>
@@ -97,6 +118,9 @@
                   <%= link_to admin_consultation_path(consultation) do %>
                     コメント数：<%= consultation.comments.count %>
                   <% end %>
+                </td>
+                <td>
+                  <%= link_to "編集", edit_admin_consultation_path(consultation), class: "btn btn-success" %>
                 </td>
                 <td>
                   <%= link_to "削除", admin_consultation_path(consultation), method: :delete, class:  "btn btn-danger" %>

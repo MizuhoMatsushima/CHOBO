@@ -31,6 +31,21 @@
             <p>コメント数：<%= @consultation.comments.count %></p>
           </div>
         </div>
+        <% if @consultation.score < 0 %>
+          <div style="display:inline-flex">
+            確認状況：
+            <% if @consultation.emotion_check == 1 %>
+              <p>確認済み</p>
+            <% else %>
+              <p class="text-danger">未確認</p>
+            <% end %>
+          </div>
+        <% end %>
+        <div class="m-3 col-12" style="display:inline-flex">
+          <div class="ml-auto mr-3"><%= link_to "編集", edit_admin_consultation_path, class: "btn btn-success" %></div>
+          <div class="mr-auto ml-3"><%= link_to "削除", admin_consultation_path, method: :delete, class: "btn btn-danger" %></div>
+        </div>
+        <div class="text-center"><%= link_to "一覧に戻る", admin_consultations_path %></div>
       </div>
       <div class="comment-index">
         <%= render "public/comments/comment-index", consultation: @consultation %>

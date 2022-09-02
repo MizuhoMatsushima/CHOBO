@@ -8,6 +8,22 @@ class Admin::ConsultationsController < ApplicationController
     @consultation = Consultation.find(params[:id])
     @consultation_tags = @consultation.tags
     @comment = Comment.new
+    #@comments = Consultation.comments.page(params[:page])
+  end
+
+  def edit
+    @consultation = Consultation.find(params[:id])
+    @consultation_tags = @consultation.tags
+  end
+
+  def update
+    @consultation = Consultation.find(params[:id])
+    @consultation.score = Language.get_data(consultation_params[:body])
+    if @consultation.update(consultation_params)
+      redirect_to admin_consultations_path
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -27,5 +43,17 @@ class Admin::ConsultationsController < ApplicationController
     else
       @consultation = Consultation.search(params[:keyword]).order('created_at DESC').page(params[:page])
     end
+  end
+
+  def ai_search
+    score = params[:score]
+    check = params[:check]
+    @records = Consultation.ai_search(score, check).page(params[:page]).order(created_at: "DESC")
+  end
+
+  private
+
+  def consultation_params
+    params.require(:consultation).permit(:title, :body, :emotion_check)
   end
 end
