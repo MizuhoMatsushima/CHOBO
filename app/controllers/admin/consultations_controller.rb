@@ -20,7 +20,7 @@ class Admin::ConsultationsController < ApplicationController
     @consultation = Consultation.find(params[:id])
     @consultation.score = Language.get_data(consultation_params[:body])
     if @consultation.update(consultation_params)
-      redirect_to admin_consultations_path
+      redirect_to admin_consultation_path(@consultation)
     else
       render :edit
     end

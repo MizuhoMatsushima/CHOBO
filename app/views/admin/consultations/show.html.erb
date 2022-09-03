@@ -32,13 +32,18 @@
           </div>
         </div>
         <% if @consultation.score < 0 %>
-          <div style="display:inline-flex">
-            確認状況：
-            <% if @consultation.emotion_check == 1 %>
-              <p>確認済み</p>
-            <% else %>
-              <p class="text-danger">未確認</p>
-            <% end %>
+          <div class="row mt-4">
+            <div class="col-lg-2 col-md-3">感情分析</div>
+            <div class="col-lg-9 col-md-9">
+              <div style="display:inline-flex">
+                <p class="mr-3"><%= @consultation.score %></p>
+                <% if @consultation.emotion_check == 1 %>
+                  <p>確認済み</p>
+                <% else %>
+                  <p class="text-danger">未確認</p>
+                <% end %>
+              </div>
+            </div>
           </div>
         <% end %>
         <div class="m-3 col-12" style="display:inline-flex">
