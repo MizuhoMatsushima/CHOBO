@@ -103,11 +103,13 @@
                 </td>
                 <td class="text-center"><%= consultation.score %></td>
                 <td>
-                  <% if consultation.score < 0 %>
-                    <% if consultation.emotion_check == 1 %>
-                      <p>確認済み</p>
-                    <% else %>
-                      <p class="text-danger">未確認</p>
+                  <% unless consultation.score.nil? %>
+                    <% if consultation.score < 0 %>
+                      <% if consultation.emotion_check == 1 %>
+                        <p>確認済み</p>
+                      <% else %>
+                        <p class="text-danger">未確認</p>
+                      <% end %>
                     <% end %>
                   <% end %>
                 </td>
@@ -123,7 +125,7 @@
                   <%= link_to "編集", edit_admin_consultation_path(consultation), class: "btn btn-success" %>
                 </td>
                 <td>
-                  <%= link_to "削除", admin_consultation_path(consultation), method: :delete, class:  "btn btn-danger" %>
+                  <%= link_to "削除", admin_consultation_path(consultation), method: :delete, data: { confirm: '削除しますか？' }, class:  "btn btn-danger" %>
                 </td>
               </tr>
             <% end %>
