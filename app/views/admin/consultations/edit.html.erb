@@ -25,10 +25,15 @@
             <% end %>
           </div>
         </div>
-        <div>
-          確認状況：
-          <%= f.check_box :emotion_check %>
-        </div>
+        <% if @consultation.score < 0 %>
+          <div class="col-12 pl-0 mt-4" style="display:inline-flex">
+            <p class="my-auto">
+              確認状況：<br>
+              (感情分析)
+            </p>
+            <%= f.check_box :emotion_check, class: "col-2 my-auto form-control" %>
+          </div>
+        <% end %>
         <div class="mx-auto">
           <%= f.submit "内容を更新", class:"col-12 btn btn-secondary mt-5" %>
         </div>

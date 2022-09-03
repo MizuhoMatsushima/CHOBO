@@ -103,13 +103,11 @@
                 </td>
                 <td class="text-center"><%= consultation.score %></td>
                 <td>
-                  <% unless consultation.score.nil? %>
-                    <% if consultation.score < 0 %>
-                      <% if consultation.emotion_check == 1 %>
-                        <p>確認済み</p>
-                      <% else %>
-                        <p class="text-danger">未確認</p>
-                      <% end %>
+                  <% if consultation.score < 0 %>
+                    <% if consultation.emotion_check == 1 %>
+                      <p>確認済み</p>
+                    <% else %>
+                      <p class="text-danger">未確認</p>
                     <% end %>
                   <% end %>
                 </td>
