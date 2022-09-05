@@ -8,7 +8,6 @@ class Admin::ConsultationsController < ApplicationController
     @consultation = Consultation.find(params[:id])
     @consultation_tags = @consultation.tags
     @comment = Comment.new
-    #@comments = Consultation.comments.page(params[:page])
   end
 
   def edit
