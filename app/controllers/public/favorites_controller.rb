@@ -1,5 +1,5 @@
 class Public::FavoritesController < ApplicationController
-  #before_action :guest
+  before_action :guest
 
   def create
     @consultation = Consultation.find(params[:consultation_id])

@@ -1,5 +1,5 @@
 class Public::EndUsersController < ApplicationController
-  #before_action :guest, except: [:top, :show, :edit]
+  before_action :guest, except: [:top, :show, :edit]
 
   def top
     @current_time = DateTime.current
