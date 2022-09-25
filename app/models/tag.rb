@@ -18,12 +18,11 @@ class Tag < ApplicationRecord
 
   #タグ検索
   def self.search(search)
-    tag = Tag.where(name: search)
+    tag = Tag.where('name LIKE(?)', "%#{search}%")
     unless tag.empty?
       tag[0].consultations
-    else
-      Consultation.all
     end
+
   end
 
 end

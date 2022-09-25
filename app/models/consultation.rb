@@ -37,8 +37,6 @@ class Consultation < ApplicationRecord
   def self.search(search)
     if search != nil
       Consultation.where('title LIKE(?) or body LIKE(?)' , "%#{search}%",  "%#{search}%")
-    else
-      Consultation.all
     end
   end
 

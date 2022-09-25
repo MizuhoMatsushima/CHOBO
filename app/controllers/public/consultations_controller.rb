@@ -51,10 +51,8 @@ class Public::ConsultationsController < ApplicationController
     else
       if (params[:keyword])[0] == '#'
         @consultation = Tag.search(params[:keyword]).order('created_at DESC').page(params[:page])
-        # redirect_to consultations_path
       else
         @consultation = Consultation.search(params[:keyword]).order('created_at DESC').page(params[:page])
-        # redirect_to consultations_path
       end
     end
   end
