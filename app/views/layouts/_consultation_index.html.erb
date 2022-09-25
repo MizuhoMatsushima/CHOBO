@@ -23,34 +23,40 @@
             </tr>
           </thead>
           <tbody>
-            <% consultations.each do |consultation| %>
-              <tr>
-                <td><%= consultation.created_at.strftime('%Y年%m月%d日 %H時%m分') %></td>
-                <td>
-                  <%= link_to consultation_path(consultation) do %>
-                    <%= consultation.title.truncate(20) %>
-                  <% end %>
-                </td>
-                <td>
-                  <% consultation.tags.each do |tag| %>
-                    <%= tag.name %>
-                  <% end %>
-                </td>
-                <td class="favorite-btn_<%= consultation.id %>">
-                  <% unless consultation.end_user_id == current_end_user.id %>
-                    <%= render 'public/favorites/favorite-btn', consultation: consultation %>
-                  <% end %>
-                </td>
-                <td>
-                  <%= link_to consultation_path(consultation) do %>
-                    コメント数：<%= consultation.comments.count %>
-                  <% end %>
-                </td>
-              </tr>
+            <% if consultations.nil? %>
+              <p class="text-danger" style="font-size: 20px;">検索結果はありません</p>
+            <% else %>
+              <% consultations.each do |consultation| %>
+                <tr>
+                  <td><%= consultation.created_at.strftime('%Y年%m月%d日 %H時%m分') %></td>
+                  <td>
+                    <%= link_to consultation_path(consultation) do %>
+                      <%= consultation.title.truncate(20) %>
+                    <% end %>
+                  </td>
+                  <td>
+                    <% consultation.tags.each do |tag| %>
+                      <%= tag.name %>
+                    <% end %>
+                  </td>
+                  <td class="favorite-btn_<%= consultation.id %>">
+                    <% unless consultation.end_user_id == current_end_user.id %>
+                      <%= render 'public/favorites/favorite-btn', consultation: consultation %>
+                    <% end %>
+                  </td>
+                  <td>
+                    <%= link_to consultation_path(consultation) do %>
+                      コメント数：<%= consultation.comments.count %>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
             <% end %>
           </tbody>
         </table>
-        <div class="mt-4 d-flex justify-content-center"><%= paginate consultations %></div>
+        <%# unless consultations.nil? %>
+          <div class="mt-4 d-flex justify-content-center"><%= paginate consultations %></div>
+        <%# end %>
       </div>
     </div>
   </div>
@@ -88,48 +94,54 @@
             </thead>
           </thead>
           <tbody>
-            <% consultations.each do |consultation| %>
-              <tr>
-                <td><%= consultation.created_at.strftime('%Y年%m月%d日 %H時%m分') %></td>
-                <td>
-                  <%= link_to admin_consultation_path(consultation) do %>
-                    <%= consultation.title.truncate(20) %>
-                  <% end %>
-                </td>
-                <td>
-                  <% consultation.tags.each do |tag| %>
-                    <%= tag.name %>
-                  <% end %>
-                </td>
-                <td class="text-center"><%= consultation.score %></td>
-                <td>
-                  <% if consultation.score < 0 %>
-                    <% if consultation.emotion_check == 1 %>
-                      <p>確認済み</p>
-                    <% else %>
-                      <p class="text-danger">未確認</p>
+            <% if consultations.nil? %>
+              <p class="text-danger" style="font-size: 20px;">検索結果はありません</p>
+            <% else %>
+              <% consultations.each do |consultation| %>
+                <tr>
+                  <td><%= consultation.created_at.strftime('%Y年%m月%d日 %H時%m分') %></td>
+                  <td>
+                    <%= link_to admin_consultation_path(consultation) do %>
+                      <%= consultation.title.truncate(20) %>
                     <% end %>
-                  <% end %>
-                </td>
-                <td>
-                  ♥<%= consultation.favorites.count %>
-                </td>
-                <td>
-                  <%= link_to admin_consultation_path(consultation) do %>
-                    コメント数：<%= consultation.comments.count %>
-                  <% end %>
-                </td>
-                <td>
-                  <%= link_to "編集", edit_admin_consultation_path(consultation), class: "btn btn-success" %>
-                </td>
-                <td>
-                  <%= link_to "削除", admin_consultation_path(consultation), method: :delete, data: { confirm: '削除しますか？' }, class:  "btn btn-danger" %>
-                </td>
-              </tr>
+                  </td>
+                  <td>
+                    <% consultation.tags.each do |tag| %>
+                      <%= tag.name %>
+                    <% end %>
+                  </td>
+                  <td class="text-center"><%= consultation.score %></td>
+                  <td>
+                    <% if consultation.score < 0 %>
+                      <% if consultation.emotion_check == 1 %>
+                        <p>確認済み</p>
+                      <% else %>
+                        <p class="text-danger">未確認</p>
+                      <% end %>
+                    <% end %>
+                  </td>
+                  <td>
+                    ♥<%= consultation.favorites.count %>
+                  </td>
+                  <td>
+                    <%= link_to admin_consultation_path(consultation) do %>
+                      コメント数：<%= consultation.comments.count %>
+                    <% end %>
+                  </td>
+                  <td>
+                    <%= link_to "編集", edit_admin_consultation_path(consultation), class: "btn btn-success" %>
+                  </td>
+                  <td>
+                    <%= link_to "削除", admin_consultation_path(consultation), method: :delete, data: { confirm: '削除しますか？' }, class:  "btn btn-danger" %>
+                  </td>
+                </tr>
+              <% end %>
             <% end %>
           </tbody>
         </table>
-        <div class="mt-4 d-flex justify-content-center"><%= paginate consultations %></div>
+        <%# unless consultations.nil? %>
+          <div class="mt-4 d-flex justify-content-center"><%= paginate consultations %></div>
+        <%# end %>
       </div>
     </div>
   </div>

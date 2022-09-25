@@ -1,5 +1,9 @@
 <%= form_with url: search_path, method: :get do |f| %>
-  <h5 class="mt-4">タブ・キーワード検索</h5>
+  <% if controller.controller_name == 'homes' %>
+    <h5 class="mt-4">利用者検索</h5>
+  <% else %>
+    <h5 class="mt-4">タブ・キーワード検索</h5>
+  <% end %>
   <div class="form-inline">
     <%= f.text_field :keyword, class: "form-control col-8" %>
     <%= f.submit "検索", class: "btn btn-secondary col-2 ml-3" %>
