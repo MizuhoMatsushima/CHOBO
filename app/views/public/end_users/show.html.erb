@@ -44,10 +44,12 @@
         </table>
       </div>
       <div class="mx-auto">
-        <div class="text-center">
-          <%= link_to "登録情報の編集", edit_end_users_path(@end_user), class: "btn btn-secondary mt-5 col-6" %>
-          <%= link_to "退会する", confirm_end_users_path(@end_user), class: "btn btn-danger mt-3 mb-5- col-6" %>
-        </div>
+        <% unless @end_user.full_name == 'Guest User' %>
+          <div class="text-center">
+            <%= link_to "登録情報の編集", edit_end_users_path(@end_user), class: "btn btn-secondary mt-5 col-6" %>
+            <%= link_to "退会する", confirm_end_users_path(@end_user), class: "btn btn-danger mt-3 mb-5- col-6" %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

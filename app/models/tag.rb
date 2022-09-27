@@ -21,8 +21,9 @@ class Tag < ApplicationRecord
     tag = Tag.where('name LIKE(?)', "%#{search}%")
     unless tag.empty?
       tag[0].consultations
+    else
+      nil
     end
-
   end
 
 end
