@@ -23,7 +23,7 @@
             </tr>
           </thead>
           <tbody>
-            <% if consultations.nil? %>
+            <% if consultations.nil? || consultations.empty? %>
               <p class="text-danger" style="font-size: 20px;">検索結果はありません</p>
             <% else %>
               <% consultations.each do |consultation| %>
@@ -54,9 +54,9 @@
             <% end %>
           </tbody>
         </table>
-        <%# unless consultations.nil? %>
+        <% unless consultations.nil? %>
           <div class="mt-4 d-flex justify-content-center"><%= paginate consultations %></div>
-        <%# end %>
+        <% end %>
       </div>
     </div>
   </div>
@@ -94,7 +94,7 @@
             </thead>
           </thead>
           <tbody>
-            <% if consultations.nil? %>
+            <% if consultations.nil? || consultations.empty? %>
               <p class="text-danger" style="font-size: 20px;">検索結果はありません</p>
             <% else %>
               <% consultations.each do |consultation| %>
@@ -139,9 +139,9 @@
             <% end %>
           </tbody>
         </table>
-        <%# unless consultations.nil? %>
+        <% unless consultations.nil? %>
           <div class="mt-4 d-flex justify-content-center"><%= paginate consultations %></div>
-        <%# end %>
+        <% end %>
       </div>
     </div>
   </div>

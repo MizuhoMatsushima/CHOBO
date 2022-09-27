@@ -42,7 +42,6 @@
          <tbody>
           <%= f.fields_for :bop_details do |d| %>
             <tr class="nested-fields">
-              <%#= f.text_field :subject_name, :placeholder => "科目名（例：食費など）", class: "form-control mr-3" %>
               <td>
                 <%= d.text_field :detail_name, :placeholder => "細目名（例：バナナなど）", class: "form-control mr-3" %>
               </td>
