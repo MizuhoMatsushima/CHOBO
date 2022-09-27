@@ -3,14 +3,8 @@ class Public::EndUsersController < ApplicationController
 
   def top
     @current_time = DateTime.current
-    #@ago = @current_time.strftime("%m") エラーなければ削除
     # 三項演算子Version
     @dt = params[:date].nil? ? DateTime.current : DateTime.parse("#{params[:date]}-01").in_time_zone('Asia/Tokyo')
-    # if params[:date].nil?
-    #   @dt = DateTime.current  # 現在時刻
-    # else
-    #   @dt = DateTime.parse("#{params[:date]}-01").in_time_zone('Asia/Tokyo') # paramsでdateがある場合
-    # end
     beginning_of_month = @dt.beginning_of_month # 月初
     end_of_month = @dt.end_of_month # 月末
     @end_user = current_end_user
@@ -21,7 +15,6 @@ class Public::EndUsersController < ApplicationController
     @bop_subject_name = @end_user_pay.group(:subject_name).pluck(:subject_name)
     @bop_subject_price = @end_user_pay.group(:subject_name).sum(:total_price)
     @bop_subject_graph = @bop_subject_price.sort_by { |_, v| v }.reverse.to_h
-    #@deposit_balance = @end_user.deposit_balances.where(date: beginning_of_month...end_of_month).sum(:savings_amount)
   end
 
   def show

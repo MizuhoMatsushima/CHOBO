@@ -45,12 +45,6 @@ class EndUser < ApplicationRecord
   end
 
   def income_total(dt)
-    # array = [] #空の配列を用意し、
-    # AccountBook.where(pay_day: dt.beginning_of_month...dt.end_of_month).each do |account_book|
-    #   array << account_book.income
-    #   #テーブルのレコードを１件ずつ取り出し、incomeカラムのデータを配列に入れる
-    # end
-    # array.sum
     self.account_books.where(book_date: dt.beginning_of_month...dt.end_of_month).map{|k| k.income}.sum
   end
 
@@ -68,12 +62,6 @@ class EndUser < ApplicationRecord
   end
 
   def payments(dt)
-    # array = [] #空の配列を用意し、
-    # BopSubject.where(date: dt.beginning_of_month...dt.end_of_month, bop: 1).each do |bop_subject|
-    #   array << bop_subject.total_price
-    #   #テーブルのレコードを１件ずつ取り出し、total_priceカラムのデータを配列に入れる
-    # end
-    # array.sum
     self.bop_subjects.where(date: dt.beginning_of_month...dt.end_of_month, bop: 1).map{|k| k.total_price}.sum
   end
 
@@ -91,20 +79,10 @@ class EndUser < ApplicationRecord
 
   #groupにしたカラムのgroupごとの小計
   def subject_payments(subject_name, dt)
-    # array = [] #空の配列を用意し、
-    # BopSubject.where(subject_name: subject_name, date: dt.beginning_of_month...dt.end_of_month, bop: 0).each do |bop_subject|
-    #   array << bop_subject.total_price
-    # end
-    # array.sum
     self.bop_subjects.where(subject_name: subject_name, date: dt.beginning_of_month...dt.end_of_month, bop: 1).map{|k| k.total_price}.sum
   end
 
   def subject_balance(subject_name, dt)
-    # array = [] #空の配列を用意し、
-    # BopSubject.where(subject_name: subject_name, date: dt.beginning_of_month...dt.end_of_month, bop: 0).each do |bop_subject|
-    #   array << bop_subject.total_price
-    # end
-    # array.sum
     self.bop_subjects.where(subject_name: subject_name, date: dt.beginning_of_month...dt.end_of_month, bop: 0).map{|k| k.total_price}.sum
   end
 

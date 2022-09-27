@@ -28,8 +28,7 @@ class Public::BopSubjectsController < ApplicationController
     @dt = params[:date].nil? ? DateTime.current : DateTime.parse("#{params[:date]}-01").in_time_zone('Asia/Tokyo')
     beginning_of_month = @dt.beginning_of_month # 月初
     end_of_month = @dt.end_of_month # 月末
-    @end_user = current_end_user
-    @bop_month = @end_user.bop_subjects.where(date: beginning_of_month...end_of_month, bop: bop)
+    @bop_month = current_end_user.bop_subjects.where(date: beginning_of_month...end_of_month, bop: bop)
     @bop_day = @bop_month.order(date: "DESC").pluck(:date).uniq
   end
 

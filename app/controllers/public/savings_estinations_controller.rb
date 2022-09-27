@@ -2,19 +2,17 @@ class Public::SavingsEstinationsController < ApplicationController
   before_action :guest, except: [:index, :edit]
 
   def index
-    @end_user = current_end_user
     @savings_estination = SavingsEstination.new
-    @savings_estinations = @end_user.savings_estinations.page(params[:page]).per(10)
+    @savings_estinations = current_end_user.savings_estinations.page(params[:page]).per(10)
   end
 
   def create
-    @end_user = current_end_user
     @savings_estination = SavingsEstination.new(savings_estination_params)
     @savings_estination.end_user_id = current_end_user.id
     if @savings_estination.save
       redirect_to savings_estinations_path
     else
-      @savings_estinations = @end_user.savings_estinations.page(params[:page]).per(10)
+      @savings_estinations = current_end_user.savings_estinations.page(params[:page]).per(10)
       render :index
     end
   end

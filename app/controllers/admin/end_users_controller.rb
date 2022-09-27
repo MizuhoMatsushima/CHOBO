@@ -1,11 +1,10 @@
 class Admin::EndUsersController < ApplicationController
-  
+
   def show
     @end_user = EndUser.find(params[:id])
   end
 
   def search
-    @end_users = EndUser.all.page(params[:page])
     if params[:keyword] == ""
       flash[:keyword] = "キーワードを入力してください"
       redirect_to admin_root_path
