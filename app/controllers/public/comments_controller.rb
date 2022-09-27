@@ -1,12 +1,11 @@
 class Public::CommentsController < ApplicationController
-  before_action :guest
 
   def create
     @consultation = Consultation.find(params[:consultation_id])
     @consultation_tags = @consultation.tags
     @comment = current_end_user.comments.new(comment_params)
     @comment.consultation_id = @consultation.id
-    @comment.save
+    @comment.save unless current_end_user.email == 'guest@com'
   end
 
   private

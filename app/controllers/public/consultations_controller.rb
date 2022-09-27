@@ -3,7 +3,6 @@ class Public::ConsultationsController < ApplicationController
 
   def index
     @consultations = Consultation.all.order(created_at: "DESC").page(params[:page])
-    @tags = Tag.all
     @name = ""
   end
 
@@ -36,21 +35,23 @@ class Public::ConsultationsController < ApplicationController
   end
 
   def my_index
-    @end_user = current_end_user
-    @consultations = @end_user.consultations.page(params[:page])
-    @name = @end_user.full_name + "さんの"
+    @consultations = current_end_user.consultations.page(params[:page])
+    @name = current_end_user.full_name + "さんの"
   end
 
   def search
     @consultations = Consultation.all
-    @tags = Tag.all
     @name = ""
     if params[:keyword] == ""
       flash[:keyword] = "キーワードを入力してください"
       redirect_to consultations_path
     else
       if (params[:keyword])[0] == '#'
-        @consultation = Tag.search(params[:keyword]).order('created_at DESC').page(params[:page])
+        if Tag.search(params[:keyword]).nil?
+          @consultation = nil
+        else
+          @consultation = Tag.search(params[:keyword]).order('created_at DESC').page(params[:page])
+        end
       else
         @consultation = Consultation.search(params[:keyword]).order('created_at DESC').page(params[:page])
       end

@@ -5,7 +5,6 @@ class Public::FavoritesController < ApplicationController
     favorite = current_end_user.favorites.new(consultation_id: @consultation.id)
     favorite.save
     respond_to :js
-    #非同期通信
   end
 
   def destroy
@@ -13,7 +12,6 @@ class Public::FavoritesController < ApplicationController
     favorite = current_end_user.favorites.find_by(consultation_id: @consultation.id)
     favorite.destroy
     respond_to :js
-    #非同期通信
   end
 
   def my_index
