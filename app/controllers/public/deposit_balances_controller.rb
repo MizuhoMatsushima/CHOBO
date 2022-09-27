@@ -8,8 +8,6 @@ class Public::DepositBalancesController < ApplicationController
 
   def index
     @deposit_balances = current_end_user.deposit_balances.order(deposit_date: "DESC").page(params[:page]).per(10)
-    @savings_amount = @deposit_balances.group(:savings_estination_id).sum(:savings_amount)
-    @grapf = @deposit_balances.group(:deposit_date).sum(:savings_amount).sort_by { |_, v| v }.reverse.to_h
     @savings_estinations = current_end_user.savings_estinations.page(params[:page]).per(10)
   end
 

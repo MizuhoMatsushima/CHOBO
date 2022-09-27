@@ -36,7 +36,11 @@ class Admin::ConsultationsController < ApplicationController
       flash[:keyword] = "キーワードを入力してください"
       redirect_to admin_consultations_path
     elsif (params[:keyword])[0] == '#'
-      @consultation = Tag.search(params[:keyword]).order('created_at DESC').page(params[:page])
+      if Tag.search(params[:keyword]).nil?
+        @consultation = nil
+      else
+        @consultation = Tag.search(params[:keyword]).order('created_at DESC').page(params[:page])
+      end
     else
       @consultation = Consultation.search(params[:keyword]).order('created_at DESC').page(params[:page])
     end
