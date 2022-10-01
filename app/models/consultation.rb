@@ -11,14 +11,7 @@ class Consultation < ApplicationRecord
 
   def save_tag(sent_tags)
     current_tags = self.tags.pluck(:name) unless self.tags.nil?
-    old_tags = current_tags - sent_tags
     new_tags = sent_tags - current_tags
-
-    # 古いタグを消す
-    old_tags.each do |old|
-      old_tag_id = Tag.find_by(name: old).id
-      self.middle_of_tags.find_by(tag_id: old_tag_id).destroy
-    end
 
     # 新しいタグを保存
     new_tags.each do |new|
