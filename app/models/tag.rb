@@ -19,6 +19,7 @@ class Tag < ApplicationRecord
   #タグ検索
   def self.search(search)
     tag = Tag.where('name LIKE(?)', "%#{search}%")
+    #↓リファクタリング可能箇所
     unless tag.empty?
       tag[0].consultations
     else
